@@ -103,6 +103,10 @@ public enum AppConfig {
         return appConfig.getBoolean("espd.designer.criteria.purelyNational.selected");
     }
 
+    public boolean isReductionPreselected() {
+        return appConfig.getBoolean("espd.designer.criteria.reduction.selected");
+    }
+
     public int getMaxFileSize() {
         return appConfig.getInt("espd.designer.maxFileSizeUpload");
     }

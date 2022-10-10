@@ -101,6 +101,8 @@ public final class CriteriaUtil {
                         selectableCriterion.setSelected(AppConfig.getInstance().isSelectionCriteriaPreselected());
                     } else if (selectableCriterion.getTypeCode().matches(CriteriaType.EXCLUSION_D.getRegex())) {
                         selectableCriterion.setSelected(AppConfig.getInstance().isPurelyNationalPreselected());
+                    } else if (selectableCriterion.getTypeCode().matches(CriteriaType.REDUCTION.getRegex())) {
+                        selectableCriterion.setSelected(AppConfig.getInstance().isReductionPreselected());
                     } else {
                         selectableCriterion.setSelected(true);
                     }
