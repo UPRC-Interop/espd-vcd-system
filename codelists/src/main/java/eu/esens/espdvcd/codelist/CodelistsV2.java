@@ -35,7 +35,7 @@ public enum CodelistsV2 implements MultilingualCodelists {
     /**
      * Country Identification according to ISO 3A
      */
-    CountryIdentification("/gc/v2/CountryCodeIdentifier-CodeList.gc"),
+    CountryIdentification("/gc/v2/country-v2-translated.gc"),
     /**
      * Criterion Element Type CodeList
      */

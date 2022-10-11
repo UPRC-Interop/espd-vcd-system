@@ -33,7 +33,7 @@ public class CodelistsTest {
     @Test
     public void testGetAllLang() {
         Assert.assertTrue(CodelistsV2.CountryIdentification.getAllLangs().size() > 1);
-        Assert.assertTrue(CodelistsV1.CountryIdentification.getAllLang().size() == 1);
+        Assert.assertEquals(1, CodelistsV1.CountryIdentification.getAllLang().size());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class CodelistsTest {
         // valid input
         Assert.assertEquals("Greece", CodelistsV1.CountryIdentification.getDataMap().get("GR"));
         // Invalid input
-        Assert.assertEquals(null, CodelistsV1.CountryIdentification.getDataMap().get("lala"));
+        Assert.assertNull(CodelistsV1.CountryIdentification.getDataMap().get("lala"));
     }
 
     @Test
@@ -50,8 +50,8 @@ public class CodelistsTest {
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap().get("LOT_ALL"));
         Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getDataMap("ell").get("LOT_ALL"));
         // Invalid input
-        Assert.assertEquals(null, CodelistsV2.BidType.getDataMap().get(null));
-        Assert.assertEquals(null, CodelistsV2.BidType.getDataMap().get("lala"));
+        Assert.assertNull(CodelistsV2.BidType.getDataMap().get(null));
+        Assert.assertNull(CodelistsV2.BidType.getDataMap().get("lala"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap("lala").get("LOT_ALL"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getDataMap(null).get("LOT_ALL"));
     }
@@ -62,8 +62,8 @@ public class CodelistsTest {
         Assert.assertEquals("Greece", CodelistsV1.CountryIdentification.getValueForId("GR"));
         Assert.assertEquals("Main tenderer", CodelistsV1.TenderingRole.getValueForId("MT"));
         // Invalid input
-        Assert.assertEquals(null, CodelistsV1.CountryIdentification.getValueForId(null));
-        Assert.assertEquals(null, CodelistsV1.TenderingRole.getValueForId("lala"));
+        Assert.assertNull(CodelistsV1.CountryIdentification.getValueForId(null));
+        Assert.assertNull(CodelistsV1.TenderingRole.getValueForId("lala"));
     }
 
     @Test
@@ -71,11 +71,11 @@ public class CodelistsTest {
         // valid input
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getValueForId("LOT_ALL"));
-        Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR", "ell"));
+        Assert.assertEquals("Ελλάδα", CodelistsV2.CountryIdentification.getValueForId("GR", "ell"));
         Assert.assertEquals("Υποβολή για όλες τις παρτίδες", CodelistsV2.BidType.getValueForId("LOT_ALL", "ell"));
         // Invalid input
-        Assert.assertEquals(null, CodelistsV2.CountryIdentification.getValueForId(null));
-        Assert.assertEquals(null, CodelistsV2.BidType.getValueForId("lala"));
+        Assert.assertNull(CodelistsV2.CountryIdentification.getValueForId(null));
+        Assert.assertNull(CodelistsV2.BidType.getValueForId("lala"));
         Assert.assertEquals("Greece", CodelistsV2.CountryIdentification.getValueForId("GR", null));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType.getValueForId("LOT_ALL", "lala"));
     }
@@ -83,49 +83,49 @@ public class CodelistsTest {
     @Test
     public void testContainsIdV1() {
         // valid input
-        Assert.assertEquals(true, CodelistsV1.CountryIdentification.containsId("GR"));
-        Assert.assertEquals(true, CodelistsV1.CountryIdentification.containsId("GB"));
+        Assert.assertTrue(CodelistsV1.CountryIdentification.containsId("GR"));
+        Assert.assertTrue(CodelistsV1.CountryIdentification.containsId("GB"));
         // Invalid input
-        Assert.assertEquals(false, CodelistsV1.CountryIdentification.containsId(null));
-        Assert.assertEquals(false, CodelistsV1.CountryIdentification.containsId("lala"));
+        Assert.assertFalse(CodelistsV1.CountryIdentification.containsId(null));
+        Assert.assertFalse(CodelistsV1.CountryIdentification.containsId("lala"));
     }
 
     @Test
     public void testContainsIdV2() {
         // valid input
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsId("GR"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsId("GB"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsId("GR", "ell"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsId("GB", "ell"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsId("GR"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsId("GB"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsId("GR", "ell"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsId("GB", "ell"));
         // Invalid input
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId(null));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("lala"));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", null));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsId("GR", "lala"));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsId(null));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsId("lala"));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsId("GR", null));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsId("GR", "lala"));
     }
 
     @Test
     public void testContainsValueV1() {
         // valid input
-        Assert.assertEquals(true, CodelistsV1.CountryIdentification.containsValue("Greece"));
-        Assert.assertEquals(true, CodelistsV1.CountryIdentification.containsValue("France"));
+        Assert.assertTrue(CodelistsV1.CountryIdentification.containsValue("Greece"));
+        Assert.assertTrue(CodelistsV1.CountryIdentification.containsValue("France"));
         // Invalid input
-        Assert.assertEquals(false, CodelistsV1.CountryIdentification.containsValue(null));
-        Assert.assertEquals(false, CodelistsV1.CountryIdentification.containsValue("lala"));
+        Assert.assertFalse(CodelistsV1.CountryIdentification.containsValue(null));
+        Assert.assertFalse(CodelistsV1.CountryIdentification.containsValue("lala"));
     }
 
     @Test
     public void testContainsValueV2() {
         // valid input
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsValue("Greece"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsValue("France"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsValue("Greece", "bul"));
-        Assert.assertEquals(true, CodelistsV2.CountryIdentification.containsValue("France", "deu"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsValue("Greece"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsValue("France"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsValue("Гъpция", "bul"));
+        Assert.assertTrue(CodelistsV2.CountryIdentification.containsValue("Französisch-Polynesien", "deu"));
         // Invalid input
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue(null));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("lala"));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", null));
-        Assert.assertEquals(false, CodelistsV2.CountryIdentification.containsValue("Greece", "lala"));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsValue(null));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsValue("lala"));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsValue("Greece", null));
+        Assert.assertFalse(CodelistsV2.CountryIdentification.containsValue("Greece", "lala"));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class CodelistsTest {
 
             for (Codelists c : CodelistsV1.values()) {
                 theCodelist = c.getConstantName();
-                Assert.assertNotNull(!c.getDataMap().isEmpty());
+                c.getDataMap();
             }
 
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class CodelistsTest {
 
             for (Codelists c : CodelistsV2.values()) {
                 theCodelist = c.getConstantName();
-                Assert.assertNotNull(!c.getDataMap().isEmpty());
+                c.getDataMap();
             }
 
         } catch (Exception e) {
@@ -196,8 +196,8 @@ public class CodelistsTest {
         Assert.assertTrue(CodelistsV1.CountryIdentification._getDataMap().isPresent());
         Assert.assertEquals("Greece", CodelistsV1.CountryIdentification._getDataMap().get().get("GR"));
         // Invalid input
-        Assert.assertEquals(null, CodelistsV1.CountryIdentification._getDataMap().get().get("lala"));
-        Assert.assertEquals(null, CodelistsV1.CountryIdentification._getDataMap().get().get(null));
+        Assert.assertNull(CodelistsV1.CountryIdentification._getDataMap().get().get("lala"));
+        Assert.assertNull(CodelistsV1.CountryIdentification._getDataMap().get().get(null));
     }
 
     @Test
@@ -210,8 +210,9 @@ public class CodelistsTest {
         // Invalid input
         Assert.assertTrue(CodelistsV2.BidType._getDataMap(null).isPresent());
         Assert.assertTrue(CodelistsV2.BidType._getDataMap("lala").isPresent());
-        Assert.assertEquals(null, CodelistsV2.BidType._getDataMap().get().get(null));
-        Assert.assertEquals(null, CodelistsV2.BidType._getDataMap().get().get("lala"));
+        Assert.assertTrue(CodelistsV2.BidType._getDataMap().isPresent());
+        Assert.assertNull(CodelistsV2.BidType._getDataMap().get().get(null));
+        Assert.assertNull(CodelistsV2.BidType._getDataMap().get().get("lala"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap("lala").get().get("LOT_ALL"));
         Assert.assertEquals("Submission for all lots", CodelistsV2.BidType._getDataMap(null).get().get("LOT_ALL"));
     }
@@ -231,7 +232,7 @@ public class CodelistsTest {
         // valid input
         Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR"));
         Assert.assertEquals(Optional.of("Submission for all lots"), CodelistsV2.BidType._getValueForId("LOT_ALL"));
-        Assert.assertEquals(Optional.of("Greece"), CodelistsV2.CountryIdentification._getValueForId("GR", "ell"));
+        Assert.assertEquals(Optional.of("Ελλάδα"), CodelistsV2.CountryIdentification._getValueForId("GR", "ell"));
         Assert.assertEquals(Optional.of("Υποβολή για όλες τις παρτίδες"), CodelistsV2.BidType._getValueForId("LOT_ALL", "ell"));
         // Invalid input
         Assert.assertEquals(Optional.empty(), CodelistsV2.CountryIdentification._getValueForId(null));
