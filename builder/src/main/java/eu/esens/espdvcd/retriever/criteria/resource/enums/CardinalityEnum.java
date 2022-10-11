@@ -39,8 +39,8 @@ public enum CardinalityEnum {
 
     ONE_TO_MANY(true, true);
 
-    private boolean mandatory;
-    private boolean multiple;
+    private final boolean mandatory;
+    private final boolean multiple;
 
     CardinalityEnum(boolean mandatory, boolean multiple) {
         this.mandatory = mandatory;

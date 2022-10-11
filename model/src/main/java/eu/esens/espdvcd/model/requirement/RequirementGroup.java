@@ -54,7 +54,7 @@ public class RequirementGroup implements Serializable {
     /**
      * Criterion requirements
      * <p>
-     * Requirements to fulfill an specific criterion.
+     * Requirements to fulfill a specific criterion.
      * <p>
      * Data type: <br>
      * Cardinality: 1..n<br>
