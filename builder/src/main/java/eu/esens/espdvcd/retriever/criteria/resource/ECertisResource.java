@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
@@ -113,12 +114,12 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             // LOGGER.log(Level.INFO, "Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
             System.out.println("Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
 
-            for (Future f : futures) {
+            for (Future<ECertisCriterion> f : futures) {
 
                 if (f.isDone()) {
 
                     try {
-                        ECertisCriterion ec = (ECertisCriterion) f.get();
+                        ECertisCriterion ec = f.get();
                         eCertisCriterionMap.put(ec.getID(), ec);
 
                     } catch (ExecutionException e) {
@@ -214,7 +215,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
@@ -233,14 +234,14 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
         initCriterionMap();
         return criterionMap.values().stream()
                 .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
-                .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
+                .collect(Collectors.toMap(Criterion::getID, Function.identity()));
     }
 
     @Override
@@ -252,7 +253,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public LegislationReference getLegislationForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
