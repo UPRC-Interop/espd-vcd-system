@@ -126,7 +126,7 @@ task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.Lic
 
     license {
         header = rootProject.file('LICENSE-HEADER-2.0.txt')
-        ext.year = '2016-2020'
+        ext.year = '2016-2024'
         ext.name = 'University of Piraeus Research Center'
         skipExistingHeaders = true
         ignoreFailures = true

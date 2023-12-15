@@ -442,7 +442,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
 
             if (countryCode != null) { // Use filter only if param is not null
 
-                return ec.getSubCriterions().stream()
+                return ec.getSubCriteria().stream()
                     .filter(subCriterion -> subCriterion.getLegislationReference() != null
                         && subCriterion.getLegislationReference().getJurisdictionLevelCode() != null
                         && subCriterion.getLegislationReference().getJurisdictionLevelCode()
@@ -450,7 +450,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
                     .collect(Collectors.toList());
             } else {
 
-                return ec.getSubCriterions();
+                return ec.getSubCriteria();
             }
 
         } else {
