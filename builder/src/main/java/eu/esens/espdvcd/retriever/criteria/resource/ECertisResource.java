@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,19 +20,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rholder.retry.RetryException;
 import eu.esens.espdvcd.builder.model.ModelFactory;
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.LegislationReference;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
+import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceConfig;
 import eu.esens.espdvcd.retriever.criteria.resource.enums.ResourceType;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetECertisCriterionRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisRetryingTask;
 import eu.esens.espdvcd.retriever.criteria.resource.tasks.GetFromECertisTask;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.CriterionUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURI;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -49,9 +58,6 @@ import java.util.stream.Collectors;
 public class ECertisResource implements CriteriaResource, LegislationResource, EvidencesResource {
 
     private static final Logger LOGGER = Logger.getLogger(ECertisResource.class.getName());
-
-    private static final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest";
-    private static final String ALL_CRITERIA_URL = ECERTIS_URL + "/criteria";
 
     // Contains all European criteria
     private Map<String, ECertisCriterion> criterionMap;
@@ -95,14 +101,16 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
         Map<String, ECertisCriterion> eCertisCriterionMap = new LinkedHashMap<>();
 
         List<String> fullIDList = initialIDSet != null
-                // ? extractCommonIDList(initialIDList, getAllCriteriaID())
-                ? extractFullIDList(initialIDSet, getAllCriteriaID())
-                : getAllCriteriaID();
+            // ? extractCommonIDList(initialIDList, getAllCriteriaID())
+            ? extractFullIDList(initialIDSet, getAllCriteriaID())
+            : getAllCriteriaID();
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
         Set<GetECertisCriterionRetryingTask> rTasks = new LinkedHashSet<>(fullIDList.size());
-        fullIDList.forEach(ID -> rTasks.add(new GetECertisCriterionRetryingTask(ID)));
+        fullIDList.forEach(ID -> rTasks.add(
+            GetECertisCriterionRetryingTask.forCriterion(ID)
+                .build()));
 
         try {
             // LOGGER.log(Level.INFO, "Invoke all tasks... START");
@@ -113,12 +121,12 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
             // LOGGER.log(Level.INFO, "Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
             System.out.println("Invoke all tasks... FINISH: " + (endTime - startTime) + " ms");
 
-            for (Future f : futures) {
+            for (Future<ECertisCriterion> f : futures) {
 
                 if (f.isDone()) {
 
                     try {
-                        ECertisCriterion ec = (ECertisCriterion) f.get();
+                        ECertisCriterion ec = f.get();
                         eCertisCriterionMap.put(ec.getID(), ec);
 
                     } catch (ExecutionException e) {
@@ -147,22 +155,23 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * @return A list with the IDs
      * @throws RetrieverException
      */
-    List<String> getAllCriteriaID() throws RetrieverException {
+    public List<String> getAllCriteriaID() throws RetrieverException {
 
         List<String> criterionIDList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ALL_CRITERIA_URL));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(
+                new GetFromECertisTask(
+                    ECertisURI.baseURL().build()));
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
-            JsonNode criteria = root.path("Criterion");
+            JsonNode criteria = root.path(ResourceConfig.INSTANCE.getECertisCriterionJsonElement());
 
             for (JsonNode criterion : criteria) {
-//                String tempID = criterion.path("ID").asText();
-//                criterionIDList.add(tempID);
-
-                // Konstantinos Raptis: After EU e-Certis Update 03-09-2020
-                String tempID = criterion.path("ID").path("value").asText();
+                String tempID = criterion
+                    .path(ResourceConfig.INSTANCE.getECertisIDJsonElement())
+                    .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                    .asText();
                 criterionIDList.add(tempID);
             }
 
@@ -179,21 +188,36 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      *
      * @throws RetrieverException
      */
-    List<SelectableCriterion> getAllCriteriaBasicInfo() throws RetrieverException {
+    public List<SelectableCriterion> getAllCriteriaBasicInfo() throws RetrieverException {
 
         List<SelectableCriterion> cList = new ArrayList<>();
 
         try {
-            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(new GetFromECertisTask(ALL_CRITERIA_URL));
+            GetFromECertisRetryingTask task = new GetFromECertisRetryingTask(
+                new GetFromECertisTask(ECertisURI.baseURL().build()));
+
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(task.call());
-            JsonNode criteria = root.path("Criterion");
+            JsonNode criteria = root.path(ResourceConfig.INSTANCE.getECertisCriterionJsonElement());
 
             for (JsonNode criterion : criteria) {
                 SelectableCriterion sc = new SelectableCriterion();
-                sc.setID(criterion.path("ID").asText());
-                sc.setName(criterion.path("Name").findValue("value").asText());
-                sc.setDescription(criterion.path("Description").findValue("value").asText());
+
+                sc.setID(criterion
+                    .path(ResourceConfig.INSTANCE.getECertisIDJsonElement())
+                    .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                    .asText());
+
+                sc.setName(criterion
+                    .path(ResourceConfig.INSTANCE.getECertisNameJsonElement())
+                    .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                    .asText());
+
+                sc.setDescription(criterion
+                    .path(ResourceConfig.INSTANCE.getECertisDescriptionJsonElement())
+                    .path(ResourceConfig.INSTANCE.getECertisValueJsonElement())
+                    .asText());
+
                 sc.setSelected(true);
                 cList.add(sc);
             }
@@ -214,14 +238,14 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
         initCriterionMap();
         return criterionMap.values().stream()
-                .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
-                .collect(Collectors.toList());
+            .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -233,14 +257,14 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
         initCriterionMap();
         return criterionMap.values().stream()
-                .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
-                .collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
+            .map(ec -> ModelFactory.ESPD_REQUEST.extractSelectableCriterion(ec, true))
+            .collect(Collectors.toMap(Criterion::getID, Function.identity()));
     }
 
     @Override
@@ -252,43 +276,72 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     public LegislationReference getLegislationForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
 
         // failback check
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
         initCriterionMap();
         return criterionMap.containsKey(ID)
-                ? new LegislationReference(criterionMap.get(ID).getLegislationReference())
-                : null;
+            ? new LegislationReference(criterionMap.get(ID).getLegislationReference())
+            : null;
     }
 
     @Override
-    public List<Evidence> getEvidencesForCriterion(String ID) throws RetrieverException {
+    public List<Evidence> getEvidencesForNationalCriterion(@NotNull String ID,
+                                                           @Nullable EULanguageCodeEnum lang) throws RetrieverException {
 
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
+        GetECertisCriterionRetryingTask task = GetECertisCriterionRetryingTask.forCriterion(ID)
+            .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
+            .build();
+
+
 
         try {
             ECertisCriterion ec = task.call();
-            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
 
-        } catch (ExecutionException | RetryException | IOException e) {
+            if (!CriterionUtils.isEuropean(ec)) { // if it is National
+                return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
+            } else { // then it is European
+                throw new IllegalArgumentException("Error... Given Criterion id "
+                    + ec.getID()
+                    + " belongs to a European Criterion.");
+            }
+
+        } catch (ExecutionException | RetryException | IOException | IllegalArgumentException e) {
             throw new RetrieverException(e);
         }
     }
 
     @Override
-    public List<Evidence> getEvidencesForCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
+    public List<Evidence> getEvidencesForEuropeanCriterion(@NotNull String id,
+                                                           @Nullable String countryCode,
+                                                           @NotNull EULanguageCodeEnum lang) throws RetrieverException {
 
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
+        GetECertisCriterionRetryingTask task = GetECertisCriterionRetryingTask.forCriterion(id)
+            .lang(ECertisLanguageCodeEnum.valueOf(lang.name()))
+            .build();
 
         try {
             ECertisCriterion ec = task.call();
-            return ModelFactory.ESPD_REQUEST.extractEvidences(ec.getEvidenceGroups());
 
-        } catch (ExecutionException | RetryException | IOException e) {
+            if (CriterionUtils.isEuropean(ec)) { // if it is European
+
+                return ModelFactory.ESPD_REQUEST.extractEvidences(
+                    getNationalCriteriaByCountryCode(ec, countryCode) // Get National sub-Criteria by country code
+                        .stream()
+                        .map(ECertisCriterion::getEvidenceGroups) // Get the evidences of that National sub-Criterion
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList()));
+
+            } else { // then it is National
+                throw new IllegalArgumentException("Error... Given Criterion id "
+                    + id
+                    + " belongs to a National Criterion.");
+            }
+
+        } catch (ExecutionException | RetryException | IOException | IllegalArgumentException e) {
             throw new RetrieverException(e);
         }
-
     }
 
     @Override
@@ -299,30 +352,44 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     /**
      * Retrieves an e-Certis Criterion with full data.
      *
-     * @param ID The Criterion ID
+     * @param id The Criterion id (European or National)
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID) throws RetrieverException {
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID);
-
-        try {
-            return task.call();
-        } catch (ExecutionException | RetryException | IOException e) {
-            throw new RetrieverException(e);
-        }
+    public ECertisCriterion getECertisCriterion(@NotNull String id) throws RetrieverException {
+        return getECertisCriterion(id, ECertisLanguageCodeEnum.EN);
     }
 
     /**
      * Retrieves an e-Certis Criterion with full data in the specified language.
      *
-     * @param ID   The Criterion ID
-     * @param lang The Criterion Language (ISO 639-1:2002)
+     * @param id   The Criterion id (European or National)
+     * @param lang The language code (ISO 639-1:2002)
      * @return The e-Certis Criterion
      * @throws RetrieverException
      */
-    public ECertisCriterion getECertisCriterion(String ID, EULanguageCodeEnum lang) throws RetrieverException {
-        GetECertisCriterionRetryingTask task = new GetECertisCriterionRetryingTask(ID, lang);
+    public ECertisCriterion getECertisCriterion(@NotNull String id,
+                                                @NotNull ECertisLanguageCodeEnum lang) throws RetrieverException {
+
+        return getECertisCriterion(id, lang, null);
+    }
+
+    /**
+     * Retrieves an e-Certis Criterion with full data for the specified national entity in the specified language.
+     *
+     * @param id          The Criterion id (European or National)
+     * @param lang        The language code (ISO 639-1:2002)
+     * @param countryCode The country code (ISO 2A)
+     * @return The e-Certis Criterion
+     * @throws RetrieverException
+     */
+    public ECertisCriterion getECertisCriterion(@NotNull String id,
+                                                @NotNull ECertisLanguageCodeEnum lang,
+                                                @Nullable ECertisNationalEntityEnum countryCode) throws RetrieverException {
+
+        GetECertisCriterionRetryingTask task = GetECertisCriterionRetryingTask.forCriterion(id)
+            .lang(lang)
+            .build();
 
         try {
             return task.call();
@@ -339,7 +406,7 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
      * @return
      * @throws RetrieverException
      */
-    public ECertisCriterion getParentCriterion(ECertisCriterion ec, EULanguageCodeEnum lang) throws RetrieverException {
+    public ECertisCriterion getParentCriterion(ECertisCriterion ec, ECertisLanguageCodeEnum lang) throws RetrieverException {
         if (ec.getParentCriterion() == null) {
             throw new RetrieverException("Error... Unable to Extract Parent Criterion of " + ec.getID());
         }
@@ -361,18 +428,36 @@ public class ECertisResource implements CriteriaResource, LegislationResource, E
     }
 
     /**
-     * Get sub-Criteria of a European Criterion by identification code.
+     * Get National Criteria (sub-Criteria) of a European Criterion filtered by country code.
      *
-     * @param ec   The European Criterion
-     * @param code The identification code (ISO 639-1:2002)
-     * @return List of subCriteria
+     * @param ec          The Criterion (European)
+     * @param countryCode The country code (ISO 2A)
+     * @return The National Criteria
      */
-    public List<ECertisCriterion> getSubCriterionList(ECertisCriterion ec, String code) {
-        return ec.getSubCriteria().stream()
-                .filter(c -> c.getLegislationReference() != null)
-                .filter(c -> c.getLegislationReference()
-                        .getJurisdictionLevelCode().equals(code))
-                .collect(Collectors.toList());
+    public List<ECertisCriterion> getNationalCriteriaByCountryCode(@NotNull ECertisCriterion ec,
+                                                                   @Nullable String countryCode)
+        throws RetrieverException, IllegalArgumentException {
+
+        if (CriterionUtils.isEuropean(ec)) { // Check if it is a European criterion
+
+            if (countryCode != null) { // Use filter only if param is not null
+
+                return ec.getSubCriterions().stream()
+                    .filter(subCriterion -> subCriterion.getLegislationReference() != null
+                        && subCriterion.getLegislationReference().getJurisdictionLevelCode() != null
+                        && subCriterion.getLegislationReference().getJurisdictionLevelCode()
+                        .equals(countryCode.toLowerCase()))
+                    .collect(Collectors.toList());
+            } else {
+
+                return ec.getSubCriterions();
+            }
+
+        } else {
+            throw new IllegalArgumentException("Error... Given Criterion id "
+                + ec.getID()
+                + " belongs to a National Criterion.");
+        }
     }
 
 }

@@ -1,11 +1,11 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
+ * Copyright 2016-2020 University of Piraeus Research Center
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.builder;
 
-import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.schema.SchemaFactoryV2;
 import eu.esens.espdvcd.codelist.enums.internal.DocumentType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -31,7 +31,7 @@ import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -56,8 +56,7 @@ public class DocumentBuilderV2 {
      * @return the String representation of the XML Data as an input stream
      */
     public InputStream getAsInputStream() {
-        ByteArrayInputStream bis = new ByteArrayInputStream(theXML.getBytes(Charset.forName("UTF-8")));
-        return bis;
+        return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -80,12 +79,12 @@ public class DocumentBuilderV2 {
         switch (type) {
 
             case XML:
-                reqType = finalize(SchemaFactory.EDM_V2
+                reqType = finalize(SchemaFactoryV2
                         .ESPD_REQUEST.extractQualificationApplicationRequestType(req));
                 return reqType;
 
             case PDF:
-                reqType = finalize(SchemaFactory.EDM_V2
+                reqType = finalize(SchemaFactoryV2
                         .ESPD_REQUEST_FOR_PDF.extractQualificationApplicationRequestType(req));
                 return reqType;
 
@@ -115,12 +114,12 @@ public class DocumentBuilderV2 {
         switch (type) {
 
             case XML:
-                responseType = finalize(SchemaFactory.EDM_V2
+                responseType = finalize(SchemaFactoryV2
                         .ESPD_RESPONSE.extractQualificationApplicationResponseType(res));
                 return responseType;
 
             case PDF:
-                responseType = finalize(SchemaFactory.EDM_V2
+                responseType = finalize(SchemaFactoryV2
                         .ESPD_RESPONSE_FOR_PDF.extractQualificationApplicationResponseType(res));
                 return responseType;
 
@@ -148,9 +147,9 @@ public class DocumentBuilderV2 {
 
 
         requestType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        requestType.setID(SchemaFactory.EDM_V2
+        requestType.setID(SchemaFactoryV2
                 .ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
-        requestType.setUUID(SchemaFactory.EDM_V2
+        requestType.setUUID(SchemaFactoryV2
                 .ESPD_REQUEST.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return requestType;
@@ -173,9 +172,9 @@ public class DocumentBuilderV2 {
         responseType.getIssueTime().setValue(LocalTime.now());
 
         responseType.setProfileID(createCENBIIProfileIdType(getProfileID()));
-        responseType.setID(SchemaFactory.EDM_V2
+        responseType.setID(SchemaFactoryV2
                 .ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
-        responseType.setUUID(SchemaFactory.EDM_V2
+        responseType.setUUID(SchemaFactoryV2
                 .ESPD_RESPONSE.createISOIECUUIDType(UUID.randomUUID().toString()));
 
         return responseType;

@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,46 +17,88 @@ package eu.esens.espdvcd.retriever.criteria.resource.tasks;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.github.rholder.retry.RetryException;
-import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
+import eu.esens.espdvcd.codelist.enums.ecertis.ECertisLanguageCodeEnum;
 import eu.esens.espdvcd.model.retriever.ECertisCriterion;
 import eu.esens.espdvcd.model.retriever.ECertisCriterionImpl;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.ECertisURI;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
+import java.net.URI;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Konstantinos Raptis
  */
 public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterion> {
 
-    private static final String ECERTIS_URL = "https://ec.europa.eu/growth/tools-databases/ecertisrest";
-    private static final String ALL_CRITERIA_URL = ECERTIS_URL + "/criteria";
+    private static final Logger LOGGER = Logger.getLogger(GetECertisCriterionRetryingTask.class.getName());
 
-    private String ID;
-    private EULanguageCodeEnum lang;
+    private final URI uri;
 
-    public GetECertisCriterionRetryingTask(String ID) {
-        this(ID, EULanguageCodeEnum.EN);
-    }
-
-    public GetECertisCriterionRetryingTask(String ID, EULanguageCodeEnum lang) {
-        this.ID = ID;
-        this.lang = lang;
+    private GetECertisCriterionRetryingTask(Builder builder) {
+        this.uri = ECertisURI.baseURL()
+            .withLang(builder.lang)
+            .withCriterionId(builder.id)
+            .build().asURI();
+        System.out.println("URI " + uri.toString());
     }
 
     @Override
     public ECertisCriterion call() throws ExecutionException, RetryException, IOException {
-        String theLang = lang.name().toLowerCase();
 
-        GetFromECertisTask task = new GetFromECertisTask(ALL_CRITERIA_URL + "/" + ID + "?lang=" + theLang);
+        GetFromECertisTask task = new GetFromECertisTask(uri);
         GetFromECertisRetryingTask rTask = new GetFromECertisRetryingTask(task);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
+
+        try {
+            return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
+        } catch (MismatchedInputException e) {
+            LOGGER.log(Level.SEVERE, "MismatchedInputException when reading " + uri.toString());
+            throw e;
+        }
+    }
+
+    public static Builder forCriterion(String id) {
+        return new Builder(id);
+    }
+
+    public static class Builder {
+
+        /* mandatory params */
+        private final String id;
+        /* optional params */
+        private ECertisLanguageCodeEnum lang;
+
+        /**
+         * @param id The Criterion id (UUID).
+         */
+        public Builder(String id) {
+            this.id = id;
+        }
+
+        /**
+         * @param lang The language that the Criteria data will be returned.
+         * @return
+         */
+        public Builder lang(@Nullable ECertisLanguageCodeEnum lang) {
+            this.lang = Optional.ofNullable(lang).orElse(ECertisLanguageCodeEnum.EN);
+            return Builder.this;
+        }
+
+        public GetECertisCriterionRetryingTask build() {
+            return new GetECertisCriterionRetryingTask(Builder.this);
+        }
+
     }
 
 }

@@ -1,12 +1,12 @@
 ///
-/// Copyright 2016-2019 University of Piraeus Research Center
-///
+/// Copyright 2016-2020 University of Piraeus Research Center
+/// <p>
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
 /// You may obtain a copy of the License at
-///
+/// <p>
 ///     http://www.apache.org/licenses/LICENSE-2.0
-///
+/// <p>
 /// Unless required by applicable law or agreed to in writing, software
 /// distributed under the License is distributed on an "AS IS" BASIS,
 /// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -57,7 +57,7 @@ export class RootComponent implements OnInit, OnChanges, AfterViewInit {
   finishStepValid: boolean;
 
   isLinear = true;
-  elTitle = 'Προμηθεύς ESPDint – ηλεκτρονική υπηρεσία σύνταξης του Ενιαίου Ευρωπαϊκού Εγγράφου Σύμβασης (ΕΕΕΣ)';
+  elTitle = 'Π�?ομηθε�?ς ESPDint – ηλεκτ�?ονική υπη�?εσία σ�?νταξης του Ενιαίου Ευ�?ωπα�?κο�? Εγγ�?άφου Σ�?μβασης (ΕΕΕΣ)';
   enTitle = 'Promitheus ESPDint – e-Service to fill out the European Single Procurement Document (ESPD)';
 
 

@@ -1,11 +1,11 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
+ * Copyright 2016-2020 University of Piraeus Research Center
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.builder;
 
 import eu.esens.espdvcd.builder.schema.SchemaFactory;
+import eu.esens.espdvcd.builder.schema.SchemaFactoryV1;
 import eu.esens.espdvcd.codelist.enums.internal.DocumentType;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
@@ -32,6 +33,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -59,9 +61,9 @@ public class DocumentBuilderV1 {
      * @return the String representation of the XML Data as an input stream
      */
     public InputStream getAsInputStream() {
-        ByteArrayInputStream bis = new ByteArrayInputStream(theXML.getBytes(Charset.forName("UTF-8")));
-        return bis;
+        return new ByteArrayInputStream(theXML.getBytes(StandardCharsets.UTF_8));
     }
+
 
     /**
      * @param req The ESPDRequest Model instance to be transformed to XML
@@ -77,12 +79,12 @@ public class DocumentBuilderV1 {
         switch (type) {
 
             case XML:
-                reqType = finalize(SchemaFactory.EDM_V1
+                reqType = finalize(SchemaFactoryV1
                         .ESPD_REQUEST.extractESPDRequestType(req));
                 return reqType;
 
             case PDF:
-                reqType = finalize(SchemaFactory.EDM_V1
+                reqType = finalize(SchemaFactoryV1
                         .ESPD_REQUEST_FOR_PDF.extractESPDRequestType(req));
                 return reqType;
 
@@ -97,7 +99,7 @@ public class DocumentBuilderV1 {
      * @return a JAXB ESPDResponseType instance from an ESPDResponse Model instance
      */
     protected ESPDResponseType createXML(ESPDResponse res) {
-        ESPDResponseType resType = finalize(SchemaFactory.EDM_V1
+        ESPDResponseType resType = finalize(SchemaFactoryV1
                 .ESPD_RESPONSE.extractESPDResponseType(res));
         return resType;
     }
@@ -108,12 +110,12 @@ public class DocumentBuilderV1 {
         switch (type) {
 
             case XML:
-                resType = finalize(SchemaFactory.EDM_V1
+                resType = finalize(SchemaFactoryV1
                         .ESPD_RESPONSE.extractESPDResponseType(res));
                 return resType;
 
             case PDF:
-                resType = finalize(SchemaFactory.EDM_V1
+                resType = finalize(SchemaFactoryV1
                         .ESPD_RESPONSE_FOR_PDF.extractESPDResponseType(res));
                 return resType;
 
@@ -140,7 +142,7 @@ public class DocumentBuilderV1 {
 
         reqType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        reqType.setID(SchemaFactory.EDM_V1
+        reqType.setID(SchemaFactoryV1
                 .ESPD_REQUEST.createISOIECIDType(UUID.randomUUID().toString()));
         return reqType;
     }
@@ -163,7 +165,7 @@ public class DocumentBuilderV1 {
 
         resType.setProfileID(createBIIProfileIdType(getProfileID()));
 
-        resType.setID(SchemaFactory.EDM_V1
+        resType.setID(SchemaFactoryV1
                 .ESPD_RESPONSE.createISOIECIDType(UUID.randomUUID().toString()));
         return resType;
     }

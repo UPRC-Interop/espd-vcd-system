@@ -8,6 +8,10 @@ textarea {
     width: 800px;
 }
 
+.chapter-headline{
+    margin-left: -30px;
+}
+
 .espd-details label {
     font-weight: bold;
 }

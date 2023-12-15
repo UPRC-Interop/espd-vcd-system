@@ -1,0 +1,154 @@
+{
+    "id": {
+        "value": "14df34e8-15a9-411c-8c05-8c051693e277"
+    },
+    "typeCode": {
+        "value": "Exclusion Ground: Criminal convictions"
+    },
+    "name": {
+        "value": "Participation in a criminal organisation",
+        "languageID": "en"
+    },
+    "description": {
+        "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+        "languageID": "en"
+    },
+    "domainID": {
+        "value": "eproc"
+    },
+    "versionID": {
+        "value": "3"
+    },
+    "legislationReference": [
+        {
+            "title": {
+                "value": "LAW 4412/2016",
+                "languageID": "en"
+            },
+            "description": {
+                "value": "LAW 4412/2016 ON PUBLIC PROCUREMENT",
+                "languageID": "en"
+            },
+            "jurisdictionLevelCode": {
+                "value": "gr"
+            },
+            "article": {
+                "value": "Article 73(1)(a)",
+                "languageID": "en"
+            },
+            "uri": {
+                "value": "http://www.et.gr/idocs-nph/search/pdfViewerForm.html?args=5C7QrtC22wFHp_31M9ESQXdtvSoClrL8RC-n_7hz1t15MXD0LzQTLWPU9yLzB8V68knBzLCmTXKaO6fpVZ6Lx3UnKl3nP8NxdnJ5r9cmWyJWelDvWS_18kAEhATUkJb0x1LIdQ163nV9K--td6SIuRvcgBCRse6lnPkBO1m72m7odHFo4UjmhrIon8HaIAPb"
+            }
+        }
+    ],
+    "requirementGroup": [
+        {
+            "id": {
+                "value": "b266dd54-66cd-4279-af07-ccdf0312fe2d"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "79d6a2ef-8342-42e6-94bc-350a53297792"
+                    },
+                    "typeCode": {
+                        "value": "Certificate"
+                    },
+                    "name": {
+                        "value": "Extract of criminal record",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "This evidence should prove that the person has not been convicted by a final judgment for an offense under Article 73 of law 4412/2016. The obligation to exclude an economic operator shall also apply where the person convicted by final judgment is a member of the administrative, management or supervisory body of that economic operator or has powers of representation, decision or control therein.",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "4"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "evidenceIssuerParty": [
+                        {
+                            "websiteURI": {
+                                "value": "null"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "Public Prosecutor offices",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "websiteURI": {
+                                "value": "http://www.ncris.gov.gr"
+                            },
+                            "partyName": [
+                                {
+                                    "name": {
+                                        "value": "National Criminal Records",
+                                        "languageID": "en"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gr"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/21361?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "parentCriterion": {
+        "id": {
+            "value": "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"
+        },
+        "typeCode": {
+            "value": "Exclusion Ground: Criminal convictions"
+        },
+        "name": {
+            "value": "Participation in a criminal organisation",
+            "languageID": "en"
+        },
+        "description": {
+            "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+            "languageID": "en"
+        },
+        "domainID": {
+            "value": "eproc"
+        },
+        "versionID": {
+            "value": "3"
+        }
+    }
+}

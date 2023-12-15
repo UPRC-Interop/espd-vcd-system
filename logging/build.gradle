@@ -16,19 +16,19 @@
 dependencies {
     /* SLF4J API */
     //noinspection GroovyAssignabilityCheck
-    compile libraries.slf4j_api
+    implementation libraries.slf4j_api
 
     /* Binding for Log4J2 */
     //noinspection GroovyAssignabilityCheck
-    compile libraries.log4j_slf4j_impl
+    implementation libraries.log4j_slf4j_impl
 
     /* Log4j Core implementation required for binding */
     //noinspection GroovyAssignabilityCheck
-    compile libraries.log4j_core
+    implementation libraries.log4j_core
 
     /* Log4j API implementation required for binding */
     //noinspection GroovyAssignabilityCheck
-    compile libraries.log4j_api
+    implementation libraries.log4j_api
 }
 
 task copyTask(type: Copy) {

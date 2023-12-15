@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2018 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
+        classpath 'gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1'
     }
 }
 
@@ -54,7 +54,7 @@ subprojects { project ->
 
     license {
         header = rootProject.file('LICENSE-HEADER-2.0.txt')
-        ext.year = '2016-2018'
+        ext.year = '2016-2020'
         ext.name = 'University of Piraeus Research Center'
         excludes(["**/*.xlsx", "**/*.xml", "**/*.xsl", "**/*.doc", "**/*.pdf", "**/*.jks", "**/*.gc", "**/*.cva", "**/*.sch", "**/*.xslt", "**/*.xjb"])
         skipExistingHeaders = true
@@ -111,12 +111,12 @@ configure(subprojects - project(':designer')) {
 configure(subprojects)
         {
             dependencies {
-                compile libraries.slf4j_api
-                compile libraries.log4j_slf4j_impl
-                compile libraries.log4j_core
-                compile libraries.log4j_api
-                compile 'com.google.guava:guava:14.0'
-                testCompile group: 'junit', name: 'junit', version: '4.12'
+                implementation libraries.slf4j_api
+                implementation libraries.log4j_slf4j_impl
+                implementation libraries.log4j_core
+                implementation libraries.log4j_api
+                implementation 'com.google.guava:guava:14.0'
+                testImplementation group: 'junit', name: 'junit', version: '4.12'
             }
         }
 
@@ -126,7 +126,7 @@ task licenseFormatDesignerFrontend(type: com.hierynomus.gradle.license.tasks.Lic
 
     license {
         header = rootProject.file('LICENSE-HEADER-2.0.txt')
-        ext.year = '2016-2018'
+        ext.year = '2016-2020'
         ext.name = 'University of Piraeus Research Center'
         skipExistingHeaders = true
         ignoreFailures = true

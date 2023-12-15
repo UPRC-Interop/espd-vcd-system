@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  */
 package eu.esens.espdvcd.retriever.criteria.resource;
 
-import eu.esens.espdvcd.retriever.criteria.resource.utils.TypeCodeUtils;
+import eu.esens.espdvcd.retriever.criteria.resource.utils.SetDifferencesUtils;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -77,9 +77,9 @@ public class ESPDArtefactResourceTest {
 
         if (!isSame) {
             System.out.println("TypeCodes that exist in Resource V1 Set and does not exist in Resource V2 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV1, artefactResourceV2);
+            SetDifferencesUtils.printDifferences(artefactResourceV1, artefactResourceV2);
             System.out.println("TypeCodes that exist in Resource V2 Set and does not exist in Resource V1 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV2, artefactResourceV1);
+            SetDifferencesUtils.printDifferences(artefactResourceV2, artefactResourceV1);
         }
 
         Assert.assertTrue(isSame);
@@ -111,9 +111,9 @@ public class ESPDArtefactResourceTest {
 
         if (!isSame) {
             System.out.println("IDs that exist in Resource V1 Set and does not exist in Resource V2 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV1, artefactResourceV2);
+            SetDifferencesUtils.printDifferences(artefactResourceV1, artefactResourceV2);
             System.out.println("IDs that exist in Resource V2 Set and does not exist in Resource V1 Set");
-            TypeCodeUtils.printDifferences(artefactResourceV2, artefactResourceV1);
+            SetDifferencesUtils.printDifferences(artefactResourceV2, artefactResourceV1);
         }
 
         Assert.assertTrue(isSame);

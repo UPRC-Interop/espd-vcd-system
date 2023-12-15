@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,9 +16,11 @@
 package eu.esens.espdvcd.transformation;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import org.w3c.dom.Document;
-
-import javax.xml.transform.Source;
+import eu.esens.espdvcd.model.ESPDRequest;
+import eu.esens.espdvcd.model.ESPDResponse;
+import freemarker.template.TemplateException;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,19 +32,71 @@ public class PdfHelperTest {
 
     private final TransformationService transformationService = new TransformationService();
 
-    private void generatePDF(Path target, Source doc, EULanguageCodeEnum lang) throws IOException {
+    /**
+     * Generates an ESPD Request to PDF document.
+     * @param target is the target path.
+     * @param espdRequest is the ESPD Request Model.
+     * @param lang is the selected language for PDF document.
+     * @throws IOException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws TemplateException
+     */
+    private void generatePDF(Path target,ESPDRequest espdRequest, EULanguageCodeEnum lang) throws IOException, TemplateException,
+            ParserConfigurationException, SAXException {
         try (OutputStream os = new BufferedOutputStream(Files.newOutputStream(target))) {
-            transformationService.createPdf(doc, os, lang);
+            transformationService.createPdf(espdRequest, os, lang);
         }
     }
 
     /**
-     * Erzeugt zwei Tempfiles mit der HTML und der PDF und gibt den Path der PDF zur?ck.
+     * Generates an ESPD Response to HTML document,
+     * @param target is the target path.
+     * @param espdResponse is the ESPD Response Model.
+     * @param lang is the selected language for HTML document.
+     * @throws IOException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws TemplateException
      */
-    public Path generateTempPDF(Source content, EULanguageCodeEnum lang) throws IOException {
-        final Path target = Files.createTempFile("testpdf", ".pdf");
-        generatePDF(target, content, lang);
+    private void generatePDF(Path target, ESPDResponse espdResponse, EULanguageCodeEnum lang) throws IOException, TemplateException,
+            ParserConfigurationException, SAXException {
+        try (OutputStream os = new BufferedOutputStream(Files.newOutputStream(target))) {
+            transformationService.createPdf(espdResponse, os, lang);
+        }
+    }
 
+    /**
+     * Generates the template of PDF ESPD Request document.
+     * @param requestContent is the ESPD Request model.
+     * @param lang is the selected language for PDF document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @return java.nio.file.Path
+     */
+    public Path generateTempPDF(ESPDRequest requestContent, EULanguageCodeEnum lang) throws IOException, TemplateException,
+            ParserConfigurationException, SAXException {
+        final Path target = Files.createTempFile("testpdf", ".pdf");
+        generatePDF(target, requestContent, lang);
+        return target;
+    }
+
+    /**
+     * Generates the template of PDF ESPD Response document.
+     * @param responseContent is the ESPD Response model.
+     * @param lang is the selected language for PDF document.
+     * @throws IOException
+     * @throws TemplateException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @return java.nio.file.Path
+     */
+    public Path generateTempPDF(ESPDResponse responseContent, EULanguageCodeEnum lang) throws IOException, TemplateException,
+            ParserConfigurationException, SAXException {
+        final Path target = Files.createTempFile("testpdf", ".pdf");
+        generatePDF(target, responseContent, lang);
         return target;
     }
 }

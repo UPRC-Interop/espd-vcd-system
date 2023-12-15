@@ -1,0 +1,560 @@
+{
+    "id": {
+        "value": "c86d7f2d-f753-4c8f-a1e4-d54855fe7b46"
+    },
+    "typeCode": {
+        "value": "Exclusion Ground: Criminal convictions"
+    },
+    "name": {
+        "value": "Participation in a criminal organisation",
+        "languageID": "en"
+    },
+    "description": {
+        "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+        "languageID": "en"
+    },
+    "domainID": {
+        "value": "eproc"
+    },
+    "versionID": {
+        "value": "3"
+    },
+    "legislationReference": [
+        {
+            "title": {
+                "value": "PCR(S)15",
+                "languageID": "en"
+            },
+            "description": {
+                "value": "The Public Contracts (Scotland) Regulations 2015",
+                "languageID": "en"
+            },
+            "jurisdictionLevelCode": {
+                "value": "gb"
+            },
+            "article": {
+                "value": "Regulation 58(1)(a) PCR(S)15 / Regulation 58(1)(h) PCR(S)15",
+                "languageID": "en"
+            },
+            "uri": {
+                "value": "http://www.legislation.gov.uk/ssi/2015/446/contents/made"
+            }
+        },
+        {
+            "title": {
+                "value": "PCR15",
+                "languageID": "en"
+            },
+            "description": {
+                "value": "Public Contracts Regulations 2015",
+                "languageID": "en"
+            },
+            "jurisdictionLevelCode": {
+                "value": "gb"
+            },
+            "article": {
+                "value": "Reg 57 (a) England,Wales, Northern Ireland / Reg 57(h) England,Wales, Northern Ireland / R57 (1) (a) England, Wales Northern Ireland",
+                "languageID": "en"
+            },
+            "uri": {
+                "value": "http://www.legislation.gov.uk/uksi/2015/102/contents/made"
+            }
+        }
+    ],
+    "requirementGroup": [
+        {
+            "id": {
+                "value": "55d09513-739c-48ab-b38d-29c6cc1384a5"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "203f38fe-591a-468c-a159-f0b0ded40de3"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of money laundering",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "money laundering within the meaning of section 340(11) of the Proceeds of Crime Act 2002;",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3540?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "97c64a50-2f00-4c97-8b3b-0c138ffaf56d"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "53569265-7317-49b0-b732-0f42a2ae4fc1"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction for conspiracy-Scotland",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "where conspiracy relates to participation in a criminal organisation as defined in Article 2 of Council Framework Decision 2008/841/JHA, or an offence under sections 28 or 30 of Criminal Justice and Licensing (Scotland) Act 2010",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/4232?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "84222f48-169e-4550-a537-9e162600ff9b"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "15340b6b-4ac3-4f94-b56a-07cf1b091508"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of offence with proceeds of criminal conduct - Scotland",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "An offence in connection with the proceeds of criminal conduct within the meaning of section 93A, 93B, or 93C of the Criminal Justice Act 1988",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/4280?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "0e6e94f4-9db9-4892-84b8-29935b91f40c"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "216f8c22-80c2-4d35-9492-6067a439a33c"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of terrorist offence under Serious Crime Act",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "Any offence under Sections 44 to 46 of the Serious Crime Act 2007 which relates to a terrorist offence",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3620?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "04ed9993-57a2-4994-8620-85c83487350e"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "6c6730d4-2526-4dbe-b4b8-b8abbf19f301"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of offence with proceeds of criminal conduct",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "money laundering - an offence in connection with the proceeds of criminal conduct within the meaning of section 93A, 93B or 93C of the Criminal Justice Act 1988 or article 45, 46 or 47 of the Proceeds of Crime (Northern Ireland) Order 1996; or",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3548?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "c439719d-e317-42d0-9212-14b3f625a0ee"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "f2fa9dc4-2e10-4494-90ef-8824e75bee9a"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of conspiracy",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "(a) conspiracy within the meaning of section 1 or 1A of the Criminal Law Act 1977 or article 9 or 9A of the Criminal Attempts and Conspiracy (Northern Ireland) Order 1983 where that conspiracy relates to participation in a criminal organisation as defined in Article 2 of Council Framework Decision 2008/841/JHA",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3496?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "cd716abc-89d6-42d9-9ea7-aab8b8074d4e"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "f2fa9dc4-2e10-4494-90ef-8824e75bee9a"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of conspiracy",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "(a) conspiracy within the meaning of section 1 or 1A of the Criminal Law Act 1977 or article 9 or 9A of the Criminal Attempts and Conspiracy (Northern Ireland) Order 1983 where that conspiracy relates to participation in a criminal organisation as defined in Article 2 of Council Framework Decision 2008/841/JHA",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3496?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "value": "c2a50b6c-38c0-4c95-a64c-01b65de46832"
+            },
+            "typeOfEvidence": [
+                {
+                    "id": {
+                        "value": "216f8c22-80c2-4d35-9492-6067a439a33c"
+                    },
+                    "typeCode": {
+                        "value": "Self-declaration"
+                    },
+                    "name": {
+                        "value": "Self-declaration none conviction of terrorist offence under Serious Crime Act",
+                        "languageID": "en"
+                    },
+                    "description": {
+                        "value": "Any offence under Sections 44 to 46 of the Serious Crime Act 2007 which relates to a terrorist offence",
+                        "languageID": "en"
+                    },
+                    "versionID": {
+                        "value": "2"
+                    },
+                    "feeAmount": {},
+                    "evidenceIntendedUse": {
+                        "description": {
+                            "value": "All areas"
+                        }
+                    },
+                    "addresseeDescription": {
+                        "value": "For all entities"
+                    },
+                    "jurisdictionLevelCode": [
+                        {
+                            "value": "gb"
+                        }
+                    ],
+                    "evidenceDocumentReference": [
+                        {
+                            "attachment": {
+                                "externalReference": {
+                                    "uri": {
+                                        "value": "https://webgate.acceptance.ec.europa.eu/tools3/ecertis2/evidence/3620?lang=en"
+                                    }
+                                }
+                            },
+                            "validityPeriod": {
+                                "description": [
+                                    {
+                                        "value": "Not limited",
+                                        "languageID": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "parentCriterion": {
+        "id": {
+            "value": "005eb9ed-1347-4ca3-bb29-9bc0db64e1ab"
+        },
+        "typeCode": {
+            "value": "Exclusion Ground: Criminal convictions"
+        },
+        "name": {
+            "value": "Participation in a criminal organisation",
+            "languageID": "en"
+        },
+        "description": {
+            "value": "Participation in a criminal organisation, as defined in Article 2 of Council Framework Decision 2008/841/JHA of 24 October 2008 on the fight against organised crime",
+            "languageID": "en"
+        },
+        "domainID": {
+            "value": "eproc"
+        },
+        "versionID": {
+            "value": "3"
+        }
+    }
+}

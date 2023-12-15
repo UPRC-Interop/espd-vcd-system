@@ -1,11 +1,11 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
+ * Copyright 2016-2020 University of Piraeus Research Center
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,7 +18,7 @@ package eu.esens.espdvcd.designer.endpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.service.CriteriaService;
-import eu.esens.espdvcd.designer.service.NationalCriteriaMappingService;
+import eu.esens.espdvcd.designer.service.NationalCriteriaEvidenceService;
 import eu.esens.espdvcd.designer.util.Errors;
 import eu.esens.espdvcd.designer.util.JsonUtil;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -97,7 +97,7 @@ public class CriteriaEndpoint extends Endpoint {
         response.type("application/json");
         if (Objects.nonNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return NationalCriteriaMappingService.getInstance().getTranslatedNationalCriteria(criterionID, countryCode, lang);
+                return NationalCriteriaEvidenceService.getInstance().getTranslatedEvidence(criterionID, countryCode, lang);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());
@@ -109,7 +109,7 @@ public class CriteriaEndpoint extends Endpoint {
             }
         } else if (Objects.isNull(lang) && Objects.nonNull(countryCode) && Objects.nonNull(criterionID)) {
             try {
-                return NationalCriteriaMappingService.getInstance().getNationalCriteria(criterionID, countryCode);
+                return NationalCriteriaEvidenceService.getInstance().getDefaultEvidence(criterionID, countryCode);
             } catch (RetrieverException e) {
                 response.status(502);
                 LOGGER.severe(e.getMessage());

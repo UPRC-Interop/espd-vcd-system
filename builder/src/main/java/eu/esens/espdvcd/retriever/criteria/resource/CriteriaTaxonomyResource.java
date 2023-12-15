@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-2019 University of Piraeus Research Center
- *
+ * Copyright 2016-2020 University of Piraeus Research Center
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,7 @@ import eu.esens.espdvcd.codelist.enums.RequirementGroupTypeEnum;
 import eu.esens.espdvcd.codelist.enums.RequirementTypeEnum;
 import eu.esens.espdvcd.codelist.enums.ResponseTypeEnum;
 import eu.esens.espdvcd.codelist.enums.internal.PropertyKeyCodeEnum;
+import eu.esens.espdvcd.model.Criterion;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.Requirement;
 import eu.esens.espdvcd.model.requirement.RequirementGroup;
@@ -366,7 +367,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     public List<SelectableCriterion> getCriterionList(EULanguageCodeEnum lang) {
 
         // failsafe
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
@@ -382,11 +383,11 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     public Map<String, SelectableCriterion> getCriterionMap(EULanguageCodeEnum lang) {
 
         // failsafe
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
-        return criterionList.stream().collect(Collectors.toMap(sc -> sc.getID(), Function.identity()));
+        return criterionList.stream().collect(Collectors.toMap(Criterion::getID, Function.identity()));
     }
 
     @Override
@@ -398,7 +399,7 @@ public abstract class CriteriaTaxonomyResource implements CriteriaResource, Requ
     public List<RequirementGroup> getRequirementsForCriterion(String ID, EULanguageCodeEnum lang) {
 
         // failsafe
-        if (lang == null || lang != EULanguageCodeEnum.EN) {
+        if (lang != EULanguageCodeEnum.EN) {
             LOGGER.log(Level.WARNING, "Warning... European Criteria Multilinguality not supported yet. Language set back to English");
         }
 
