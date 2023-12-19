@@ -160,7 +160,7 @@
             <SimpleValue>National Identifier</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>National Identifier</SimpleValue>
+            <SimpleValue>Εθνικό Αναγνωριστικό</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>National Identifier</SimpleValue>
@@ -243,7 +243,7 @@
             <SimpleValue>VAT number</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>VAT number</SimpleValue>
+            <SimpleValue>ΑΦΜ</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>VAT number</SimpleValue>
@@ -326,7 +326,7 @@
             <SimpleValue>Legal Entity Identifier</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Legal Entity Identifier</SimpleValue>
+            <SimpleValue>Αναγνωριστικός κωδικός νομικής οντότητας  (LEI)</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Legal Entity Identifier</SimpleValue>
@@ -409,7 +409,7 @@
             <SimpleValue>Business Registry European Unique Identifier</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Business Registry European Unique Identifier</SimpleValue>
+            <SimpleValue>Μητρώο επιχειρήσεων Ευρωπαϊκό μοναδικό αναγνωριστικό (BRIS / Αριθμός ΓΕΜΗ)</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Business Registry European Unique Identifier</SimpleValue>
@@ -492,7 +492,7 @@
             <SimpleValue>Duns &amp; Bradstreet number</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Duns &amp; Bradstreet number</SimpleValue>
+            <SimpleValue>Αριθμός Duns & Bradstreet</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Duns &amp; Bradstreet number</SimpleValue>

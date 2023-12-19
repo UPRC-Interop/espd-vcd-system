@@ -160,7 +160,7 @@
             <SimpleValue>Sole contractor / Lead entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Sole contractor / Lead entity</SimpleValue>
+            <SimpleValue>Μοναδικός προσφέρων / Επικεφαλής</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Sole contractor / Lead entity</SimpleValue>
@@ -243,7 +243,7 @@
             <SimpleValue>Group member</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Group member</SimpleValue>
+            <SimpleValue>Μέλος Ένωσης ή Κοινοπραξίας</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Group member</SimpleValue>
@@ -326,7 +326,7 @@
             <SimpleValue>Other entity (relied upon)</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Other entity (relied upon)</SimpleValue>
+            <SimpleValue>Άλλη οντότητα (υπεργολάβος στις ικανότητες της οποίας στηρίζεται ο προσφέρων)</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Other entity (relied upon)</SimpleValue>
@@ -409,7 +409,7 @@
             <SimpleValue>Other entity (not relied upon)</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Other entity (not relied upon)</SimpleValue>
+            <SimpleValue>Άλλη οντότητα (υπεργολάβος στις ικανότητες της οποίας δεν στηρίζεται ο προσφέρων)</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Other entity (not relied upon)</SimpleValue>
@@ -474,76 +474,76 @@
             <SimpleValue>ACTIVE</SimpleValue>
          </Value>
          <Value ColumnRef="name-bul">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-spa">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-ces">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-dan">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-deu">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-est">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Μοναδικός προσφέρων</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-fra">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-gle">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-hrv">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-ita">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-lav">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-lit">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-hun">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-mlt">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-nld">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-pol">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-por">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-ron">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-slk">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-slv">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-fin">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
          <Value ColumnRef="name-swe">
-            <SimpleValue>Sole entity </SimpleValue>
+            <SimpleValue>Sole entity</SimpleValue>
          </Value>
       </Row>
       <Row>
@@ -575,7 +575,7 @@
             <SimpleValue>The leader of a Consortium, Joint Venture or another type of group.</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>The leader of a Consortium, Joint Venture or another type of group.</SimpleValue>
+            <SimpleValue>Επικεφαλής ή Εκπρόσωπος Κοινοπραξίας, Joint Venture ή άλλη μορφή Ομάδας</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>The leader of a Consortium, Joint Venture or another type of group.</SimpleValue>
