@@ -16,7 +16,6 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
-import eu.esens.espdvcd.codelist.enums.ecertis.ECertisNationalEntityEnum;
 import eu.esens.espdvcd.model.SelectableCriterion;
 import eu.esens.espdvcd.model.requirement.response.evidence.Evidence;
 import eu.esens.espdvcd.retriever.criteria.CriteriaDataRetriever;
