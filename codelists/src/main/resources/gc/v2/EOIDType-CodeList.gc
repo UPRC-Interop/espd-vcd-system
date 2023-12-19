@@ -326,7 +326,7 @@
             <SimpleValue>Legal Entity Identifier</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Αναγνωριστικός κωδικός νομικής οντότητας  (LEI)</SimpleValue>
+            <SimpleValue>Αναγνωριστικός κωδικός νομικής οντότητας (LEI)</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Legal Entity Identifier</SimpleValue>
@@ -492,7 +492,7 @@
             <SimpleValue>Duns &amp; Bradstreet number</SimpleValue>
          </Value>
          <Value ColumnRef="name-ell">
-            <SimpleValue>Αριθμός Duns & Bradstreet</SimpleValue>
+            <SimpleValue>Αριθμός Duns &amp; Bradstreet</SimpleValue>
          </Value>
          <Value ColumnRef="name-eng">
             <SimpleValue>Duns &amp; Bradstreet number</SimpleValue>
