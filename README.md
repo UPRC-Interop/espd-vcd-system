@@ -27,7 +27,7 @@ The **ESPD designer** has two parts:
 - **Designer-frontend** which contains the Angular web application that consumes the REST API and provides a user-friendly interface for working with ESPDs
 
 ## Compilation ##
-1. ```$ gradlew build clean```
+1. ```$ gradlew clean build```
     This will build all the sub projects' jar-files. Tests, if available should be run by each sub project. The clean task will clean up all the build files.
 2. ```$ ng build --prod```
     If run in the designer-frontend modules' folder, this will build the Angular web application.
