@@ -259,7 +259,7 @@ task copyWebAppResources {
 task generateVersionFile {
     doLast {
         file("$projectDir/src/main/resources/application.version").text = """
-eu.esens.espdvcd.build.version="$version" + "b1"
+eu.esens.espdvcd.build.version="$version-b1"
 eu.esens.espdvcd.build.revision=${grgit.open(dir: "${rootProject.projectDir}").head().id}
 eu.esens.espdvcd.build.time="${new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())}"
 eu.esens.espdvcd.build.name="ESPD/VCD System"
