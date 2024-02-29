@@ -186,21 +186,21 @@
     <svrl:fired-rule context="cac:AdditionalDocumentReference" />
 
 		<!--ASSERT -->
-<xsl:choose>
-      <xsl:when test="(count(cbc:ID)=0) or not(cbc:DocumentTypeCode/text() = 'TED_CN') or ((count(cbc:ID))=1 and fn:matches(normalize-space(cbc:ID/text()), '^[0-9]{4}/S [0-9]{3}\-[0-9]{6}$'))" />
-      <xsl:otherwise>
-        <svrl:failed-assert test="(count(cbc:ID)=0) or not(cbc:DocumentTypeCode/text() = 'TED_CN') or ((count(cbc:ID))=1 and fn:matches(normalize-space(cbc:ID/text()), '^[0-9]{4}/S [0-9]{3}\-[0-9]{6}$'))">
-          <xsl:attribute name="id">BR-COM-10-01</xsl:attribute>
-          <xsl:attribute name="flag">fatal</xsl:attribute>
-          <xsl:attribute name="location">
-            <xsl:apply-templates mode="schematron-select-full-path" select="." />
-          </xsl:attribute>
-          <svrl:text>If the document referenced is a Contract Notice published on TED the ID must follow the scheme defined by the Publications Office: [][][][]/S [][][]-[][][][][][] (cbc:ID = '<xsl:text />
-            <xsl:value-of select="cbc:ID" />
-            <xsl:text />').</svrl:text>
-        </svrl:failed-assert>
-      </xsl:otherwise>
-    </xsl:choose>
+<!--<xsl:choose>-->
+<!--      <xsl:when test="(count(cbc:ID)=0) or not(cbc:DocumentTypeCode/text() = 'TED_CN') or ((count(cbc:ID))=1 and fn:matches(normalize-space(cbc:ID/text()), '^[0-9]{4}/S [0-9]{3}\-[0-9]{6}$'))" />-->
+<!--      <xsl:otherwise>-->
+<!--        <svrl:failed-assert test="(count(cbc:ID)=0) or not(cbc:DocumentTypeCode/text() = 'TED_CN') or ((count(cbc:ID))=1 and fn:matches(normalize-space(cbc:ID/text()), '^[0-9]{4}/S [0-9]{3}\-[0-9]{6}$'))">-->
+<!--          <xsl:attribute name="id">BR-COM-10-01</xsl:attribute>-->
+<!--          <xsl:attribute name="flag">fatal</xsl:attribute>-->
+<!--          <xsl:attribute name="location">-->
+<!--            <xsl:apply-templates mode="schematron-select-full-path" select="." />-->
+<!--          </xsl:attribute>-->
+<!--          <svrl:text>If the document referenced is a Contract Notice published on TED the ID must follow the scheme defined by the Publications Office: [][][][]/S [][][]-[][][][][][] (cbc:ID = '<xsl:text />-->
+<!--            <xsl:value-of select="cbc:ID" />-->
+<!--            <xsl:text />').</svrl:text>-->
+<!--        </svrl:failed-assert>-->
+<!--      </xsl:otherwise>-->
+<!--    </xsl:choose>-->
 
 		<!--ASSERT -->
 <xsl:choose>
