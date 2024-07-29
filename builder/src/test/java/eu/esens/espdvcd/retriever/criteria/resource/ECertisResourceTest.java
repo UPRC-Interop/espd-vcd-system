@@ -114,7 +114,7 @@ public class ECertisResourceTest {
         // ECertisCriterion ec = r.getECertisCriterion("005eb9ed-1347-4ca3-bb29-9bc0db64e1ab");
 
         Assert.assertNotNull(ec);
-        Assert.assertFalse(ec.getSubCriterions().isEmpty());
+        Assert.assertFalse(ec.getSubCriteria().isEmpty());
 
 //        ObjectMapper mapper = new ObjectMapper();
 //        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
