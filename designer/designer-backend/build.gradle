@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
  */
 plugins {
     id 'application'
-    id "org.ajoberstar.grgit" version "3.1.1"
+    id "org.ajoberstar.grgit" version "4.1.1"
 }
 
 final sourceCompatibility = 1.11

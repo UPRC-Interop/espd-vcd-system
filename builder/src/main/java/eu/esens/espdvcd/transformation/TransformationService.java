@@ -30,13 +30,18 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +55,10 @@ public class TransformationService {
     private static final String ESPD_PROP_DOC = "properties/ESPD_";
     private static final String ESPD_EN_PROP_DOC = "properties/ESPD_en";
     private static final String XML = ".xml";
+    private static final String LOGO_PATH = "images/PromitheusESPDint_logo.png";
+
+    private static final String CSS_FA_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/css/font-awesome.css").toAbsolutePath().toUri().toString();
+//    private static final String CSS_FA_FONT_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/fonts/fontawesome-webfont.eot").toAbsolutePath().toUri().toString();
 
     /**
      * Transforms an ESPD Request model to W3C document.
@@ -75,6 +84,9 @@ public class TransformationService {
         ftlModel.put("espdModel", espdRequestModel);
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
+        ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
+        ftlModel.put("cssFaPath", CSS_FA_PATH);
+//        ftlModel.put("cssFaFontPath", CSS_FA_FONT_PATH);
 
         /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -110,6 +122,9 @@ public class TransformationService {
         ftlModel.put("espdModel", espdResponseModel);
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
+        ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
+        ftlModel.put("faPath", CSS_FA_PATH);
+//        ftlModel.put("faFontPath", CSS_FA_FONT_PATH);
         /*--------------------------------------------------------------------------------------------------------------*/
 
         StringWriter sw = new StringWriter();
@@ -129,6 +144,22 @@ public class TransformationService {
         InputStream isResource = this.getClass().getClassLoader().getResourceAsStream(pathForBuildingProj+path);
         return new InputSource(isResource);
     }
+
+    public static String getImageAsBase64(String path) {
+        try (InputStream is = TransformationService.class.getResourceAsStream(path)) {
+            if (is == null) {
+                throw new IllegalArgumentException("File not found: " + path);
+            }
+            BufferedImage image = ImageIO.read(is);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", baos);
+            byte[] bytes = baos.toByteArray();
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read the image file", e);
+        }
+    }
+
 
     /**
      * Creates the PDF builder with W3C document.

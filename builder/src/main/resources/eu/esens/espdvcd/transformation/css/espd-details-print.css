@@ -6,6 +6,10 @@
 @page {
     size: A4 portrait;
 
+    @top-left {
+        content: element(image-content);
+    }
+
     @bottom-left {
         content: element(footer-content);
     }
@@ -22,7 +26,7 @@
 
 @font-face {
     font-family: "Free Sans";
-    src: url("../FreeSans.ttf") format("truetype"); /* Use an absolute or relative url. */
+    /*src: url("../FreeSans.ttf") format("truetype"); !* Use an absolute or relative url. *!*/
 }
 
 .espd-details {
@@ -38,6 +42,12 @@
     font-style: normal;
     font-size: 13px;
     position: running(footer-content);
+}
+
+.espd-details .procedure-header .image-content {
+    display: block;
+    /* POSITION RUNNING FOR REPEATING HEADER IMAGE */
+    /*position: running(image-content);*/
 }
 
 .espd-details .procedure-header h2 {

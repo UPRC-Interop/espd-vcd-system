@@ -21,9 +21,12 @@
 <#assign enProps = espdEnProperties.properties>
 <#assign version = espdModel.getDocumentDetails().getVersion()>
 <#assign espdModelType = espdModel.getDocumentDetails().getType()>
+<#assign logo = logoPath>
+<#assign faCss = faPath>
+<#--<#assign faCssFont = faFontPath>-->
 
 <html>
-<@p.header props/>
-<@p.page espdModel espdModelType enProps props version/>
+<@p.header props faCss />
+<@p.page espdModel espdModelType enProps props version logo faCss />
 </html>
 
