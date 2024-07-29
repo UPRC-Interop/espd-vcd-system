@@ -57,9 +57,6 @@ public class TransformationService {
     private static final String XML = ".xml";
     private static final String LOGO_PATH = "images/PromitheusESPDint_logo.png";
 
-    private static final String CSS_FA_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/css/font-awesome.css").toAbsolutePath().toUri().toString();
-//    private static final String CSS_FA_FONT_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/fonts/fontawesome-webfont.eot").toAbsolutePath().toUri().toString();
-
     /**
      * Transforms an ESPD Request model to W3C document.
      * @param espdRequestModel is the ESPD Request Model.
@@ -85,8 +82,6 @@ public class TransformationService {
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
         ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
-        ftlModel.put("cssFaPath", CSS_FA_PATH);
-//        ftlModel.put("cssFaFontPath", CSS_FA_FONT_PATH);
 
         /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -123,8 +118,6 @@ public class TransformationService {
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
         ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
-        ftlModel.put("faPath", CSS_FA_PATH);
-//        ftlModel.put("faFontPath", CSS_FA_FONT_PATH);
         /*--------------------------------------------------------------------------------------------------------------*/
 
         StringWriter sw = new StringWriter();
@@ -159,7 +152,6 @@ public class TransformationService {
             throw new RuntimeException("Failed to read the image file", e);
         }
     }
-
 
     /**
      * Creates the PDF builder with W3C document.
