@@ -12,6 +12,7 @@
                 <div class="footer-content">
                     ${title}
                 </div>
+<#--                <img src="../images/PromitheusESPDint_logo.png" alt="Logo">-->
                 <h2>${title}</h2>
             </div>
             <@proc.procedureSection espdModel espdModelType enProps props version/>
@@ -24,13 +25,13 @@
 
 <#macro header props>
     <head>
+<#--        <style media="screen, print" type="text/css">-->
+<#--            <#include '../css/espd-details.css'>-->
+<#--        </style>-->
+<#--        <style media="screen, print" type="text/css">-->
+<#--            <#include '../css/espd-details-notice.css'>-->
+<#--        </style>-->
         <style media="screen, print" type="text/css">
-            <#include '../css/espd-details.css'>
-        </style>
-        <style media="screen, print" type="text/css">
-            <#include '../css/espd-details-notice.css'>
-        </style>
-        <style media="print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>
         <#assign title = pr.getESPDProperty("espd.gui.app.title",props)/>

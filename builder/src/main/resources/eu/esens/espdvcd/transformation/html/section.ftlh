@@ -40,12 +40,12 @@
 
 <#macro sectionLabel label text="">
     <#if text?length gt 56>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-long">${text}</span>
         </div>
     <#else>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-right">${text}</span>
         </div>
@@ -54,12 +54,12 @@
 
 <#macro sectionLabelForUrl label text="">
     <#if text?length gt 56>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-long"><@u.formatUrl text/></span>
         </div>
     <#else>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-right"><@u.formatUrl text/></span>
         </div>
@@ -68,12 +68,12 @@
 
 <#macro sectionLabelForMail label text="">
     <#if text?length gt 56>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-long"><@m.formatMail text/></span>
         </div>
     <#else>
-        <div>
+        <div class="descInput">
             <span class="content-left">${label}</span>
             <span class="content-right"><@m.formatMail text/></span>
         </div>

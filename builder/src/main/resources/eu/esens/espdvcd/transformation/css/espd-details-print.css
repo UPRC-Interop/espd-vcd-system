@@ -3,10 +3,8 @@
 /*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
 -->
 
-
 @page {
     size: A4 portrait;
-    margin: 1cm 2cm 2cm 2cm;
 
     @bottom-left {
         content: element(footer-content);
@@ -22,48 +20,59 @@
     size: A4 landscape;
 }
 
-
-/* ################################################# */
-
+@font-face {
+    font-family: "Free Sans";
+    src: url("../FreeSans.ttf") format("truetype"); /* Use an absolute or relative url. */
+}
 
 .espd-details {
-    padding-top: 0;
+    /* Font-family attribute renders Greek letters instead of # symbols */
+    font-family: "Free Sans", sans-serif;
+    font-size: 13px;
+    max-width: unset;
+    margin: unset;
 }
 
 .espd-details .procedure-header .footer-content {
     display: block;
     font-style: normal;
-    /* font-size gewaehlt, damit kein Zeilenumbruch im Seitenfuss des PDF entsteht */
     font-size: 13px;
     position: running(footer-content);
 }
 
-.espd-details {
-    padding-top: 0;
-}
-
 .espd-details .procedure-header h2 {
-    line-height: 1.4;
+    text-align: center;
 }
 
 .espd-details .section {
-    border: 0;
-    padding: 0;
-}
-
-.espd-details .section:last-child {
-    page-break-after: avoid;
+    margin-bottom: 20px;
 }
 
 .espd-details .chapter {
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
     page-break-inside: avoid;
 }
 
 .espd-details .chapter-headline{
+    font-size: 14px;
+    vertical-align: unset;
+    color: white;
+    padding: 10px;
+    background-color: #476065;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
     page-break-after: avoid;
-    font-size: 23px;
 }
 
+.chapter-content {
+    padding: 20px;
+}
+
+.descInput {
+    margin-bottom: 10px;
+}
 
 textarea {
     width: 95%;
@@ -75,20 +84,69 @@ textarea {
     min-width: 54px;
 }
 
-
 .espd-details h3 {
+    color: white;
+    background-color: #476065;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
     margin-top: 10px;
     page-break-after: avoid;
-    background-color: #dedede;
 }
 
-.espd-details h2 {
-    background-color: #b1b1b1;
+.content-left {
+    color: #b4b4b4;
+    font-weight: normal;
+    clear: both;
+    display: block;
+    width: 100%;
 }
-/* ENDE Print-Anpassung */
 
+.content-right {
+    width: 100%;
+    border-bottom: 1px solid #b4b4b4;
+    clear: both;
+    display: block;
+}
 
+p {
+    text-align: justify;
+    margin: 0 0 10px;
+}
 
+label {
+    display: block;
+    font-weight: bold;
+}
 
-<!-- /*-->]]>!*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!</root><!--*/
--->
+#eoSizedLabel {
+    font-weight: bold;
+}
+
+.criterionLabel {
+    /*margin-top: 20px;*/
+    font-weight: bold;
+}
+
+.singleQuestion {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.questionGroup {
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.question {
+    margin-top: 15px;
+}
+
+.question.level-two {
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 5px;
+}

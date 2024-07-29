@@ -34,19 +34,28 @@
         <@c.chapterStructure '' pr.getESPDProperty('espd.part2.info.eo',props)/>
         <div class="chapter-content">
             <@sectionForEO model modelType enProps props version/>
+        </div>
+    </div>
+    <div class="chapter ${levelString} ${chapterString}">
+        <@c.chapterStructure '' pr.getESPDProperty('espd.part2.info.respresent',props)/>
+        <div class="chapter-content">
             <@powerOfAttorney model modelType props />
         </div>
+    </div>
+    <div class="chapter ${levelString} ${chapterString}">
         <@c.chapterStructure '' pr.getESPDProperty('espd.part2.info.reliance',props) />
         <div class="chapter-content">
-            <div class="chapter ${levelString} ${chapterString}">
+<#--            <div class="chapter ${levelString} ${chapterString}">-->
                 <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES' enProps props version/>
-            </div>
+<#--            </div>-->
         </div>
+    </div>
+    <div class="chapter ${levelString} ${chapterString}">
         <@c.chapterStructure '' pr.getESPDProperty('espd.part2.information.subcontractors',props) />
         <div class="chapter-content">
-            <div class="chapter ${levelString} ${chapterString}">
+<#--            <div class="chapter ${levelString} ${chapterString}">-->
                 <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES' enProps props version/>
-            </div>
+<#--            </div>-->
         </div>
     </div>
 </#macro>
@@ -75,23 +84,17 @@
 </#macro>
 
 <#macro personalInfo person props>
-    <#assign chapter_headline = pr.getESPDProperty('espd.part2.info.respresent',props)>
-    <div class="chapter-headline">
-            ${chapter_headline}
-    </div>
-    <div class="chapter-content">
-        <@s.sectionLabelForValueOfNode person.getFirstName() 'espd.part2.first.name' props />
-        <@s.sectionLabelForValueOfNode person.getFamilyName() 'espd.part2.last.name' props />
-        <@s.sectionLabelForValueOfNode person.getBirthDate() 'espd.part2.birth.date' props />
-        <@s.sectionLabelForValueOfNode person.getBirthPlace() 'espd.part2.birth.place' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1() 'espd.part1.street.and. num' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode() 'espd.part1.postcode' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity() 'espd.part1.city' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCountryCode() 'espd.part1.country' props />
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber() 'espd.part2.telephone' props />
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress() 'espd.part2.email' props />
-        <@s.sectionLabelForValueOfNode person.getRole() 'espd.part2.pos.act.in.capacity' props />
-    </div>
+    <@s.sectionLabelForValueOfNode person.getFirstName() 'espd.part2.first.name' props />
+    <@s.sectionLabelForValueOfNode person.getFamilyName() 'espd.part2.last.name' props />
+    <@s.sectionLabelForValueOfNode person.getBirthDate() 'espd.part2.birth.date' props />
+    <@s.sectionLabelForValueOfNode person.getBirthPlace() 'espd.part2.birth.place' props />
+    <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1() 'espd.part1.street.and. num' props />
+    <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode() 'espd.part1.postcode' props />
+    <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity() 'espd.part1.city' props />
+    <@s.sectionLabelForValueOfNode person.getPostalAddress().getCountryCode() 'espd.part1.country' props />
+    <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber() 'espd.part2.telephone' props />
+    <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress() 'espd.part2.email' props />
+    <@s.sectionLabelForValueOfNode person.getRole() 'espd.part2.pos.act.in.capacity' props />
 </#macro>
 
 <#macro sectionForEO model modelType enProps props version>
@@ -120,11 +123,11 @@
         <@s.sectionLabelForValueOfNode  fax "espd.part1.fax" props />
         <@s.sectionLabelForValueOfNode  id "espd.part2.vat" props />
         <@s.sectionLabelForUrlValueOfNode websiteURI "espd.part1.website" props />
-        <br/>
-        <@labelAndTextValue pr.getESPDProperty("espd.part2.lots.concerned",props) projLot />
-        <br/>
-        <label>${pr.getESPDProperty("espd.part2.is.eo.sized",props)}</label>
-        <@smeIndicator model props />
+<#--        <@labelAndTextValue pr.getESPDProperty("espd.part2.lots.concerned",props) projLot />-->
+        <div class="singleQuestion">
+            <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}</label>
+            <@smeIndicator model props />
+        </div>
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP' enProps props version/>
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST' enProps props version/>
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS' enProps props version/>
@@ -138,7 +141,8 @@
 </#macro>
 
 <#macro smeIndicator model props>
-   <p>${yesNo(isSME(model),props)}</p>
+<#--    <i class="fa-solid fa-circle-dot fa-2xs" style="color: #476065;"></i>-->
+    <p>${yesNo(isSME(model),props)}</p>
 </#macro>
 
 <#function isSME model>

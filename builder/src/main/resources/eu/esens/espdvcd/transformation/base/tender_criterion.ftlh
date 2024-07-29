@@ -23,12 +23,14 @@
     <#assign nameOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterion.getName(),enProps),props)>
     <#assign descOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterion.getDescription(),enProps),props)/>
     <#if nameOfCriterion == descOfCriterion>
-        <p>${descOfCriterion}</p>
+        <p>pTest1${descOfCriterion}</p>
     <#else>
-        <label>${nameOfCriterion}</label>
-        <p>${descOfCriterion}</p>
+        <div class="questionGroup">
+            <label class="criterionLabel">labelTest1${nameOfCriterion}</label>
+            <p>pTest2${descOfCriterion}</p>
+            <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props levelOfRequirements version/>
+        </div>
     </#if>
-    <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props levelOfRequirements version/>
 </#macro>
 
 <#macro getTenderingCriterionGroup groupOfRequirements model modelType enProps props level version>
@@ -46,8 +48,8 @@
 <#macro getRequirementGroupContent groupOfRequirements level chapterString model modelType enProps props version>
     <#list groupOfRequirements as req>
         <#assign levelString = c.getLevelString(level)>
-        <div class="chapter ${levelString} ${chapterString}">
-            <div class="chapter-content">
+        <div class="question ${levelString} ${chapterString}">
+            <div class="question-content">
                 <@getTenderCriterionContent req model modelType enProps props version/>
             </div>
         </div>
@@ -96,19 +98,19 @@
     <#if req.getDescription()??>
         <#assign reqDesc = req.getDescription()>
         <#assign desc = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(reqDesc,enProps),props)>
-        <label>${desc}</label>
+        <label>labelTest2${desc}</label>
     </#if>
 </#macro>
 
 <#macro getPeriodDescription req props>
     <#assign desc = pr.getESPDProperty('espd.crit.start.date',props)+"-"+pr.getESPDProperty('espd.crit.end.date',props)>
-    <label>${desc}</label>
+    <label>labelTest3${desc}</label>
 </#macro>
 
 <#macro yesNoIndicator req modelType props>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().isIndicator()??>
-            <p>${yesNo(req.getResponse().isIndicator(),props)}</p>
+            <p>pTest3${yesNo(req.getResponse().isIndicator(),props)}</p>
         </#if>
     <#else>
         <#assign yes = pr.getESPDProperty('espd.gui.yes',props)>
@@ -120,10 +122,10 @@
 <#macro getCountryValue req modelType>
     <#if modelType=="ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getCountryCode()??>
-            <p> ${req.getResponse().getCountryCode()} </p>
+            <p>pTest4${req.getResponse().getCountryCode()} </p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest5&ndash;</p>
     </#if>
 </#macro>
 
@@ -131,7 +133,7 @@
     <#if modelType=="ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getAmount()?? && req.getResponse().getCurrency()??>
             <#assign amountValue = req.getResponse().getAmount()+"\n"+req.getResponse().getCurrency() />
-            <p>${amountValue}</p>
+            <p>pTest6${amountValue}</p>
         </#if>
     </#if>
 </#macro>
@@ -139,110 +141,110 @@
 <#macro getDateValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getDate()??>
-            <p> ${req.getResponse().getDate()} </p>
+            <p>pTest7${req.getResponse().getDate()} </p>
         </#if>
     <#else>
-        <p>..</p>
+        <p>pTest8..</p>
     </#if>
 </#macro>
 
 <#macro getDescriptionValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getDescription()??>
-          <p>${req.getResponse().getDescription()}</p>
+          <p>pTest9${req.getResponse().getDescription()}</p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest10&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getIdentifierValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getIdentifier()??>
-            <p>${req.getResponse().getIdentifier()}</p>
+            <p>pTest11${req.getResponse().getIdentifier()}</p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest12&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getCodeValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getEvidenceURLCode()??>
-            <p>${req.getResponse().getEvidenceURLCode()}</p>
+            <p>pTest13${req.getResponse().getEvidenceURLCode()}</p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest14&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getUrlValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getUrl()??>
-            <p> ${req.getResponse().getUrl()} </p>
+            <p>pTest15${req.getResponse().getUrl()} </p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest16&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getPercentageValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getPercentage()??>
-            <p>${req.getResponse().getPercentage()} &percnt;</p>
+            <p>pTest17${req.getResponse().getPercentage()} &percnt;</p>
         </#if>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest18&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getPeriodValue req modelType version>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()?? && version == "V1">
         <#if req.getResponse().getDescription()??>
-            <p>${req.getResponse().getDescription()}</p>
+            <p>pTest19${req.getResponse().getDescription()}</p>
         </#if>
     <#elseif modelType == "ESPD_RESPONSE" && req.getResponse()?? && version == "V2">
         <#if req.getResponse().getStartDate()?? && req.getResponse().getEndDate()??>
-            <p>${req.getResponse().getStartDate()} - ${req.getResponse().getEndDate()}</p>
+            <p>pTest20${req.getResponse().getStartDate()} - ${req.getResponse().getEndDate()}</p>
         </#if>
     <#else>
-        <p>..-..</p>
+        <p>pTest21..-..</p>
     </#if>
 </#macro>
 
 <#macro getQuantityIntegerValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
-        <p>${req.getResponse().getQuantity()}</p>
+        <p>pTest22${req.getResponse().getQuantity()}</p>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest23&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getQuantityYearValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
-        <p>${req.getResponse().getYear()}</p>
+        <p>pTest24${req.getResponse().getYear()}</p>
     <#else>
-        <p>&ndash;</p>
+        <p>pTest25&ndash;</p>
     </#if>
 </#macro>
 
 <#macro getEvidenceIdentifier req model modelType props>
     <#if modelType == "ESPD_REQUEST">
-        <label>${pr.getESPDProperty('espd.crit.url',props)}</label>
-        <p>&ndash;</p>
-        <label>${pr.getESPDProperty('espd.crit.code',props)}</label>
-        <p>&ndash;</p>
-        <label>${pr.getESPDProperty('espd.crit.issuer',props)}</label>
-        <p>&ndash;</p>
+        <label>labelTest4${pr.getESPDProperty('espd.crit.url',props)}</label>
+        <p>pTest26&ndash;</p>
+        <label>labelTest5${pr.getESPDProperty('espd.crit.code',props)}</label>
+        <p>pTest27&ndash;</p>
+        <label>labelTest6${pr.getESPDProperty('espd.crit.issuer',props)}</label>
+        <p>pTest28&ndash;</p>
     <#elseif modelType == "ESPD_RESPONSE">
         <#list model.getEvidenceList() as evidence>
             <#if req.getID() == evidence.getID()>
-                <label>${pr.getESPDProperty('espd.crit.url',props)}</label>
-                <p>${evidence.getEvidenceURL()}</p>
-                <label>${pr.getESPDProperty('espd.crit.code',props)}</label>
-                <p>${evidence.getDescription()}</p>
-                <label>${pr.getESPDProperty('espd.crit.issuer',props)}</label>
-                <p>${evidence.getEvidenceIssuer().getName()}</p>
+                <label>labelTest7${pr.getESPDProperty('espd.crit.url',props)}</label>
+                <p>pTest29${evidence.getEvidenceURL()}</p>
+                <label>labelTest8${pr.getESPDProperty('espd.crit.code',props)}</label>
+                <p>pTest30${evidence.getDescription()}</p>
+                <label>labelTest9${pr.getESPDProperty('espd.crit.issuer',props)}</label>
+                <p>pTest31${evidence.getEvidenceIssuer().getName()}</p>
             </#if>
         </#list>
     </#if>
