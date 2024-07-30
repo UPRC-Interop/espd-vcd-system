@@ -52,11 +52,10 @@ public class TransformationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransformationService.class);
     private static final String FTL_PATH = "/eu/esens/espdvcd/transformation/";
-//    private static final String FREE_SANS_PATH = "eu/esens/espdvcd/transformation/";
-//    public static final String FREE_SANS = "Free Sans";
     private static final String ESPD_PROP_DOC = "properties/ESPD_";
     private static final String ESPD_EN_PROP_DOC = "properties/ESPD_en";
     private static final String XML = ".xml";
+
     private static final String LOGO_PATH = "images/PromitheusESPDint_logo.png";
 
     private static final String FONT_AWESOME_CSS_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/css/font-awesome.css").toAbsolutePath().toUri().toString();
@@ -237,13 +236,9 @@ public class TransformationService {
      * */
     private void createPdf(OutputStream outputStream, PdfRendererBuilder builder) throws IOException {
         builder
-//                .useFont(
-//                () -> TransformationService.class.getClassLoader().getResourceAsStream(FREE_SANS_PATH+"FreeSans.ttf"),
-//                FREE_SANS, 400, BaseRendererBuilder.FontStyle.NORMAL, true);
                 .toStream(outputStream)
                 .useFont(FREE_SANS_FONT_FILE, "Free-Sans")
                 .useFont(FONT_AWESOME_FONT_FILE, "FontAwesome");
-
         PdfBoxRenderer renderer = builder.buildPdfRenderer();
         renderer.layout();
         renderer.createPDF();

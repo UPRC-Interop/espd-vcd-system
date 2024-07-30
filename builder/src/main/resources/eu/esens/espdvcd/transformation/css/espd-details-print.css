@@ -114,14 +114,10 @@ textarea {
 
 .content-right {
     width: 100%;
+    padding-bottom: 2px;
     border-bottom: 1px solid #b4b4b4;
     clear: both;
     display: block;
-}
-
-p {
-    text-align: justify;
-    margin: 0 0 10px;
 }
 
 label {
@@ -129,12 +125,36 @@ label {
     font-weight: bold;
 }
 
+.icon-label {
+    display: inline-block;
+}
+
+.level-two > .question-content > .icon-label {
+    display: block;
+}
+
+p {
+    text-align: justify;
+}
+
+.criterion-paragraph {
+    padding-bottom: 2px;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.fa {
+    color: #476065;
+    font-size: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
 #eoSizedLabel {
     font-weight: bold;
+    display: inline-block;
 }
 
 .criterionLabel {
-    /*margin-top: 20px;*/
     font-weight: bold;
 }
 

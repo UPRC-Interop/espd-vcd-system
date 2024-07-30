@@ -141,8 +141,7 @@
 </#macro>
 
 <#macro smeIndicator model props>
-<#--    <i class="fa-solid fa-circle-dot fa-2xs" style="color: #476065;"></i>-->
-    <p>${yesNo(isSME(model),props)}</p>
+    <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i>${yesNo(isSME(model),props)}</span>
 </#macro>
 
 <#function isSME model>
