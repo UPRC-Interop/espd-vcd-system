@@ -16,6 +16,7 @@
                     <img src="data:image/png;base64,${logo}" alt="Logo" width="300px">
                 </div>
             </div>
+            <div style="background-color: crimson"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
             <@proc.procedureSection espdModel espdModelType enProps props version/>
             <@e.exclusionSection espdModel espdModelType enProps props version/>
             <@s.selectionSection espdModel espdModelType enProps props version/>
@@ -24,8 +25,17 @@
     </body>
 </#macro>
 
-<#macro header props>
+<#macro header props fontAwesomeCssPath>
     <head>
+        <link rel="stylesheet" href="${fontAwesomeCssPath}">
+<#--        <style>-->
+<#--            @font-face {-->
+<#--                font-family: 'FontAwesome';-->
+<#--                src: url('${faCssFont}?v=4.7.0');-->
+<#--                font-weight: normal;-->
+<#--                font-style: normal;-->
+<#--            }-->
+<#--        </style>-->
         <style media="screen, print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>

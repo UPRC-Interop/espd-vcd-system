@@ -25,13 +25,13 @@
 }
 
 @font-face {
-    font-family: "Free Sans";
+    font-family: "Free-Sans";
     /*src: url("../FreeSans.ttf") format("truetype"); !* Use an absolute or relative url. *!*/
 }
 
 .espd-details {
     /* Font-family attribute renders Greek letters instead of # symbols */
-    font-family: "Free Sans", sans-serif;
+    font-family: "Free-Sans", sans-serif;
     font-size: 13px;
     max-width: unset;
     margin: unset;
