@@ -139,7 +139,9 @@
 <#macro getDateValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getDate()??>
-            <p>${req.getResponse().getDate()}</p>
+            <#assign dateInput = req.getResponse().getDate()/>
+            <#assign formattedDate = dateInput?date("yyyy-MM-dd")/>
+            <p>${formattedDate?string("dd.MM.yyyy")}</p>
         </#if>
     <#else>
         <p>..</p>
