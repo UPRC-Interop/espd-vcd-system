@@ -139,7 +139,7 @@
 <#macro getDateValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getDate()??>
-            <p> ${req.getResponse().getDate()} </p>
+            <p>${req.getResponse().getDate()}</p>
         </#if>
     <#else>
         <p>..</p>
@@ -189,7 +189,7 @@
 <#macro getPercentageValue req modelType>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getPercentage()??>
-            <p>${req.getResponse().getPercentage()} &percnt;</p>
+            <p>${req.getResponse().getPercentage()?string("0.00")} &percnt;</p>
         </#if>
     <#else>
         <p>&ndash;</p>
