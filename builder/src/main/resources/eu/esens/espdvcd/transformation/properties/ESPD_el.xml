@@ -328,7 +328,7 @@
     <entry key="espd.gui.espd">Το αρχείο που τηλεφορτώθηκε δεν είναι αναγνώσιμο. Πρόκειται για έγκυρη αίτηση ή απάντηση ΕΕΕΣ;</entry>
     <entry key="espd.gui.espd.upload.error">Το αρχείο που τηλεφορτώθηκε δεν είναι αναγνώσιμο. Πρόκειται για έγκυρη αίτηση ΕΕΕΣ;</entry>
     <entry key="espd.gui.espd.upload.request.error">Το αρχείο που τηλεφορτώθηκε δεν είναι αναγνώσιμο. Πρόκειται για έγκυρη απάντηση ΕΕΕΣ;</entry>
-    <entry key="espd.gui.espd.upload.response.error">Ευρωπαϊκό Ενιαίο Έγγραφο Σύμβασης / Τυποποιημένο Έντυπο Υπεύθυνης Δήλωσης </entry>
+    <entry key="espd.gui.espd.upload.response.error">Ευρωπαϊκό Ενιαίο Έγγραφο Σύμβασης</entry>
     <entry key="espd.gui.europa">Europa</entry>
     <entry key="espd.gui.expire.reminder.message">Την τελευταία ώρα δεν έχετε κάνει καμία ενέργεια στην υπηρεσία ΕΕΕΣ. Αποθηκεύστε το eΕΕΕΣ για να μη χάσετε δεδομένα.    Μπορείτε ανά πάσα στιγμή να εισάγετε (επαναχρησιμοποιήσετε) το eΕΕΕΣ για να συνεχίσετε την εργασία σας.</entry>
     <entry key="espd.gui.export">Aποθηκεύσετε</entry>
