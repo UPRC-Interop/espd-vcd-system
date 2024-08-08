@@ -73,7 +73,6 @@
     background-color: #476065;
     border: 1px solid #e5e5e5;
     border-radius: 2px;
-    page-break-after: avoid;
 }
 
 .chapter-content {
@@ -88,12 +87,6 @@ textarea {
     width: 95%;
 }
 
-.espd-details .level-two .chapter-number,
-.espd-details .level-two .chapter-headline {
-    font-size: 14px;
-    min-width: 54px;
-}
-
 .espd-details h3 {
     color: white;
     background-color: #476065;
@@ -101,7 +94,6 @@ textarea {
     border: 1px solid #e5e5e5;
     border-radius: 2px;
     margin-top: 10px;
-    page-break-after: avoid;
 }
 
 .content-left {
@@ -125,38 +117,22 @@ label {
     font-weight: bold;
 }
 
-.icon-label {
-    display: inline-block;
-}
-
-.level-two > .question-content > .icon-label {
-    display: block;
-}
-
 p {
     text-align: justify;
-}
-
-.criterion-paragraph {
-    padding-bottom: 2px;
-    border-bottom: 1px solid #b4b4b4;
 }
 
 .fa {
     color: #476065;
     font-size: 15px;
+    margin-left: 5px;
     margin-right: 5px;
     vertical-align: middle;
 }
 
-#eoSizedLabel {
-    font-weight: bold;
-    display: inline-block;
-}
-
-.criterionLabel {
-    font-weight: bold;
-}
+/*#eoSizedLabel {*/
+/*    font-weight: bold;*/
+/*    display: inline-block;*/
+/*}*/
 
 .singleQuestion {
     margin-top: 20px;
@@ -174,7 +150,7 @@ p {
     margin-top: 15px;
 }
 
-.question.level-two {
+.questionSubgroup {
     border: 1px solid #e5e5e5;
     border-radius: 2px;
     padding: 10px;

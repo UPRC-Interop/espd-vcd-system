@@ -73,7 +73,7 @@
     <entry key="espd.part2.cert.e.avaliable">b) If the certificate of registration or certification is available electronically, please state:</entry>
     <entry key="espd.part2.contact.person">Contact person or persons:</entry>
     <entry key="espd.part2.detinfo.of.represent">If needed, please provide detailed information on the representation (its forms, extent, purpose ...):</entry>
-    <entry key="espd.part2.disworkers.details">If required, please specify which category or categories of disabled or disadvantaged workers the employees concerned belong to?</entry>
+    <entry key="espd.part2.disworkers.details">If required, please provide details on whether the employees concerned belong to a specific category of disabled or disadvantaged workers?</entry>
     <entry key="espd.part2.doc.e.avaliable">If the relevant documentation is available electronically, please indicate:</entry>
     <entry key="espd.part2.email">E-mail:</entry>
     <entry key="espd.part2.ensure.others.espd">Please ensure that the others concerned  provide a separate ESPD form.</entry>
@@ -83,7 +83,7 @@
     <entry key="espd.part2.eo.rely.other.entities">Does the economic operator rely on the capacities of other entities in order to meet the selection criteria set out under Part IV and the criteria and rules (if any) set out under Part V below?</entry>
     <entry key="espd.part2.first.name">First name:</entry>
     <entry key="espd.part2.header">Part II: Information concerning the economic operator</entry>
-    <entry key="espd.part2.if.proc.reserved">Only in case the procurement is reserved: is the economic operator a sheltered workshop, a 'social business'  or will it provide for the performance of the contract in the context of sheltered employment programmes?</entry>
+    <entry key="espd.part2.if.proc.reserved">Only in case the procurement is reserved: is the economic operator a sheltered workshop, a 'social business' or will it provide for the performance of the contract in the context of sheltered employment programmes?</entry>
     <entry key="espd.part2.info.eo">A: Information about the economic operator</entry>
     <entry key="espd.part2.info.reliance">C: Information about reliance on the capacities of other entities</entry>
     <entry key="espd.part2.info.respresent">B: Information about representatives of the economic operator</entry>
@@ -442,7 +442,7 @@
     <entry key="espd.crit.cert.e.avaliable">If the certificate of registration or certification is available electronically, please state where</entry>
     <entry key="espd.crit.ref.for.cert">Please state the references on which the registration or certification is based, and, where applicable, the classification obtained in the official list</entry>
     <entry key="espd.crit.all.selection.covered">Does the registration or certification cover all of the required selection criteria?</entry>
-    <entry key="espd.crit.eo.has.cert.soc">Will the economic operator be able to provide a certificate with regard to the payment of social security contributions and taxes or provide information enabling the contracting authority or contracting entity to obtaining it directly by accessing a national database in any Member State that is available free of charge?</entry>
+<!--    <entry key="espd.crit.eo.has.cert.soc">Will the economic operator be able to provide a certificate with regard to the payment of social security contributions and taxes or provide information enabling the contracting authority or contracting entity to obtaining it directly by accessing a national database in any Member State that is available free of charge?</entry>-->
     <entry key="espd.crit.lots.indication">Where applicable, indication of the lot(s) for which the economic operator wishes to tender</entry>
     <entry key="espd.crit.allow.checks">Do you allow checks?</entry>
     <entry key="espd.crit.describe.educational">Please describe the educational or professional qualification</entry>

@@ -28,21 +28,33 @@
     <#return ''>
 </#function>
 
+<#--<#function searchKey value props>-->
+<#--    <#list props.entry as p>-->
+<#--        <#assign value = value?string>-->
+<#--        <#if value?length &gt; 30>-->
+<#--            <#if p?string?contains(value?substring(0,30)) || p?string?contains(value?lower_case?substring(0,30))>-->
+<#--                <#return p.@key>-->
+<#--            </#if>-->
+<#--        <#else>-->
+<#--            <#if p?string?contains(value)>-->
+<#--                <#return p.@key>-->
+<#--            </#if>-->
+<#--        </#if>-->
+<#--    </#list>-->
+<#--    <#return ''>-->
+<#--</#function>-->
+
+<#-- NEW -->
 <#function searchKey value props>
     <#list props.entry as p>
         <#assign value = value?string>
-        <#if value?length &gt; 30>
-            <#if p?string?contains(value?substring(0,30)) || p?string?contains(value?lower_case?substring(0,30))>
-                <#return p.@key>
-            </#if>
-        <#else>
-            <#if p?string?contains(value)>
-                <#return p.@key>
-            </#if>
+        <#if  p == value>
+            <#return p.@key>
         </#if>
     </#list>
     <#return ''>
 </#function>
+<#------->
 
 <#function getESPDPropertyTranslationKey value enProps>
     <#assign key = searchKey(value,enProps)>

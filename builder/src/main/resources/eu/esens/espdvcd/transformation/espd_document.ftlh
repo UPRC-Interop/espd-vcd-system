@@ -17,12 +17,13 @@
 
 <#import './html/page.ftlh' as p>
 
-<#assign props = espdProperties.properties>
-<#assign enProps = espdEnProperties.properties>
-<#assign version = espdModel.getDocumentDetails().getVersion()>
-<#assign espdModelType = espdModel.getDocumentDetails().getType()>
-<#assign logo = logoPath>
-<#assign fontAwesomeCssPath = fontAwesomeCssPath>
+<#assign espdModel = espdModel/>
+<#assign props = espdProperties.properties/>
+<#assign enProps = espdEnProperties.properties/>
+<#assign version = espdModel.getDocumentDetails().getVersion()/>
+<#assign espdModelType = espdModel.getDocumentDetails().getType()/>
+<#assign logo = logoPath/>
+<#assign fontAwesomeCssPath = fontAwesomeCssPath/>
 
 <html>
     <@p.header props fontAwesomeCssPath/>

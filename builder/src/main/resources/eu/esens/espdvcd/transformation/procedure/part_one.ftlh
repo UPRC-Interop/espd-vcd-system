@@ -20,40 +20,33 @@
 
 <#macro partOne model props>
     <div class="section">
-        <h3>${pr.getESPDProperty("espd.part1.header",props)}</h3>
-        <@partOneChapter 1 '' pr.getESPDProperty('espd.part1.info.pub',props) model props 'espd.part1.info.pub'/>
-        <@partOneChapter 1 '' pr.getESPDProperty('espd.part1.contact.details.ca',props) model props 'espd.part1.contact.details.ca'/>
-        <@partOneChapter 1 '' pr.getESPDProperty('espd.part1.info.procurement.proc',props) model props 'espd.part1.info.procurement.proc'/>
+        <h3>${pr.getESPDProperty("espd.part1.header", props)}</h3>
+        <@partOneChapter model props 'espd.part1.info.pub'/>
+        <@partOneChapter model props 'espd.part1.contact.details.ca'/>
+        <@partOneChapter model props 'espd.part1.info.procurement.proc'/>
     </div>
 </#macro>
 
-<#macro partOneChapter level chapter_number chapter_headline model props type>
-    <#assign levelString = c.getLevelString(level)>
-    <#assign chapterString = c.getChapterString(chapter_number)>
-    <div class="chapter ${levelString} ${chapterString}">
-        <@c.chapterStructure chapter_number chapter_headline />
-        <div class="chapter-content">
-            <#if type == "espd.part1.info.pub">
-                <@additionalDocumentReference model props />
-            <#elseif type == "espd.part1.contact.details.ca">
-                <@contractingParty model props />
-            <#elseif type == "espd.part1.info.procurement.proc">
-                <@infoProcurementProc model props />
-            </#if>
-        </div>
+<#macro partOneChapter model props type>
+    <div class="chapter">
+        <#if type == "espd.part1.info.pub">
+            <div class="chapter-headline">${pr.getESPDProperty('espd.part1.info.pub', props)}</div>
+            <div class="chapter-content">
+                <@additionalDocumentReference model props/>
+            </div>
+        <#elseif type == "espd.part1.contact.details.ca">
+            <div class="chapter-headline">${pr.getESPDProperty('espd.part1.contact.details.ca', props)}</div>
+            <div class="chapter-content">
+                <@contractingParty model props/>
+            </div>
+        <#elseif type == "espd.part1.info.procurement.proc">
+            <div class="chapter-headline">${pr.getESPDProperty('espd.part1.info.procurement.proc', props)}</div>
+            <div class="chapter-content">
+                <@infoProcurementProc model props/>
+            </div>
+        </#if>
     </div>
 </#macro>
-
-<#macro infoProcurementProc model props>
-    <#assign procurerName = pr.getESPDProperty('espd.part1.procurer.name',props)>
-    <#assign shortDesc = pr.getESPDProperty('espd.part1.title.or.short.desc',props)>
-    <#assign fileRefCa = pr.getESPDProperty('espd.part1.file.ref.ca',props)>
-
-    <@s.sectionLabel procurerName model.getCADetails().getProcurementProcedureTitle() />
-    <@s.sectionLabel shortDesc model.getCADetails().getProcurementProcedureDesc() />
-    <@s.sectionLabel fileRefCa model.getCADetails().getProcurementProcedureFileReferenceNo() />
-</#macro>
-
 
 <#macro additionalDocumentReference model props>
     <#assign filledAlert = pr.getESPDProperty('espd.part1.to.be.filled.alert',props)>
@@ -102,3 +95,12 @@
     <@s.sectionLabelForValueOfNode countryCode "espd.part1.country" props />
 </#macro>
 
+<#macro infoProcurementProc model props>
+    <#assign procurerName = pr.getESPDProperty('espd.part1.procurer.name',props)>
+    <#assign shortDesc = pr.getESPDProperty('espd.part1.title.or.short.desc',props)>
+    <#assign fileRefCa = pr.getESPDProperty('espd.part1.file.ref.ca',props)>
+
+    <@s.sectionLabel procurerName model.getCADetails().getProcurementProcedureTitle() />
+    <@s.sectionLabel shortDesc model.getCADetails().getProcurementProcedureDesc() />
+    <@s.sectionLabel fileRefCa model.getCADetails().getProcurementProcedureFileReferenceNo() />
+</#macro>
