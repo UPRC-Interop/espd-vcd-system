@@ -59,23 +59,19 @@
 </#macro>
 
 <#macro partFive model modelType enProps props version>
-    <#assign levelString = c.getLevelString(1)>
-    <#assign chapterString = c.getChapterString('')>
-    <div class="chapter ${levelString} ${chapterString}">
-        <@c.chapterStructure '' pr.getESPDProperty('espd.part5.reduction',props)/>
-         <div class="chapter-content">
+    <div class="chapter">
+        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.reduction',props)}</div>
+        <div class="chapter-content">
             <p>${pr.getESPDProperty("espd.part5.toptext",props)}</p>
             <label>${pr.getESPDProperty('espd.part5.reduction.question',props)}</label>
             <@reductionOfCandidatesPart model modelType enProps props version/>
-         </div>
+        </div>
     </div>
 </#macro>
 
 <#macro partSix props>
-    <#assign levelString = c.getLevelString(1)>
-    <#assign chapterString = c.getChapterString('')>
-    <div class="chapter ${levelString} ${chapterString}">
-        <@c.chapterStructure '' pr.getESPDProperty('espd.part5.concl.statements',props)/>
+    <div class="chapter">
+        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.concl.statements',props)}</div>
         <div class="chapter-content">
             <p>${pr.getESPDProperty("espd.part5.concl.statements.text",props)}</p>
             <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part1",props)}</p>

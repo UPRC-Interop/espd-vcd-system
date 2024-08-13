@@ -18,31 +18,28 @@
 <#import '../html/chapter.ftlh' as c>
 <#import '../propertyreader/property_reader.ftlh' as pr>
 
-
 <#macro exclusionSection model modelType enProps props version>
-    <#assign criminalTopTitle = pr.getESPDProperty('espd.part3.crit.grounds.criminal.conv.top.title',props)>
-    <#assign criminalMainTitle = pr.getESPDProperty('espd.part3.crit.eu.grounds.criminal.conv.main.title',props)>
-    <#assign paymentTaxesTitle = pr.getESPDProperty('espd.part3.crit.top.grounds.payment.taxes.title',props)>
-    <#assign taxesMainTitle = pr.getESPDProperty('espd.part3.crit.eu.payment.taxes.main.title',props)>
-    <#assign conflictsTopTitle = pr.getESPDProperty('espd.part3.crit.insolvency.conflicts.top.title',props)>
-    <#assign breachingObligations = pr.getESPDProperty('espd.part3.crit.eu.main.breaching.obligations',props)>
-    <#assign nationalTopTile = pr.getESPDProperty('espd.part3.crit.purely.national.top.title',props)>
+    <#assign criminalTopTitle = pr.getESPDProperty("espd.part3.crit.grounds.criminal.conv.top.title", props)>
+    <#assign criminalMainTitle = pr.getESPDProperty("espd.part3.crit.eu.grounds.criminal.conv.main.title", props)>
+    <#assign paymentTaxesTitle = pr.getESPDProperty("espd.part3.crit.top.grounds.payment.taxes.title", props)>
+    <#assign taxesMainTitle = pr.getESPDProperty("espd.part3.crit.eu.payment.taxes.main.title", props)>
+    <#assign conflictsTopTitle = pr.getESPDProperty("espd.part3.crit.insolvency.conflicts.top.title", props)>
+    <#assign breachingObligations = pr.getESPDProperty("espd.part3.crit.eu.main.breaching.obligations", props)>
+    <#assign nationalTopTile = pr.getESPDProperty("espd.part3.crit.purely.national.top.title", props)>
 
     <div class="section">
         <h3>${pr.getESPDProperty("espd.part3.header",props)}</h3>
-        <@exclusionChapter 1 '' criminalTopTitle criminalMainTitle model modelType '57(1)' enProps props version/>
-        <@exclusionChapter 1 '' paymentTaxesTitle taxesMainTitle model modelType '57(2)' enProps props version/>
-        <@exclusionChapter 1 '' conflictsTopTitle breachingObligations model modelType '57(4)' enProps props version/>
-        <@exclusionChapter 1 '' nationalTopTile '' model modelType '' enProps props version/>
+        <@exclusionChapter criminalTopTitle criminalMainTitle model modelType '57(1)' enProps props version/>
+        <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType '57(2)' enProps props version/>
+        <@exclusionChapter conflictsTopTitle breachingObligations model modelType '57(4)' enProps props version/>
+        <@exclusionChapter nationalTopTile '' model modelType '' enProps props version/>
     </div>
 </#macro>
 
-<#macro exclusionChapter level chapter_number chapter_headline chapter_content model modelType article enProps props version>
-    <#assign levelString = c.getLevelString(level)>
-    <#assign chapterString = c.getChapterString(chapter_number)>
-    <div class="chapter ${levelString} ${chapterString}">
-        <@c.chapterStructure chapter_number chapter_headline />
+<#macro exclusionChapter chapter_headline chapter_content model modelType article enProps props version>
+    <div class="chapter">
         <#if chapter_content??>
+            <div class="chapter-headline">${chapter_headline}</div>
             <div class="chapter-content">
                 <label>${chapter_content}</label>
                 <#if article == ''>

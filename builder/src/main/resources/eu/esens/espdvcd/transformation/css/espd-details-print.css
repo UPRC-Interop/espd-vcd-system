@@ -1,7 +1,5 @@
-<!-- /*--><root>
-/*CSS-Definitionen fuer die Print/PDF-Version*/
-/*Diese Zeilen stehen lassen, damit die CSS-Datei in dem XSL eingebunden werden kann!<![CDATA[<!--*/
--->
+/* FOR FUTURE REFERENCE: THIS GOT TO DO WITH PAGE BREAKS */
+/*page-break-inside: avoid;*/
 
 @page {
     size: A4 portrait;
@@ -62,7 +60,6 @@
     margin-bottom: 10px;
     border: 1px solid #e5e5e5;
     border-radius: 2px;
-    page-break-inside: avoid;
 }
 
 .espd-details .chapter-headline{
@@ -117,9 +114,27 @@ label {
     font-weight: bold;
 }
 
+.genericDescriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel,
+.eoIdentifierCpvLabel, .identifierLabel {
+    font-weight: normal;
+    color: #b4b4b4;
+    clear: both;
+    width: 100%;
+}
+
 p {
     text-align: justify;
 }
+
+.descriptionParagraph, .evidenceUrlParagraph, .quantityParagraph, .quantityYearParagraph, .quantityIntegerParagraph, .amountParagraph, .countryParagraph, .percentageParagraph, .periodParagraph, .codeParagraph,
+.evidenceIdentifierUrlParagraph, .evidenceIdentifierCodeParagraph, .evidenceIdentifierIssuerParagraph, .urlParagraph, .lotIdentifierParagraph, .eoIdentifierEntityParagraph, .eoIdentifierTypeParagraph,
+.eoIdentifierCpvParagraph, .identifierParagraph {
+    width: 100%;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #b4b4b4;
+    clear: both;
+}
+
 
 .fa {
     color: #476065;

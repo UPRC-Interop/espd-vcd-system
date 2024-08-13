@@ -19,26 +19,43 @@
 <#import './tender_criterion.ftlh' as tc>
 
 <#macro selectionSection model modelType enProps props version>
-    <#assign title = pr.getESPDProperty('espd.part4.header',props) >
-    <#assign selectionSwitch = pr.getESPDProperty('espd.part4.all.selection.switch',props)>
+    <#assign selectionSwitch = pr.getESPDProperty("espd.part4.all.selection.switch", props)>
     <div class="section">
-        <h3>${title}</h3>
-        <@selectionChapter 1 '' selectionSwitch model modelType enProps props version/>
+        <h3>${pr.getESPDProperty("espd.part4.header", props)}</h3>
+        <@selectionChapter model modelType enProps props version "espd.part4.suitability"/>
+        <@selectionChapter model modelType enProps props version "espd.part4.economic.and.financial.standing"/>
+        <@selectionChapter model modelType enProps props version "espd.part4.technical.professional.ability"/>
+        <@selectionChapter model modelType enProps props version "espd.part4.quality.assurance"/>
     </div>
 </#macro>
 
-<#macro selectionChapter level chapter_number chapter_headline model modelType enProps props version>
-     <#assign levelString = c.getLevelString(level)>
-    <#assign chapterString = c.getChapterString(chapter_number)>
-    <div class="chapter ${levelString} ${chapterString}">
-        <@c.chapterStructure chapter_number chapter_headline />
-        <div class="chapter-content">
-            <label>${pr.getESPDProperty('espd.part4.crit.selection.ca.declares.that',props)}</label>
-            <@selectionCriteriaContent model modelType '58(2)' enProps props version/>
-            <@selectionCriteriaContent model modelType '58(3)' enProps props version/>
-            <@selectionCriteriaContent model modelType '58(4)' enProps props version/>
-            <@selectionCriteriaContent model modelType '62(2)' enProps props version/>
-         </div>
+<#macro selectionChapter model modelType enProps props version chapter>
+    <div class="chapter">
+        <#if chapter == "espd.part4.suitability">
+            <div class="chapter-headline">${pr.getESPDProperty("espd.part4.suitability", props)}</div>
+            <div class="chapter-content">
+                <div class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</div>
+                <@selectionCriteriaContent model modelType '58(2)' enProps props version/>
+            </div>
+        <#elseif chapter == "espd.part4.economic.and.financial.standing">
+            <div class="chapter-headline">${pr.getESPDProperty("espd.part4.economic.and.financial.standing", props)}</div>
+            <div class="chapter-content">
+                <div class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</div>
+                <@selectionCriteriaContent model modelType '58(3)' enProps props version/>
+            </div>
+        <#elseif chapter == "espd.part4.technical.professional.ability">
+            <div class="chapter-headline">${pr.getESPDProperty("espd.part4.technical.professional.ability", props)}</div>
+            <div class="chapter-content">
+                <div class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</div>
+                <@selectionCriteriaContent model modelType '58(4)' enProps props version/>
+            </div>
+        <#elseif chapter == "espd.part4.quality.assurance">
+            <div class="chapter-headline">${pr.getESPDProperty("espd.part4.quality.assurance", props)}</div>
+            <div class="chapter-content">
+                <div class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</div>
+                <@selectionCriteriaContent model modelType '62(2)' enProps props version/>
+            </div>
+        </#if>
     </div>
 </#macro>
 
