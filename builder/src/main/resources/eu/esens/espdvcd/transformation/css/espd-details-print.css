@@ -114,40 +114,30 @@ label {
     font-weight: bold;
 }
 
-.genericDescriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel,
-.eoIdentifierCpvLabel, .identifierLabel {
+.genericDescriptionLabel, .periodDescriptionLabel, .descriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel, .eoIdentifierCpvLabel, .identifierLabel {
     font-weight: normal;
     color: #b4b4b4;
-    clear: both;
-    width: 100%;
 }
 
 p {
     text-align: justify;
 }
 
-.descriptionParagraph, .evidenceUrlParagraph, .quantityParagraph, .quantityYearParagraph, .quantityIntegerParagraph, .amountParagraph, .countryParagraph, .percentageParagraph, .periodParagraph, .codeParagraph,
-.evidenceIdentifierUrlParagraph, .evidenceIdentifierCodeParagraph, .evidenceIdentifierIssuerParagraph, .urlParagraph, .lotIdentifierParagraph, .eoIdentifierEntityParagraph, .eoIdentifierTypeParagraph,
-.eoIdentifierCpvParagraph, .identifierParagraph {
+.descriptionParagraph, .evidenceUrlParagraph, .quantityParagraph, .quantityYearParagraph, .quantityIntegerParagraph, .amountParagraph, .countryParagraph, .percentageParagraph, .periodParagraph, .codeParagraph, .evidenceIdentifierUrlParagraph, .evidenceIdentifierCodeParagraph, .evidenceIdentifierIssuerParagraph, .urlParagraph, .lotIdentifierParagraph, .dateParagraph, .eoIdentifierEntityParagraph, .eoIdentifierTypeParagraph, .eoIdentifierCpvParagraph, .identifierParagraph {
     width: 100%;
     padding-bottom: 2px;
     border-bottom: 1px solid #b4b4b4;
-    clear: both;
+    margin-top: 2px;
 }
 
 
 .fa {
     color: #476065;
     font-size: 15px;
-    margin-left: 5px;
+    /*margin-left: 5px;*/
     margin-right: 5px;
     vertical-align: middle;
 }
-
-/*#eoSizedLabel {*/
-/*    font-weight: bold;*/
-/*    display: inline-block;*/
-/*}*/
 
 .singleQuestion {
     margin-top: 20px;
@@ -161,13 +151,13 @@ p {
     margin-bottom: 10px;
 }
 
-.question {
-    margin-top: 15px;
-}
-
 .questionSubgroup {
     border: 1px solid #e5e5e5;
     border-radius: 2px;
     padding: 10px;
     margin-bottom: 5px;
+}
+
+.hidden {
+    display: none;
 }

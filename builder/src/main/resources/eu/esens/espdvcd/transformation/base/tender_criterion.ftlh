@@ -85,8 +85,10 @@
 </#macro>
 
 <#macro getTenderCriterionContent req model modelType enProps props version>
-    <#if req.getResponseDataType() != "DESCRIPTION">
+    <#if req.getResponseDataType() != "DESCRIPTION" && req.getResponseDataType() !="PERIOD">
         <@getDescription req modelType enProps props/>
+    <#elseif req.getResponseDataType() != "DESCRIPTION" && req.getResponseDataType() ="PERIOD">
+        <@getPeriodDescription req modelType enProps props/>
     </#if>
 
     <#if req.getResponseDataType() == "INDICATOR" || req.getResponseDataType() == "CODE_BOOLEAN">
@@ -145,12 +147,11 @@
             <#assign key = pr.getESPDPropertyTranslationKey(reqDesc, enProps)/>
             <#assign desc = pr.getESPDProperty(key, props)/>
         </#if>
-
         <label class="genericDescriptionLabel">${desc}</label>
     </#if>
 </#macro>
 
-<#macro getPeriodDescription req props>
+<#macro getPeriodDescription  req modelType enProps props>
     <#assign desc = pr.getESPDProperty("espd.crit.start.date", props) + "-" + pr.getESPDProperty("espd.crit.end.date", props)>
     <label class="periodDescriptionLabel">${desc}</label>
 </#macro>
