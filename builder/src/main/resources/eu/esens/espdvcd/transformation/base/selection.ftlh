@@ -19,7 +19,6 @@
 <#import './tender_criterion.ftlh' as tc>
 
 <#macro selectionSection model modelType enProps props version>
-    <#assign selectionSwitch = pr.getESPDProperty("espd.part4.all.selection.switch", props)>
     <div class="section">
         <h3>${pr.getESPDProperty("espd.part4.header", props)}</h3>
         <@selectionChapter model modelType enProps props version "espd.part4.suitability"/>

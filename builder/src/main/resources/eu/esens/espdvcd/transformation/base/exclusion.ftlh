@@ -52,11 +52,11 @@
     </div>
 </#macro>
 
-<#macro tenderingCriteria model modelType article enProps props version>
+<#macro purelyNationalExclusionGrounds model modelType enProps props version>
     <#assign exclusionCriteria = model.getExclusionCriteriaList()>
     <#list exclusionCriteria as criterion>
         <#if criterion.getLegislationReference()?? && criterion.getTypeCode()??>
-            <#if criterion.getLegislationReference().getArticle()?contains(article?string) && criterion.getTypeCode() != "CRITERION.EXCLUSION.NATIONAL.OTHER">
+            <#if criterion.getLegislationReference().getArticle() == "Article 57(3)" && criterion.getTypeCode() == 'CRITERION.EXCLUSION.NATIONAL.OTHER'>
                 <@tc.getTenderingCriterion criterion model modelType enProps props version/>
                 <#if criterion.getSubCriterionList()??>
                     <#assign subCriterionList = criterion.getSubCriterionList()/>
@@ -69,12 +69,11 @@
     </#list>
 </#macro>
 
-
-<#macro purelyNationalExclusionGrounds model modelType enProps props version>
+<#macro tenderingCriteria model modelType article enProps props version>
     <#assign exclusionCriteria = model.getExclusionCriteriaList()>
     <#list exclusionCriteria as criterion>
         <#if criterion.getLegislationReference()?? && criterion.getTypeCode()??>
-            <#if criterion.getLegislationReference().getArticle() == "Article 57(3)" && criterion.getTypeCode() == "CRITERION.EXCLUSION.NATIONAL.OTHER">
+            <#if criterion.getLegislationReference().getArticle()?contains(article?string) && criterion.getTypeCode() != 'CRITERION.EXCLUSION.NATIONAL.OTHER'>
                 <@tc.getTenderingCriterion criterion model modelType enProps props version/>
                 <#if criterion.getSubCriterionList()??>
                     <#assign subCriterionList = criterion.getSubCriterionList()/>

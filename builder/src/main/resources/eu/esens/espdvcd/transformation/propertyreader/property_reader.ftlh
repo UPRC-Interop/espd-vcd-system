@@ -47,12 +47,11 @@
 <#-- NEW -->
 <#function searchKey value props>
     <#list props.entry as p>
-        <#assign value = value?string>
-        <#if  p == value>
+        <#if p == value>
             <#return p.@key>
         </#if>
     </#list>
-    <#return ''>
+    <#return "">
 </#function>
 <#------->
 
@@ -60,4 +59,3 @@
     <#assign key = searchKey(value,enProps)>
     <#return key>
 </#function>
-

@@ -21,7 +21,7 @@
 
 <#macro partTwo model modelType enProps props version>
     <div class="section">
-        <h3>${pr.getESPDProperty('espd.part2.header',props)}</h3>
+        <h3>${pr.getESPDProperty("espd.part2.header", props)}</h3>
         <@partTwoChapter model modelType enProps props version/>
     </div>
 </#macro>
@@ -30,7 +30,7 @@
     <#--  Α  -->
     <div class="chapter">
         <div class="chapter-headline">
-            ${pr.getESPDProperty('espd.part2.info.eo',props)}
+            ${pr.getESPDProperty("espd.part2.info.eo", props)}
         </div>
         <div class="chapter-content">
             <@sectionForEO model modelType enProps props version/>
@@ -39,16 +39,16 @@
     <#--  Β  -->
     <div class="chapter">
         <div class="chapter-headline">
-            ${pr.getESPDProperty('espd.part2.info.respresent',props)}
+            ${pr.getESPDProperty("espd.part2.info.respresent", props)}
         </div>
         <div class="chapter-content">
-            <@powerOfAttorney model modelType props />
+            <@powerOfAttorney model modelType props/>
         </div>
     </div>
     <#--  Γ  -->
     <div class="chapter">
         <div class="chapter-headline">
-            ${pr.getESPDProperty('espd.part2.info.reliance',props)}
+            ${pr.getESPDProperty("espd.part2.info.reliance", props)}
         </div>
         <div class="chapter-content">
             <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES' enProps props version/>
@@ -57,7 +57,7 @@
     <#--  Δ  -->
     <div class="chapter">
         <div class="chapter-headline">
-            ${pr.getESPDProperty('espd.part2.information.subcontractors',props)}
+            ${pr.getESPDProperty("espd.part2.information.subcontractors", props)}
         </div>
         <div class="chapter-content">
             <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.SUBCONTRACTS_WITH_THIRD_PARTIES' enProps props version/>
@@ -97,6 +97,7 @@
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP' enProps props version/>
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST' enProps props version/>
         <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS' enProps props version/>
+        <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.LOTS_TENDERED' enProps props version/>
     </#if>
 </#macro>
 
@@ -115,10 +116,10 @@
 <#function yesNo value props>
     <#switch value>
         <#case true>
-            <#assign yes = pr.getESPDProperty('espd.gui.yes',props)>
+            <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
             <#return '${yes}'>
         <#case false>
-            <#assign no = pr.getESPDProperty('espd.gui.no',props)>
+            <#assign no = pr.getESPDProperty("espd.gui.no", props)>
             <#return '${no}'>
     </#switch>
 </#function>
@@ -132,22 +133,21 @@
 </#macro>
 
 <#macro personalInfo person props>
-    <#assign chapter_headline = pr.getESPDProperty('espd.part2.info.respresent',props)>
-    <div class="chapter-headline">
-        ${chapter_headline}
+    <div class="subchapter-headline">
+        ${pr.getESPDProperty("espd.part2.info.respresent", props)}
     </div>
-    <div class="chapter-content">
-        <@s.sectionLabelForValueOfNode person.getFirstName() 'espd.part2.first.name' props />
-        <@s.sectionLabelForValueOfNode person.getFamilyName() 'espd.part2.last.name' props />
-        <@s.sectionLabelForValueOfNode person.getBirthDate() 'espd.part2.birth.date' props />
-        <@s.sectionLabelForValueOfNode person.getBirthPlace() 'espd.part2.birth.place' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1() 'espd.part1.street.and. num' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode() 'espd.part1.postcode' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity() 'espd.part1.city' props />
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCountryCode() 'espd.part1.country' props />
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber() 'espd.part2.telephone' props />
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress() 'espd.part2.email' props />
-        <@s.sectionLabelForValueOfNode person.getRole() 'espd.part2.pos.act.in.capacity' props />
+    <div class="subchapter-content">
+        <@s.sectionLabelForValueOfNode person.getFirstName() "espd.part2.first.name" props/>
+        <@s.sectionLabelForValueOfNode person.getFamilyName() "espd.part2.last.name" props/>
+        <@s.sectionLabelForValueOfNode person.getBirthDate() "espd.part2.birth.date" props/>
+        <@s.sectionLabelForValueOfNode person.getBirthPlace() "espd.part2.birth.place" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1() "espd.part1.street.and. num" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode() "espd.part1.postcode" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity() "espd.part1.city" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCountryCode() "espd.part1.country" props/>
+        <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber() "espd.part2.telephone" props/>
+        <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress() "espd.part2.email" props/>
+        <@s.sectionLabelForValueOfNode person.getRole() "espd.part2.pos.act.in.capacity" props/>
     </div>
 </#macro>
 

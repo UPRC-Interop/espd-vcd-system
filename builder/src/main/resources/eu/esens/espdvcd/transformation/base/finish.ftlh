@@ -34,6 +34,17 @@
     </#if>
 </#macro>
 
+<#macro partFive model modelType enProps props version>
+    <div class="chapter">
+        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.reduction',props)}</div>
+        <div class="chapter-content">
+            <p>${pr.getESPDProperty("espd.part5.toptext",props)}</p>
+            <label>${pr.getESPDProperty('espd.part5.reduction.question',props)}</label>
+            <@reductionOfCandidatesPart model modelType enProps props version/>
+        </div>
+    </div>
+</#macro>
+
 <#macro reductionOfCandidatesPart model modelType enProps props version>
     <#if version == "V1">
         <#assign lstRc = model.getFullCriterionList()>
@@ -56,17 +67,6 @@
             </#if>
         </#if>
     </#list>
-</#macro>
-
-<#macro partFive model modelType enProps props version>
-    <div class="chapter">
-        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.reduction',props)}</div>
-        <div class="chapter-content">
-            <p>${pr.getESPDProperty("espd.part5.toptext",props)}</p>
-            <label>${pr.getESPDProperty('espd.part5.reduction.question',props)}</label>
-            <@reductionOfCandidatesPart model modelType enProps props version/>
-        </div>
-    </div>
 </#macro>
 
 <#macro partSix props>

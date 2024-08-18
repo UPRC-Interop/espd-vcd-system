@@ -6,7 +6,7 @@
 
 <#macro page espdModel espdModelType enProps props version logo>
     <body>
-        <#assign title = pr.getESPDProperty('espd.gui.app.title',props)>
+        <#assign title = pr.getESPDProperty("espd.gui.app.title",props)>
         <div class="espd-details eu-form">
             <div class="procedure-header">
                 <div class="footer-content">
