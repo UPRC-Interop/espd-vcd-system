@@ -17,13 +17,14 @@
 
 <#import './html/page.ftlh' as p>
 
+<#assign espdModel = espdModel/>
 <#assign props = espdProperties.properties>
 <#assign enProps = espdEnProperties.properties>
 <#assign version = espdModel.getDocumentDetails().getVersion()>
 <#assign espdModelType = espdModel.getDocumentDetails().getType()>
 
 <html>
-<@p.header props/>
-<@p.page espdModel espdModelType enProps props version/>
+    <@p.header props/>
+    <@p.page espdModel espdModelType enProps props version/>
 </html>
 

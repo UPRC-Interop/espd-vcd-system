@@ -6,7 +6,7 @@
 
 <#macro page espdModel espdModelType enProps props version>
     <body>
-        <#assign title = pr.getESPDProperty('espd.gui.app.title',props)>
+        <#assign title = pr.getESPDProperty("espd.gui.app.title",props)>
         <div class="espd-details eu-form">
             <div class="procedure-header">
                 <div class="footer-content">
@@ -30,7 +30,7 @@
         <style media="screen, print" type="text/css">
             <#include '../css/espd-details-notice.css'>
         </style>
-        <style media="print" type="text/css">
+        <style media="screen, print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>
         <#assign title = pr.getESPDProperty("espd.gui.app.title",props)/>
