@@ -4,6 +4,17 @@
 <#import '../base/finish.ftlh' as f>
 <#import '../propertyreader/property_reader.ftlh' as pr>
 
+<#macro header props fontAwesomeCssPath>
+    <head>
+        <#--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+        <link rel="stylesheet" href="${fontAwesomeCssPath}">
+        <style media="screen, print" type="text/css">
+            <#include '../css/espd-details-print.css'>
+        </style>
+        <title>${pr.getESPDProperty("espd.gui.app.title",props)}</title>
+    </head>
+</#macro>
+
 <#macro page espdModel espdModelType enProps props version logo>
     <body>
         <#assign title = pr.getESPDProperty("espd.gui.app.title",props)>
@@ -22,15 +33,4 @@
             <@f.finishSection espdModel espdModelType enProps props version/>
         </div>
     </body>
-</#macro>
-
-<#macro header props fontAwesomeCssPath>
-    <head>
-<#--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-        <link rel="stylesheet" href="${fontAwesomeCssPath}">
-        <style media="screen, print" type="text/css">
-            <#include '../css/espd-details-print.css'>
-        </style>
-        <title>${pr.getESPDProperty("espd.gui.app.title",props)}</title>
-    </head>
 </#macro>

@@ -135,15 +135,16 @@
     <#if req.getDescription()??>
         <#assign reqDesc = req.getDescription()/>
         <#assign hiddenElementClass = ""/>
+
         <#if reqDesc == "Is this information available electronically?">
             <#assign desc = pr.getESPDProperty("espd.crit.information.available.electronically", props)/>
         <#elseif reqDesc == pr.getESPDProperty("espd.crit.eo.has.cert.soc", enProps) || reqDesc == pr.getESPDProperty("espd.crit.decision.final.and.binding", enProps) || reqDesc == pr.getESPDProperty("espd.crit.please.describe.them", enProps) || reqDesc == pr.getESPDProperty("espd.part3.crit.eu.national.bankruptcy.title", enProps) || reqDesc == pr.getESPDProperty("espd.crit.eo.has.cert.soc", enProps)>
             <#assign desc = ""/>
             <#assign hiddenElementClass = "hiddenGenericDescriptionLabel"/>
-        <#elseif reqDesc == "Lot Ids">
-            <#assign desc = pr.getESPDProperty("espd.crit.your.answer", props)/>
         <#elseif reqDesc == "Have you taken measures to demonstrate your reliability" || reqDesc == "Have you taken measures to demonstrate your reliability (Self-Cleaning)?">
             <#assign desc = pr.getESPDProperty("espd.crit.taken.self.cleaning.measures", props)/>
+        <#elseif reqDesc == "Your answer">
+            <#assign desc = pr.getESPDProperty("espd.crit.your.answer", props)/>
         <#else>
             <#assign key = pr.getESPDPropertyTranslationKey(reqDesc, enProps)/>
             <#assign desc = pr.getESPDProperty(key, props)/>
@@ -192,32 +193,34 @@
         <#if req.getResponse().getDescription()??>
             <#assign reqDesc = req.getDescription()/>
 
-            <#if req.getResponse().getDescription()="__Bankruptcy">
+            <#if reqDesc = "__Bankruptcy">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Insolvency">
+            <#elseif reqDesc = "__Insolvency">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Creditors">
+            <#elseif reqDesc = "__Creditors">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__BankruptcyNationalLaw">
+            <#elseif reqDesc = "__BankruptcyNationalLaw">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Liquidator">
+            <#elseif reqDesc = "__Liquidator">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Suspension">
+            <#elseif reqDesc = "__Suspension">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Misconduct">
+            <#elseif reqDesc = "__Misconduct">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Competition">
+            <#elseif reqDesc = "__Competition">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__ConflictOfInterests">
+            <#elseif reqDesc = "__ConflictOfInterests">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__InvolvementIntoProcurementProcedure">
+            <#elseif reqDesc = "__InvolvementIntoProcurementProcedure">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__Damages">
+            <#elseif reqDesc = "__Damages">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif req.getResponse().getDescription()="__EnvManagement">
+            <#elseif reqDesc = "__EnvManagement">
                 <#assign key = "espd.part4.crit.explain.supply.contracts.environmental.law"/>
             <#elseif reqDesc == "Indicate reasons for being nevertheless to perform the contract">
                 <#assign key = "espd.crit.reasons.nevertheless.contract"/>
+            <#elseif reqDesc == "Lot Ids">
+                <#assign key = "espd.crit.your.answer"/>
             <#else>
                 <#assign key = pr.getESPDPropertyTranslationKey(reqDesc, enProps)/>
             </#if>
