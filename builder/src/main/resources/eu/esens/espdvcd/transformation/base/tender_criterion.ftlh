@@ -134,11 +134,12 @@
 <#macro getDescription req modelType enProps props>
     <#if req.getDescription()??>
         <#assign reqDesc = req.getDescription()/>
-
+        <#assign hiddenElementClass = ""/>
         <#if reqDesc == "Is this information available electronically?">
             <#assign desc = pr.getESPDProperty("espd.crit.information.available.electronically", props)/>
-        <#elseif reqDesc == pr.getESPDProperty("espd.crit.eo.has.cert.soc", enProps) || reqDesc == pr.getESPDProperty("espd.crit.decision.final.and.binding", enProps) || reqDesc == pr.getESPDProperty("espd.crit.please.describe.them", enProps) || reqDesc == pr.getESPDProperty("espd.part3.crit.eu.national.bankruptcy.title", enProps)>
+        <#elseif reqDesc == pr.getESPDProperty("espd.crit.eo.has.cert.soc", enProps) || reqDesc == pr.getESPDProperty("espd.crit.decision.final.and.binding", enProps) || reqDesc == pr.getESPDProperty("espd.crit.please.describe.them", enProps) || reqDesc == pr.getESPDProperty("espd.part3.crit.eu.national.bankruptcy.title", enProps) || reqDesc == pr.getESPDProperty("espd.crit.eo.has.cert.soc", enProps)>
             <#assign desc = ""/>
+            <#assign hiddenElementClass = "hiddenGenericDescriptionLabel"/>
         <#elseif reqDesc == "Lot Ids">
             <#assign desc = pr.getESPDProperty("espd.crit.your.answer", props)/>
         <#elseif reqDesc == "Have you taken measures to demonstrate your reliability" || reqDesc == "Have you taken measures to demonstrate your reliability (Self-Cleaning)?">
@@ -147,7 +148,12 @@
             <#assign key = pr.getESPDPropertyTranslationKey(reqDesc, enProps)/>
             <#assign desc = pr.getESPDProperty(key, props)/>
         </#if>
-        <label class="genericDescriptionLabel">${desc}</label>
+
+        <#if hiddenElementClass = "">
+            <label class="genericDescriptionLabel">${desc}</label>
+        <#else>
+            <label class="genericDescriptionLabel ${hiddenElementClass}">${desc}</label>
+        </#if>
     </#if>
 </#macro>
 

@@ -158,6 +158,10 @@ p {
     margin-bottom: 5px;
 }
 
+.questionSubgroup:has(>.question label.hiddenGenericDescriptionLabel) {
+    display: none;
+}
+
 .hidden {
     display: none;
 }

@@ -31,7 +31,6 @@
         <style media="screen, print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>
-        <#assign title = pr.getESPDProperty("espd.gui.app.title",props)/>
-        <title>${title}</title>
+        <title>${pr.getESPDProperty("espd.gui.app.title",props)}</title>
     </head>
 </#macro>
