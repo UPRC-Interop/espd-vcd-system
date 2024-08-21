@@ -191,31 +191,32 @@
 <#macro getDescriptionValue req modelType enProps props>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getDescription()??>
+            <#assign resDesc = req.getResponse().getDescription()/>
             <#assign reqDesc = req.getDescription()/>
 
-            <#if reqDesc = "__Bankruptcy">
+            <#if resDesc = "__Bankruptcy">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Insolvency">
+            <#elseif resDesc = "__Insolvency">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Creditors">
+            <#elseif resDesc = "__Creditors">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__BankruptcyNationalLaw">
+            <#elseif resDesc = "__BankruptcyNationalLaw">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Liquidator">
+            <#elseif resDesc = "__Liquidator">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Suspension">
+            <#elseif resDesc = "__Suspension">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Misconduct">
+            <#elseif resDesc = "__Misconduct">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Competition">
+            <#elseif resDesc = "__Competition">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__ConflictOfInterests">
+            <#elseif resDesc = "__ConflictOfInterests">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__InvolvementIntoProcurementProcedure">
+            <#elseif resDesc = "__InvolvementIntoProcurementProcedure">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__Damages">
+            <#elseif resDesc = "__Damages">
                 <#assign key = "espd.crit.please.give.more.details"/>
-            <#elseif reqDesc = "__EnvManagement">
+            <#elseif resDesc = "__EnvManagement">
                 <#assign key = "espd.part4.crit.explain.supply.contracts.environmental.law"/>
             <#elseif reqDesc == "Indicate reasons for being nevertheless to perform the contract">
                 <#assign key = "espd.crit.reasons.nevertheless.contract"/>
