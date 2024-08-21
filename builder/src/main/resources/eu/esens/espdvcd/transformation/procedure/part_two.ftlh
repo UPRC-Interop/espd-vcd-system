@@ -27,7 +27,7 @@
 </#macro>
 
 <#macro partTwoChapter model modelType enProps props version>
-    <#--  Α  -->
+<#--  Α  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.info.eo", props)}
@@ -36,16 +36,11 @@
             <@sectionForEO model modelType enProps props version/>
         </div>
     </div>
-    <#--  Β  -->
+<#--  Β  -->
     <div class="chapter">
-        <div class="chapter-headline">
-            ${pr.getESPDProperty("espd.part2.info.respresent", props)}
-        </div>
-        <div class="chapter-content">
-            <@powerOfAttorney model modelType props/>
-        </div>
+        <@powerOfAttorney model modelType props/>
     </div>
-    <#--  Γ  -->
+<#--  Γ  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.info.reliance", props)}
@@ -54,7 +49,7 @@
             <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES' enProps props version/>
         </div>
     </div>
-    <#--  Δ  -->
+<#--  Δ  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.information.subcontractors", props)}
@@ -126,17 +121,19 @@
 
 <#macro powerOfAttorney model modelType props>
     <#if modelType == "ESPD_RESPONSE" && model.getEODetails().getNaturalPersons()??>
+        <#assign naturalPersonsCounter = 0/>
         <#list model.getEODetails().getNaturalPersons() as person>
-            <@personalInfo person props/>
+            <#assign naturalPersonsCounter = naturalPersonsCounter + 1/>
+            <@personalInfo person props naturalPersonsCounter/>
         </#list>
     </#if>
 </#macro>
 
-<#macro personalInfo person props>
-    <div class="subchapter-headline">
-        ${pr.getESPDProperty("espd.part2.info.respresent", props)}
+<#macro personalInfo person props naturalPersonsCounter>
+    <div class="chapter-headline">
+        ${pr.getESPDProperty("espd.part2.info.respresent", props)} #${naturalPersonsCounter}
     </div>
-    <div class="subchapter-content">
+    <div class="chapter-content">
         <@s.sectionLabelForValueOfNode person.getFirstName() "espd.part2.first.name" props/>
         <@s.sectionLabelForValueOfNode person.getFamilyName() "espd.part2.last.name" props/>
         <@s.sectionLabelForValueOfNode person.getBirthDate() "espd.part2.birth.date" props/>
