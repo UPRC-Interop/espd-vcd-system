@@ -26,6 +26,7 @@ import eu.esens.espdvcd.model.requirement.response.*;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement> {
@@ -57,7 +58,10 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
         JsonNode type = root.get("type");
         JsonNode ID = root.get("id");
         JsonNode description = root.get("description");
-        JsonNode propertyKeyOrNull = root.get("propertyKeyOrNull");
+        // JsonNode propertyKeyOrNull = root.get("propertyKeyOrNull"); // this element is not used by the backend code
+        JsonNode propertyKeyMapNode = root.get("propertyKeyMap");
+
+        Map<String,String> tempPropertyKeyMap = mapper.treeToValue(propertyKeyMapNode, Map.class);
 
         ResponseRequirement responseRequirement = new ResponseRequirement(
                 ID.asText(),
@@ -65,6 +69,7 @@ public class RequirementDeserialiser extends StdDeserializer<ResponseRequirement
                 ResponseTypeEnum.valueOf(responseType.asText()),
                 description.asText());
         responseRequirement.setResponseValuesRelatedArtefact(responseValuesRelatedArtefact.asText());
+        responseRequirement.getPropertyKeyMap().putAll(tempPropertyKeyMap);
         Response response;
 
         switch (responseRequirement.getResponseDataType()) {
