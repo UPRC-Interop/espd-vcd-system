@@ -6,18 +6,18 @@
 
 <#macro header props fontAwesomeCssPath>
     <head>
-        <#--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<#--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
         <link rel="stylesheet" href="${fontAwesomeCssPath}">
         <style media="screen, print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>
-        <title>${pr.getESPDProperty("espd.gui.app.title",props)}</title>
+        <title>${pr.getESPDProperty("espd.gui.app.title", props)}</title>
     </head>
 </#macro>
 
 <#macro page espdModel espdModelType enProps props version logo>
     <body>
-        <#assign title = pr.getESPDProperty("espd.gui.app.title",props)>
+        <#assign title = pr.getESPDProperty("espd.gui.app.title", props)>
         <div class="espd-details eu-form">
             <div class="procedure-header">
                 <div class="footer-content">

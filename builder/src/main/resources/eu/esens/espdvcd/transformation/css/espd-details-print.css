@@ -54,6 +54,7 @@
 
 .espd-details .section {
     margin-bottom: 20px;
+    page-break-after: always;
 }
 
 .espd-details .chapter {
@@ -114,7 +115,7 @@ label {
     font-weight: bold;
 }
 
-.genericDescriptionLabel, .periodDescriptionLabel, .descriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel, .eoIdentifierCpvLabel, .identifierLabel {
+.genericDescriptionLabel, .periodDescriptionLabel, .descriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel, .eoIdentifierCpvLabel, .identifierLabel, .codeLabel, .dateLabel{
     font-weight: normal;
     color: #b4b4b4;
 }

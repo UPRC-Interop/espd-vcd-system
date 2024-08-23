@@ -15,7 +15,7 @@
 -->
 
 <#function getESPDProperty key props>
-    <#assign espdProperty = searchProperty(key,props)>
+    <#assign espdProperty = searchProperty(key, props)>
     <#return espdProperty>
 </#function>
 
@@ -56,6 +56,6 @@
 <#------->
 
 <#function getESPDPropertyTranslationKey value enProps>
-    <#assign key = searchKey(value,enProps)>
+    <#assign key = searchKey(value, enProps)>
     <#return key>
 </#function>
