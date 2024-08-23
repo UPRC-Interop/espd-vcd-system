@@ -23,10 +23,9 @@
 <#assign version = espdModel.getDocumentDetails().getVersion()/>
 <#assign espdModelType = espdModel.getDocumentDetails().getType()/>
 <#assign logo = logoPath/>
-<#assign fontAwesomeCssPath = fontAwesomeCssPath/>
 
 <html>
-    <@p.header props fontAwesomeCssPath/>
+    <@p.header props/>
     <@p.page espdModel espdModelType enProps props version logo/>
 </html>
 

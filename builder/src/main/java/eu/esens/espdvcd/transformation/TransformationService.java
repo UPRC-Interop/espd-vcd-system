@@ -21,7 +21,10 @@ import eu.esens.espdvcd.codelist.enums.EULanguageCodeEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import freemarker.ext.dom.NodeModel;
-import freemarker.template.*;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateExceptionHandler;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.W3CDom;
 import org.slf4j.Logger;
@@ -41,7 +44,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Base64;
 import java.util.HashMap;
@@ -57,8 +59,6 @@ public class TransformationService {
     private static final String XML = ".xml";
 
     private static final String LOGO_PATH = "images/PromitheusESPDint_logo.png";
-
-    private static final String FONT_AWESOME_CSS_PATH = Paths.get("src/main/resources/eu/esens/espdvcd/transformation/css/font-awesome.css").toAbsolutePath().toUri().toString();
 
     private final String FREE_SANS_FONT_PATH = "/eu/esens/espdvcd/transformation/FreeSans.ttf";
     private final File FREE_SANS_FONT_FILE;
@@ -114,7 +114,6 @@ public class TransformationService {
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
         ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
-        ftlModel.put("fontAwesomeCssPath", FONT_AWESOME_CSS_PATH);
 
         /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -151,7 +150,6 @@ public class TransformationService {
         ftlModel.put("espdProperties",NodeModel.parse(findPropFile(ESPD_PROP_DOC+lang.name().toLowerCase()+XML)));
         ftlModel.put("espdEnProperties",NodeModel.parse(findPropFile(ESPD_EN_PROP_DOC+XML)));
         ftlModel.put("logoPath", getImageAsBase64(LOGO_PATH));
-        ftlModel.put("fontAwesomeCssPath", FONT_AWESOME_CSS_PATH);
         /*--------------------------------------------------------------------------------------------------------------*/
 
         StringWriter sw = new StringWriter();

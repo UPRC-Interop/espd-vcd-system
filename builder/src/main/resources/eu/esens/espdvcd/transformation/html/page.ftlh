@@ -4,10 +4,11 @@
 <#import '../base/finish.ftlh' as f>
 <#import '../propertyreader/property_reader.ftlh' as pr>
 
-<#macro header props fontAwesomeCssPath>
+<#macro header props>
     <head>
-<#--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-        <link rel="stylesheet" href="${fontAwesomeCssPath}">
+        <style media="screen, print" type="text/css">
+            <#include '../css/font-awesome.css'>
+        </style>
         <style media="screen, print" type="text/css">
             <#include '../css/espd-details-print.css'>
         </style>
