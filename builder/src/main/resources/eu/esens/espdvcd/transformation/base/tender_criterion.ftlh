@@ -20,6 +20,8 @@
 <#--<span style="background-color: beige">HERE IT IS</span>-->
 <#--<p style="background-color: beige">${reqDesc}</p>-->
 
+<#--TAXES: groupRequirementID == "c882afa4-6971-4b00-8970-0c283eb122cc"-->
+
 <#macro getTenderingCriterion criterion model modelType enProps props version>
     <#assign criterionID = criterion.getID()/>
     <#assign criterionName = criterion.getName()/>
@@ -93,7 +95,7 @@
                     <@getTenderingCriterionGroup gr.getRequirementGroups() model modelType enProps props level+1 version/>
                 </div>
             <#elseif level &gt; 1>
-                <#if groupRequirementID == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2" || groupRequirementID == "c882afa4-6971-4b00-8970-0c283eb122cc">
+                <#if groupRequirementID == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">
                     <#return>
                 </#if>
                 <div class="questionSubgroup">
@@ -164,19 +166,15 @@
 <#macro getDescription req modelType enProps props groupRequirementID>
     <#if req.getDescription()??>
         <#if req.getPropertyKeyOrNull()??>
-            <p style="background-color: aliceblue">${req.getPropertyKeyOrNull()}</p>
-            <#assign propertyKey = req.getPropertyKeyOrNull()/>
-            <#assign genericDescription = pr.getESPDProperty(propertyKey, props)/>
-<#--            <#if propertyKey == "espd.crit.decision.final.and.binding">-->
+<#--            Requirement descriptions for ONFALSE cases-->
+<#--            <#if groupRequirementID == "c882afa4-6971-4b00-8970-0c283eb122cc" && req.getResponse().isIndicator() == false>-->
+<#--                <#return>-->
+<#--            <#elseif req.getResponse().isIndicator() == false>-->
 <#--                <#return>-->
 <#--            </#if>-->
+            <#assign propertyKey = req.getPropertyKeyOrNull()/>
+            <#assign genericDescription = pr.getESPDProperty(propertyKey, props)/>
             <label class="genericDescriptionLabel">${genericDescription}</label>
-        <#else>
-            <p style="background-color: beige">${req.getDescription()}</p>
-            <#assign reqDesc = req.getDescription()>
-            <#assign desc = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(reqDesc,enProps), props)>
-
-            <label class="genericDescriptionLabel">${desc}</label>
         </#if>
     </#if>
 </#macro>
@@ -190,7 +188,7 @@
 <#macro yesNoIndicator req modelType enProps props>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().isIndicator()??>
-            <label class="yesNoIndicatorLabel"><span class="icon-label"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>${yesNo(req.getResponse().isIndicator(),props)}</span></label>
+            <label class="yesNoIndicatorLabel"><span class="icon-label"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>${yesNo(req.getResponse().isIndicator(), props)}</span></label>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
         <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
@@ -208,13 +206,6 @@
                 <#assign formattedDate = dateInput?date("yyyy-MM-dd")/>
                 <label class="dateLabel">${pr.getESPDProperty(propertyKey, props)}</label>
                 <p class="dateParagraph">${formattedDate?string("dd.MM.yyyy")}</p>
-            <#else>
-                <#assign reqDesc = req.getDescription()>
-                <#assign desc = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(reqDesc, enProps), props)>
-                <#assign dateInput = req.getResponse().getDate()/>
-                <#assign formattedDate = dateInput?date("yyyy-MM-dd")/>
-                <label class="dateLabel">${desc}</label>
-                <p class="dateParagraph">${formattedDate?string("dd.MM.yyyy")}</p>
             </#if>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
@@ -229,11 +220,6 @@
                 <#assign propertyKey = req.getPropertyKeyOrNull()/>
                 <#assign description = pr.getESPDProperty(propertyKey, props)/>
                 <label class="descriptionLabel">${description}</label>
-                <p class="descriptionParagraph">${req.getResponse().getDescription()}</p>
-            <#else>
-                <#assign reqDesc = req.getDescription()>
-                <#assign desc = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(reqDesc, enProps), props)>
-                <label class="descriptionLabel">${desc}</label>
                 <p class="descriptionParagraph">${req.getResponse().getDescription()}</p>
             </#if>
         </#if>
