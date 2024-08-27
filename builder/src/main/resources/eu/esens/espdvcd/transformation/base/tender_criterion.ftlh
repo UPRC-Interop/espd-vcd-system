@@ -20,8 +20,6 @@
 <#--<span style="background-color: beige">HERE IT IS</span>-->
 <#--<p style="background-color: beige">${reqDesc}</p>-->
 
-<#--TAXES: groupRequirementID == "c882afa4-6971-4b00-8970-0c283eb122cc"-->
-
 <#macro getTenderingCriterion criterion model modelType enProps props version>
     <#assign criterionID = criterion.getID()/>
     <#assign criterionName = criterion.getName()/>
@@ -81,43 +79,28 @@
         <#assign descOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionDescription,enProps), props)/>
         <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
         <p class="descOfCriterionParagraph">${descOfCriterion}</p>
-        <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props level+1 version/>
+        <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props version/>
     </div>
 </#macro>
 
-<#macro getTenderingCriterionGroup groupOfRequirements model modelType enProps props level version>
-    <#if groupOfRequirements??>
-        <#list groupOfRequirements as gr>
-            <#assign groupRequirementID = gr.getID()/>
-            <#if level = 1>
-                <div class="questionGroup">
-                    <@getRequirementGroupContent gr.getRequirements() model modelType enProps props "question" version groupRequirementID/>
-                    <@getTenderingCriterionGroup gr.getRequirementGroups() model modelType enProps props level+1 version/>
-                </div>
-            <#elseif level &gt; 1>
-                <#if groupRequirementID == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">
-                    <#return>
+<#macro getTenderingCriterionGroup requirementGroups model modelType enProps props version>
+    <#if requirementGroups??>
+        <#list requirementGroups as requirementGroup>
+            <p style="background-color: beige">${requirementGroup.getCondition()}</p>
+            <#list requirementGroup.getRequirements() as requirement>
+                <#if requirement.getResponseDataType() == "INDICATOR">
+                    <p style="background-color: beige">${requirement.getResponse().isIndicator()?string}</p>
                 </#if>
-                <div class="questionSubgroup">
-                    <@getRequirementGroupContent gr.getRequirements() model modelType enProps props "question" version groupRequirementID/>
-                    <@getTenderingCriterionGroup gr.getRequirementGroups() model modelType enProps props level+1 version/>
-                </div>
-            </#if>
+                <@getTenderCriterionContent requirement model modelType enProps props version/>
+            </#list>
+            <@getTenderingCriterionGroup requirementGroup.getRequirementGroups() model modelType enProps props version/>
         </#list>
     </#if>
 </#macro>
 
-<#macro getRequirementGroupContent groupOfRequirements model modelType enProps props className version groupRequirementID>
-    <#list groupOfRequirements as req>
-        <div class="${className}">
-            <@getTenderCriterionContent req model modelType enProps props version groupRequirementID/>
-        </div>
-    </#list>
-</#macro>
-
-<#macro getTenderCriterionContent req model modelType enProps props version groupRequirementID>
+<#macro getTenderCriterionContent req model modelType enProps props version>
     <#if req.getResponseDataType() == "INDICATOR" || req.getResponseDataType() == "CODE_BOOLEAN">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@yesNoIndicator req modelType enProps props/>
     <#elseif req.getResponseDataType() == "DATE">
         <@getDateValue req modelType enProps props/>
@@ -128,30 +111,31 @@
     <#elseif req.getResponseDataType() == "QUANTITY">
         <@getQuantityValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "QUANTITY_YEAR">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@getQuantityYearValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "QUANTITY_INTEGER">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@getQuantityIntegerValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "AMOUNT">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@getAmountValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "CODE_COUNTRY">
         <@getCountryValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "PERCENTAGE">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@getPercentageValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "PERIOD">
         <@getPeriodDescription req modelType enProps props/>
         <@getPeriodValue req modelType version/>
     <#elseif req.getResponseDataType() == "CODE">
+        <@getDescription req modelType enProps props/>
         <@getCodeValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "EVIDENCE_IDENTIFIER">
         <@getEvidenceIdentifierValue req model modelType props/>
     <#elseif req.getResponseDataType() == "IDENTIFIER">
         <@getIdentifierValue req model modelType props/>
     <#elseif req.getResponseDataType() == "URL">
-        <@getDescription req modelType enProps props groupRequirementID/>
+        <@getDescription req modelType enProps props/>
         <@getUrlValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "WEIGHT_INDICATOR">
         <@yesNoIndicator req modelType enProps props/>
@@ -163,15 +147,9 @@
 </#macro>
 
 <#-- Generic Descriptions -->
-<#macro getDescription req modelType enProps props groupRequirementID>
+<#macro getDescription req modelType enProps props>
     <#if req.getDescription()??>
         <#if req.getPropertyKeyOrNull()??>
-<#--            Requirement descriptions for ONFALSE cases-->
-<#--            <#if groupRequirementID == "c882afa4-6971-4b00-8970-0c283eb122cc" && req.getResponse().isIndicator() == false>-->
-<#--                <#return>-->
-<#--            <#elseif req.getResponse().isIndicator() == false>-->
-<#--                <#return>-->
-<#--            </#if>-->
             <#assign propertyKey = req.getPropertyKeyOrNull()/>
             <#assign genericDescription = pr.getESPDProperty(propertyKey, props)/>
             <label class="genericDescriptionLabel">${genericDescription}</label>
@@ -269,7 +247,7 @@
 <#macro getAmountValue req modelType enProps props>
     <#if modelType=="ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getAmount()?? && req.getResponse().getCurrency()??>
-            <#assign amountValue = req.getResponse().getAmount()+"\n"+req.getResponse().getCurrency() />
+            <#assign amountValue = req.getResponse().getAmount()+"\n"+req.getResponse().getCurrency()/>
             <p class="amountParagraph">${amountValue}</p>
         </#if>
     </#if>
@@ -318,11 +296,11 @@
 <#macro getCodeValue req modelType enProps props>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getEvidenceURLCode()??>
-            <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>
+        <#--            <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>-->
             <p class="codeParagraph">${req.getResponse().getEvidenceURLCode()}</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
-        <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>
+    <#--        <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>-->
         <p class="codeParagraph">&ndash;</p>
     </#if>
 </#macro>

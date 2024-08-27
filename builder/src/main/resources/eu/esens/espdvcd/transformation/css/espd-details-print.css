@@ -115,7 +115,7 @@ label {
     font-weight: bold;
 }
 
-.genericDescriptionLabel, .periodDescriptionLabel, .descriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel, .eoIdentifierCpvLabel, .identifierLabel, .codeLabel, .dateLabel{
+.genericDescriptionLabel, .periodDescriptionLabel, .descriptionLabel, .evidenceUrlLabel, .evidenceIdentifierUrlLabel, .evidenceIdentifierCodeLabel, .evidenceIdentifierIssuerLabel, .lotIdentifierLabel, .eoIdentifierEntityLabel, .eoIdentifierTypeLabel, .eoIdentifierCpvLabel, .identifierLabel, .codeLabel, .dateLabel, .countryLabel{
     font-weight: normal;
     color: #b4b4b4;
 }
@@ -159,10 +159,10 @@ p {
     margin-bottom: 5px;
 }
 
-.questionSubgroup:has(>.question label.hiddenGenericDescriptionLabel) {
-    display: none;
-}
+/*.questionSubgroup:has(>.question label.hiddenGenericDescriptionLabel) {*/
+/*    display: none;*/
+/*}*/
 
-.hidden {
-    display: none;
-}
+/*.hidden {*/
+/*    display: none;*/
+/*}*/
