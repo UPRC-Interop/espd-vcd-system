@@ -79,21 +79,30 @@
         <#assign descOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionDescription,enProps), props)/>
         <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
         <p class="descOfCriterionParagraph">${descOfCriterion}</p>
-        <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props version/>
+        <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props version true/>
     </div>
 </#macro>
 
-<#macro getTenderingCriterionGroup requirementGroups model modelType enProps props version>
+<#macro getTenderingCriterionGroup requirementGroups model modelType enProps props version indicatorValue>
     <#if requirementGroups??>
         <#list requirementGroups as requirementGroup>
-            <p style="background-color: beige">${requirementGroup.getCondition()}</p>
+            <#assign condition = requirementGroup.getCondition()/>
             <#list requirementGroup.getRequirements() as requirement>
-                <#if requirement.getResponseDataType() == "INDICATOR">
-                    <p style="background-color: beige">${requirement.getResponse().isIndicator()?string}</p>
+                <#if (indicatorValue && condition == "ONTRUE") || (indicatorValue && condition == "ON*") || (indicatorValue == false && condition == "ONFALSE") || (indicatorValue == false && condition == "ON*")>
+                    <#assign showGroup = true/>
+                <#else>
+                    <#assign showGroup = false/>
                 </#if>
-                <@getTenderCriterionContent requirement model modelType enProps props version/>
+                <#if requirement.getResponseDataType() == "INDICATOR">
+                    <#assign indicator = requirement.getResponse().isIndicator()/>
+                </#if>
+                <#if showGroup>
+                    <@getTenderCriterionContent requirement model modelType enProps props version/>
+                </#if>
             </#list>
-            <@getTenderingCriterionGroup requirementGroup.getRequirementGroups() model modelType enProps props version/>
+            <#if showGroup>
+                <@getTenderingCriterionGroup requirementGroup.getRequirementGroups() model modelType enProps props version indicator/>
+            </#if>
         </#list>
     </#if>
 </#macro>
