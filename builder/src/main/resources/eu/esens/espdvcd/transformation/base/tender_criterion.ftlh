@@ -79,30 +79,67 @@
         <#assign descOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionDescription,enProps), props)/>
         <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
         <p class="descOfCriterionParagraph">${descOfCriterion}</p>
-        <@getTenderingCriterionGroup criterion.getRequirementGroups() model modelType enProps props version true/>
+        <#if modelType == "ESPD_REQUEST">
+            <@getTenderingCriterionGroupRequest criterion.getRequirementGroups() model modelType enProps props version/>
+        <#elseif modelType == "ESPD_RESPONSE">
+            <@getTenderingCriterionGroupResponse criterion.getRequirementGroups() model modelType enProps props version true/>
+        </#if>
     </div>
 </#macro>
 
-<#macro getTenderingCriterionGroup requirementGroups model modelType enProps props version indicatorValue>
+<#macro getTenderingCriterionGroupRequest requirementGroups model modelType enProps props version>
+    <#if requirementGroups??>
+        <#list requirementGroups as requirementGroup>
+            <div class="group">
+                <#list requirementGroup.getRequirements() as requirement>
+                    <div class="requirement">
+                        <@getTenderCriterionContent requirement model modelType enProps props version/>
+                    </div>
+                </#list>
+                <div class="requirementGroup">
+                    <@getTenderingCriterionGroupRequest requirementGroup.getRequirementGroups() model modelType enProps props version/>
+                </div>
+            </div>
+        </#list>
+    </#if>
+</#macro>
+
+<#macro getTenderingCriterionGroupResponse requirementGroups model modelType enProps props version indicatorValue>
     <#if requirementGroups??>
         <#list requirementGroups as requirementGroup>
             <#assign condition = requirementGroup.getCondition()/>
-            <#list requirementGroup.getRequirements() as requirement>
-                <#if (indicatorValue && condition == "ONTRUE") || (indicatorValue && condition == "ON*") || (indicatorValue == false && condition == "ONFALSE") || (indicatorValue == false && condition == "ON*")>
-                    <#assign showGroup = true/>
-                <#else>
-                    <#assign showGroup = false/>
-                </#if>
-                <#if requirement.getResponseDataType() == "INDICATOR">
-                    <#assign indicator = requirement.getResponse().isIndicator()/>
-                </#if>
-                <#if showGroup>
-                    <@getTenderCriterionContent requirement model modelType enProps props version/>
-                </#if>
-            </#list>
-            <#if showGroup>
-                <@getTenderingCriterionGroup requirementGroup.getRequirementGroups() model modelType enProps props version indicator/>
+            <#assign id = requirementGroup.getID()/>
+            <#if id == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">
+                <#continue>
+            <#elseif (condition == "ONTRUE" && indicatorValue == false)>
+                <#continue>
+            <#elseif (condition == "ONFALSE" && indicatorValue == true)>
+                <#continue>
             </#if>
+            <div class="group">
+                <#list requirementGroup.getRequirements() as requirement>
+                    <#if (indicatorValue && condition == "ONTRUE") || (indicatorValue && condition == "ON*") || (indicatorValue == false && condition == "ONFALSE") || (indicatorValue == false && condition == "ON*")>
+                        <#assign showRequirementGroup = true/>
+                    <#else>
+                        <#assign showRequirementGroup = false/>
+                    </#if>
+                    <#if requirement.getResponse()??>
+                        <#if requirement.getResponseDataType() == "INDICATOR">
+                            <#assign indicator = requirement.getResponse().isIndicator()/>
+                        </#if>
+                    </#if>
+                    <#if showRequirementGroup>
+                        <div class="requirement">
+                            <@getTenderCriterionContent requirement model modelType enProps props version/>
+                        </div>
+                    </#if>
+                </#list>
+                <#if showRequirementGroup>
+                    <div class="requirementGroup">
+                        <@getTenderingCriterionGroupResponse requirementGroup.getRequirementGroups() model modelType enProps props version indicator/>
+                    </div>
+                </#if>
+            </div>
         </#list>
     </#if>
 </#macro>
@@ -196,6 +233,10 @@
             </#if>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
+        <#if req.getPropertyKeyOrNull()??>
+            <#assign propertyKey = req.getPropertyKeyOrNull()/>
+            <label class="dateLabel">${pr.getESPDProperty(propertyKey, props)}</label>
+        </#if>
         <p class="dateParagraph">..</p>
     </#if>
 </#macro>
@@ -211,6 +252,10 @@
             </#if>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
+        <#if req.getPropertyKeyOrNull()??>
+            <#assign propertyKey = req.getPropertyKeyOrNull()/>
+            <label class="descriptionLabel">${pr.getESPDProperty(propertyKey, props)}</label>
+        </#if>
         <p class="descriptionParagraph">&ndash;</p>
     </#if>
 </#macro>
@@ -256,9 +301,11 @@
 <#macro getAmountValue req modelType enProps props>
     <#if modelType=="ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getAmount()?? && req.getResponse().getCurrency()??>
-            <#assign amountValue = req.getResponse().getAmount()+"\n"+req.getResponse().getCurrency()/>
+            <#assign amountValue = req.getResponse().getAmount()?c + "\n" + req.getResponse().getCurrency()/>
             <p class="amountParagraph">${amountValue}</p>
         </#if>
+    <#elseif modelType == "ESPD_REQUEST">
+        <p class="amountParagraph">&ndash;</p>
     </#if>
 </#macro>
 
@@ -305,11 +352,9 @@
 <#macro getCodeValue req modelType enProps props>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().getEvidenceURLCode()??>
-        <#--            <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>-->
             <p class="codeParagraph">${req.getResponse().getEvidenceURLCode()}</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
-    <#--        <label class="codeLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>-->
         <p class="codeParagraph">&ndash;</p>
     </#if>
 </#macro>
@@ -368,8 +413,6 @@
         <p class="eoIdentifierEntityParagraph">&ndash;</p>
         <label class="eoIdentifierTypeLabel">${pr.getESPDProperty("espd.crit.type.id", props)}</label>
         <p class="eoIdentifierTypeParagraph">&ndash;</p>
-        <label class="eoIdentifierCpvLabel">${pr.getESPDProperty("espd.crit.cpv.code", props)}</label>
-        <p class="eoIdentifierCpvParagraph">&ndash;</p>
     <#elseif modelType == "ESPD_RESPONSE">
         <#if req.getResponse()??>
             <label class="eoIdentifierEntityLabel">${pr.getESPDProperty("espd.crit.entity.id", props)}</label>

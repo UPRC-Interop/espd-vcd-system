@@ -77,6 +77,11 @@
     padding: 20px;
 }
 
+.chapter-content-title, .selectionChaptersInfo, .finishTopLabel {
+    text-align: justify;
+    padding-bottom: 10px;
+}
+
 .descInput {
     margin-bottom: 10px;
 }
@@ -131,11 +136,9 @@ p {
     margin-top: 2px;
 }
 
-
 .fa {
     color: #476065;
     font-size: 15px;
-    /*margin-left: 5px;*/
     margin-right: 5px;
     vertical-align: middle;
 }
@@ -145,24 +148,16 @@ p {
     margin-bottom: 20px;
 }
 
-.questionGroup {
+.criterion {
     border: 1px solid #e5e5e5;
     border-radius: 2px;
     padding: 10px;
     margin-bottom: 10px;
 }
 
-.questionSubgroup {
+.group {
     border: 1px solid #e5e5e5;
     border-radius: 2px;
     padding: 10px;
     margin-bottom: 5px;
 }
-
-/*.questionSubgroup:has(>.question label.hiddenGenericDescriptionLabel) {*/
-/*    display: none;*/
-/*}*/
-
-/*.hidden {*/
-/*    display: none;*/
-/*}*/

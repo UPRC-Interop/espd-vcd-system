@@ -49,12 +49,12 @@
 </#macro>
 
 <#macro additionalDocumentReference model props>
-    <#assign filledAlert = pr.getESPDProperty("espd.part1.to.be.filled.alert", props)>
-    <#assign tedRecId = pr.getESPDProperty("espd.part1.ted.reception.id", props)>
-    <#assign ojsLabel = pr.getESPDProperty("espd.part1.ojs.label", props)>
-    <#assign ojsUrl = pr.getESPDProperty("espd.part1.ojs.url", props)>
-    <#assign officialJournalAlert = pr.getESPDProperty("espd.part1.official.journal.alert", props)>
-    <#assign officialJournalAlert2 = pr.getESPDProperty("espd.part1.official.journal.alert2", props)>
+    <#assign filledAlert = pr.getESPDProperty("espd.part1.to.be.filled.alert", props)/>
+    <#assign tedRecId = pr.getESPDProperty("espd.part1.ted.reception.id", props)/>
+    <#assign ojsLabel = pr.getESPDProperty("espd.part1.ojs.label", props)/>
+    <#assign ojsUrl = pr.getESPDProperty("espd.part1.ojs.url", props)/>
+    <#assign officialJournalAlert = pr.getESPDProperty("espd.part1.official.journal.alert", props)/>
+    <#assign officialJournalAlert2 = pr.getESPDProperty("espd.part1.official.journal.alert2", props)/>
 
     <p>${filledAlert}</p>
     <br>
@@ -70,23 +70,23 @@
 </#macro>
 
 <#macro contractingParty model props >
-    <#assign officialName = model.getCADetails().getCAOfficialName()>
-    <#assign vatId = model.getCADetails().getID()!"">
-    <#assign websiteURI = model.getCADetails().getWebSiteURI()!"">
-    <#assign city = model.getCADetails().getPostalAddress().getCity()!"">
-    <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()!"">
-    <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()!"">
-    <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()!"">
-    <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!"">
-    <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!"">
-    <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!"">
-    <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()>
+    <#assign officialName = model.getCADetails().getCAOfficialName()/>
+    <#assign vatId = model.getCADetails().getID()!""/>
+    <#assign websiteURI = model.getCADetails().getWebSiteURI()!""/>
+    <#assign city = model.getCADetails().getPostalAddress().getCity()!""/>
+    <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()!""/>
+    <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()!""/>
+    <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()!""/>
+    <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!""/>
+    <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!""/>
+    <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!""/>
+    <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()/>
 
     <@s.sectionLabelForValueOfNode officialName "espd.part1.name" props/>
     <@s.sectionLabelForValueOfNode vatId "espd.part2.vat" props/>
     <@s.sectionLabelForUrlValueOfNode websiteURI "espd.part1.website" props/>
     <@s.sectionLabelForValueOfNode city "espd.part1.city" props/>
-    <@s.sectionLabelForValueOfNode address "espd.part1.street.and. num",props/>
+    <@s.sectionLabelForValueOfNode address "espd.part1.street.and.num" props/>
     <@s.sectionLabelForValueOfNode postcode "espd.part1.postcode" props/>
     <@s.sectionLabelForValueOfNode contactPointName "espd.part1.contact.person" props/>
     <@s.sectionLabelForValueOfNode tel "espd.part1.telephone" props/>
@@ -96,11 +96,11 @@
 </#macro>
 
 <#macro infoProcurementProc model props>
-    <#assign procurerName = pr.getESPDProperty("espd.part1.procurer.name", props)>
-    <#assign shortDesc = pr.getESPDProperty("espd.part1.title.or.short.desc", props)>
-    <#assign fileRefCa = pr.getESPDProperty("espd.part1.file.ref.ca", props)>
+    <#assign procurerName = pr.getESPDProperty("espd.part1.procurer.name", props)/>
+    <#assign shortDesc = pr.getESPDProperty("espd.part1.title.or.short.desc", props)/>
+    <#assign fileRefCa = pr.getESPDProperty("espd.part1.file.ref.ca", props)/>
 
-    <@s.sectionLabel procurerName model.getCADetails().getProcurementProcedureTitle() />
-    <@s.sectionLabel shortDesc model.getCADetails().getProcurementProcedureDesc() />
-    <@s.sectionLabel fileRefCa model.getCADetails().getProcurementProcedureFileReferenceNo() />
+    <@s.sectionLabel procurerName model.getCADetails().getProcurementProcedureTitle()/>
+    <@s.sectionLabel shortDesc model.getCADetails().getProcurementProcedureDesc()/>
+    <@s.sectionLabel fileRefCa model.getCADetails().getProcurementProcedureFileReferenceNo()/>
 </#macro>

@@ -18,10 +18,6 @@
 <#import '../procedure/part_two.ftlh' as p2>
 
 <#macro procedureSection model modelType enProps props version>
-    <#if modelType == "ESPD_RESPONSE">
-        <@p1.partOne model props/>
-        <@p2.partTwo model modelType enProps props version/>
-    <#else>
-        <@p1.partOne model props/>
-    </#if>
+    <@p1.partOne model props/>
+    <@p2.partTwo model modelType enProps props version/>
 </#macro>

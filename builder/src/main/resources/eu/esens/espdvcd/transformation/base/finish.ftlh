@@ -19,27 +19,30 @@
 <#import '../propertyreader/property_reader.ftlh' as pr>
 
 <#macro finishSection model modelType enProps props version>
-    <#assign title = pr.getESPDProperty("espd.part5.header",props)>
-    <#if modelType == "ESPD_RESPONSE">
-        <div class="section">
-            <h3>${title}</h3>
+    <div class="section">
+        <h3>${pr.getESPDProperty("espd.part5.header", props)}</h3>
+        <#assign fullCriterionList = model.getFullCriterionList()/>
+        <#list fullCriterionList as criterion>
+            <#if criterion.getID() == "51c39ba9-0444-4967-afe9-36f753b30175" && criterion.isSelected() == true>
+                <#assign isReductionOfCandidatesCriterion = true/>
+                <#break>
+            </#if>
+        </#list>
+        <#if isReductionOfCandidatesCriterion??>
             <@partFive model modelType enProps props version/>
-            <@partSix props />
-        </div>
-    <#else>
-        <div class="section">
-            <h3>${title}</h3>
-            <@partSix props />
-        </div>
-    </#if>
+            <@partSix props/>
+        <#else>
+            <@partSix props/>
+        </#if>
+    </div>
 </#macro>
 
 <#macro partFive model modelType enProps props version>
     <div class="chapter">
-        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.reduction',props)}</div>
+        <div class="chapter-headline">${pr.getESPDProperty("espd.part5.reduction", props)}</div>
         <div class="chapter-content">
-            <p>${pr.getESPDProperty("espd.part5.toptext",props)}</p>
-            <label>${pr.getESPDProperty('espd.part5.reduction.question',props)}</label>
+            <p style="font-weight: bold">${pr.getESPDProperty("espd.part5.toptext", props)}</p>
+            <label class="finishTopLabel">${pr.getESPDProperty("espd.part5.reduction.question", props)}</label>
             <@reductionOfCandidatesPart model modelType enProps props version/>
         </div>
     </div>
@@ -47,17 +50,17 @@
 
 <#macro reductionOfCandidatesPart model modelType enProps props version>
     <#if version == "V1">
-        <#assign lstRc = model.getFullCriterionList()>
-        <@reductionOfCandidatesContent lstRc model modelType enProps props version />
+        <#assign lstRc = model.getFullCriterionList()/>
+        <@reductionOfCandidatesContent lstRc model modelType enProps props version/>
     <#elseif version == "V2">
-        <#assign lstRc = model.getEORelatedCriteriaList()>
-        <@reductionOfCandidatesContent lstRc model modelType enProps props version />
+        <#assign lstRc = model.getEORelatedCriteriaList()/>
+        <@reductionOfCandidatesContent lstRc model modelType enProps props version/>
     </#if>
 </#macro>
 
 <#macro reductionOfCandidatesContent lstRc model modelType enProps props version>
     <#list lstRc as criterion>
-        <#if criterion.getTypeCode()?string?contains('CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES') || criterion.getTypeCode()?string?contains('CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE')>
+        <#if criterion.getTypeCode()?string?contains("CRITERION.OTHER.EO_DATA.REDUCTION_OF_CANDIDATES") || criterion.getTypeCode()?string?contains("CRITERION.OTHER.EO_DATA.MEETS_THE_OBJECTIVE")>
             <@tc.getTenderingCriterion criterion model modelType enProps props version/>
             <#if criterion.getSubCriterionList()??>
                 <#assign subCriterionList = criterion.getSubCriterionList()/>
@@ -71,18 +74,22 @@
 
 <#macro partSix props>
     <div class="chapter">
-        <div class="chapter-headline">${pr.getESPDProperty('espd.part5.concl.statements',props)}</div>
+        <div class="chapter-headline">${pr.getESPDProperty("espd.part5.concl.statements", props)}</div>
         <div class="chapter-content">
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part1",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part2",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part3",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part4",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part5",props)}</p>
-            <p>${pr.getESPDProperty("espd.part5.concl.statements.signature",props)}</p>
-            <p>${pr.getESPDProperty("espd.crit.date",props)}</p>
-            <p>${pr.getESPDProperty("espd.gui.place",props)}</p>
-            <p>${pr.getESPDProperty("espd.gui.signature",props)}</p>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part1", props)}</p>
+            <br>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part2", props)}</p>
+            <br>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part3", props)}</p>
+            <br>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part4", props)}</p>
+            <br>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.text.part5", props)}</p>
+            <br>
+            <p>${pr.getESPDProperty("espd.part5.concl.statements.signature", props)}</p>
+            <p>${pr.getESPDProperty("espd.crit.date", props)}</p>
+            <p>${pr.getESPDProperty("espd.gui.place", props)}</p>
+            <p>${pr.getESPDProperty("espd.gui.signature", props)}</p>
         </div>
     </div>
 </#macro>
