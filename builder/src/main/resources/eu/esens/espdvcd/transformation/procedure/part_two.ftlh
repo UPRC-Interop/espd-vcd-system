@@ -62,18 +62,17 @@
 
 <#macro sectionForEO model modelType enProps props version>
     <#if modelType == "ESPD_RESPONSE">
-        <#assign name = model.getEODetails().getName()/>
+        <#assign name = model.getEODetails().getName()!""/>
         <#assign address = model.getEODetails().getPostalAddress().getAddressLine1()!""/>
         <#assign postcode = model.getEODetails().getPostalAddress().getPostCode()!""/>
         <#assign city = model.getEODetails().getPostalAddress().getCity()!""/>
-        <#assign countryCode = model.getEODetails().getPostalAddress().getCountryCode()/>
+        <#assign countryCode = model.getEODetails().getPostalAddress().getCountryCode()!""/>
         <#assign contactPointName = model.getEODetails().getContactingDetails().getContactPointName()!""/>
         <#assign email = model.getEODetails().getContactingDetails().getEmailAddress()!""/>
         <#assign tel = model.getEODetails().getContactingDetails().getTelephoneNumber()!""/>
         <#assign fax = model.getEODetails().getContactingDetails().getFaxNumber()!""/>
         <#assign id = model.getEODetails().getID()!""/>
         <#assign websiteURI = model.getEODetails().getWebSiteURI()!""/>
-        <#assign projLot = model.getEODetails().getProcurementProjectLot()/>
 
         <@s.sectionLabelForValueOfNode name "espd.part2.name" props/>
         <@s.sectionLabelForValueOfNode address "espd.part1.street.and.num" props/>
@@ -178,17 +177,17 @@
         ${pr.getESPDProperty("espd.part2.info.respresent", props)} #${naturalPersonsCounter}
     </div>
     <div class="chapter-content">
-        <@s.sectionLabelForValueOfNode person.getFirstName() "espd.part2.first.name" props/>
-        <@s.sectionLabelForValueOfNode person.getFamilyName() "espd.part2.last.name" props/>
-        <@s.sectionLabelForValueOfNode person.getBirthDate() "espd.part2.birth.date" props/>
-        <@s.sectionLabelForValueOfNode person.getBirthPlace() "espd.part2.birth.place" props/>
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1() "espd.part1.street.and.num" props/>
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode() "espd.part1.postcode" props/>
-        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity() "espd.part1.city" props/>
+        <@s.sectionLabelForValueOfNode person.getFirstName()!"" "espd.part2.first.name" props/>
+        <@s.sectionLabelForValueOfNode person.getFamilyName()!"" "espd.part2.last.name" props/>
+        <@s.sectionLabelForValueOfNode person.getBirthDate()!"" "espd.part2.birth.date" props/>
+        <@s.sectionLabelForValueOfNode person.getBirthPlace()!"" "espd.part2.birth.place" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getAddressLine1()!"" "espd.part1.street.and.num" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getPostCode()!"" "espd.part1.postcode" props/>
+        <@s.sectionLabelForValueOfNode person.getPostalAddress().getCity()!"" "espd.part1.city" props/>
         <@s.sectionLabelForValueOfNode person.getPostalAddress().getCountryCode() "espd.part1.country" props/>
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber() "espd.part2.telephone" props/>
-        <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress() "espd.part2.email" props/>
-        <@s.sectionLabelForValueOfNode person.getRole() "espd.part2.pos.act.in.capacity" props/>
+        <@s.sectionLabelForValueOfNode person.getContactDetails().getTelephoneNumber()!"" "espd.part2.telephone" props/>
+        <@s.sectionLabelForValueOfNode person.getContactDetails().getEmailAddress()!"" "espd.part2.email" props/>
+        <@s.sectionLabelForValueOfNode person.getRole()!"" "espd.part2.pos.act.in.capacity" props/>
     </div>
 </#macro>
 

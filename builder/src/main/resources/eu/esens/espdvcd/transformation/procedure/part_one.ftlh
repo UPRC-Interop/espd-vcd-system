@@ -70,7 +70,7 @@
 </#macro>
 
 <#macro contractingParty model props >
-    <#assign officialName = model.getCADetails().getCAOfficialName()/>
+    <#assign officialName = model.getCADetails().getCAOfficialName()!""/>
     <#assign vatId = model.getCADetails().getID()!""/>
     <#assign websiteURI = model.getCADetails().getWebSiteURI()!""/>
     <#assign city = model.getCADetails().getPostalAddress().getCity()!""/>
@@ -80,7 +80,7 @@
     <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!""/>
     <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!""/>
     <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!""/>
-    <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()/>
+    <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()!""/>
 
     <@s.sectionLabelForValueOfNode officialName "espd.part1.name" props/>
     <@s.sectionLabelForValueOfNode vatId "espd.part2.vat" props/>

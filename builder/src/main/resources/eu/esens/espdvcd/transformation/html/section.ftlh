@@ -31,9 +31,9 @@
     <#if value??>
         <#if !propertyValue?contains(":")>
             <#assign propertyValue += ":">
-            <@sectionLabel propertyValue text />
+            <@sectionLabel propertyValue text/>
         <#else>
-            <@sectionLabel propertyValue text />
+            <@sectionLabel propertyValue text/>
         </#if>
     </#if>
 </#macro>
