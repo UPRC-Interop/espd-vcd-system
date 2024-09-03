@@ -27,6 +27,12 @@
     /*src: url("../FreeSans.ttf") format("truetype"); !* Use an absolute or relative url. *!*/
 }
 
+@media print {
+    html, body {
+        height: 99%;
+    }
+}
+
 .espd-details {
     /* Font-family attribute renders Greek letters instead of # symbols */
     font-family: "Free-Sans", sans-serif;

@@ -118,24 +118,6 @@
                     <#if id == "73f0fe4c-4ed9-4343-8096-d898cf200146" && requirement.getResponseDataType() == "DESCRIPTION" && indicatorValue == false>
                         <#continue>
                     </#if>
-<#--                    <#if id == "f13754df-7e15-4155-aaa6-7ca6407baa47" && indicatorValue == true>-->
-<#--                        <#if requirement.getResponse().getDescription()?has_content == false>-->
-<#--                            <#assign hide = true/>-->
-<#--                            <#break>-->
-<#--                        </#if>-->
-<#--                    </#if>-->
-<#--                    <#if id == "41dd2e9b-1bfd-44c7-93ee-56bd74a4334b" && indicatorValue == true>-->
-<#--                        <#list model.getEvidenceList() as evidence>-->
-<#--                            <#if requirement.getID() == evidence.getID()>-->
-<#--                                <#if evidence.getEvidenceURL()?has_content == false && evidence.getDescription()?has_content == false && evidence.getEvidenceIssuer().getName()?has_content == false>-->
-<#--                                    <#assign hide = true/>-->
-<#--                                </#if>-->
-<#--                            </#if>-->
-<#--                        </#list>-->
-<#--                        <#if hide??>-->
-<#--                            <#break>-->
-<#--                        </#if>-->
-<#--                    </#if>-->
                     <#if (indicatorValue && condition == "ONTRUE") || (indicatorValue && condition == "ON*") || (indicatorValue == false && condition == "ONFALSE") || (indicatorValue == false && condition == "ON*")>
                         <#assign showRequirementGroup = true/>
                     <#else>
