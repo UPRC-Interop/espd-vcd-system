@@ -70,6 +70,8 @@
             <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.allowance.of.checks.description", enProps)/>
         <#elseif criterionID == "612a1625-118d-4ea4-a6db-413184e7c0a8">
             <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.subcontracting.proportion.description", enProps)/>
+        <#elseif criterionID == "5e506c16-26ab-4e32-bb78-b27f87dc0565">
+            <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.service.contracts.performance.services.description", enProps)/>
         </#if>
 
         <#assign nameOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionName,enProps), props)>

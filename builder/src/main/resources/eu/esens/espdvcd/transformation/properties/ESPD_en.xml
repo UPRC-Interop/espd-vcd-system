@@ -30,7 +30,7 @@
     <entry key="espd.part1.name">Official name:</entry>
     <entry key="espd.part1.nat.regnum">National registration number (if known):</entry>
     <entry key="espd.part1.official.journal.alert">In case publication of a notice in the Official Journal of the European Union is not required, please give other information allowing the procurement procedure to be unequivocally identified (e. g. reference of a publication at national level)</entry>
-    <entry key="espd.part1.ojs.label">Notice Number in the OJS is formed by Notice publication number: ΧΧΧΧΧΧ-ΥΥΥΥ and OJ S issue number: ΚΚΚ/ΥΥΥΥ (where YYYY is the year) as follows ΥΥΥΥ/S KKK-XXXXXX</entry>
+    <entry key="espd.part1.ojs.label">Notice number in the OJS:</entry>
     <entry key="espd.part1.ojs.url">OJS URL</entry>
     <entry key="espd.part1.postcode">Postcode:</entry>
     <entry key="espd.part1.procurer.name">Title:</entry>
@@ -479,7 +479,7 @@
     <entry key="espd.crit.subcrit.name">Name of the national subcriterion</entry>
     <entry key="espd.crit.subcrit.description">Description of the national subcriterion</entry>
     <entry key="espd.crit.subcrit.additional.information">Additional information; e.g. no evidences online</entry>
-    <entry key="espd.validator.numberOjs">Please enter a publication number in the valid format Chr(92)Chr(34)yyyy/S sss-nnnnnnChr(92)Chr(34)</entry>
+    <entry key="espd.validator.numberOjs">Notice Number in the OJS is formed by Notice publication number: ΧΧΧΧΧΧ-ΥΥΥΥ and OJ S issue number: ΚΚΚ/ΥΥΥΥ (where YYYY is the year) as follows ΥΥΥΥ/S KKK-XXXXXX.</entry>
     <entry key="espd.validator.matDatepickerParse">Please enter a valid date in DD/MM/YYYY format.</entry>
     <entry key="espd.validator.phoneNumber">Please enter a valid phone number.</entry>
     <entry key="espd.validator.percentage">Please enter a percentage in valid format, e. g. Chr(92)Chr(34)1.23Chr(92)Chr(34)</entry>
