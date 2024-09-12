@@ -27,7 +27,7 @@ public enum AppInfo {
 
     AppInfo() {
         appConfig = ConfigFactory.parseResources(VERSION_FILE);
-        info = new PlatformInfo(getAppVersion(), getAppRevision(), getAppName(), getBuildTime());
+        info = new PlatformInfo(getAppVersion(), getEdmVersion(), getAppRevision(), getAppName(), getBuildTime());
     }
 
     public static AppInfo getInstance() {
@@ -35,7 +35,11 @@ public enum AppInfo {
     }
 
     public String getAppVersion() {
-        return appConfig.getString("eu.esens.espdvcd.build.version");
+        return appConfig.getString("eu.esens.espdvcd.build.app-version");
+    }
+
+    public String getEdmVersion() {
+        return appConfig.getString("eu.esens.espdvcd.build.edm-version");
     }
 
     public String getAppName() {
@@ -54,21 +58,27 @@ public enum AppInfo {
         return info;
     }
 
-    class PlatformInfo {
-        private String version;
-        private String revision;
-        private String name;
-        private String buildTime;
+    public static class PlatformInfo {
+        private final String appVersion;
+        private final String edmVersion;
+        private final String revision;
+        private final String name;
+        private final String buildTime;
 
-        public PlatformInfo(String version, String revision, String name, String buildTime) {
-            this.version = version;
+        public PlatformInfo(String appVersion, String edmVersion, String revision, String name, String buildTime) {
+            this.appVersion = appVersion;
+            this.edmVersion = edmVersion;
             this.revision = revision;
             this.name = name;
             this.buildTime = buildTime;
         }
 
-        public String getVersion() {
-            return version;
+        public String getAppVersion() {
+            return appVersion;
+        }
+
+        public String getEdmVersion() {
+            return edmVersion;
         }
 
         public String getRevision() {
