@@ -72,6 +72,8 @@
             <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.subcontracting.proportion.description", enProps)/>
         <#elseif criterionID == "5e506c16-26ab-4e32-bb78-b27f87dc0565">
             <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.service.contracts.performance.services.description", enProps)/>
+        <#elseif criterionID == "9eeb6d5c-0eb8-48e8-a4c5-5087a7c095a4">
+            <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.suitability.service.contracts.auth.description", enProps)/>
         </#if>
 
         <#assign nameOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionName,enProps), props)>
@@ -329,7 +331,7 @@
             <p class="percentageParagraph">${req.getResponse().getPercentage()?string("0.00")} &percnt;</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
-        <p class="percentageParagraph">&ndash;</p>
+        <p class="percentageParagraph">&percnt;</p>
     </#if>
 </#macro>
 
