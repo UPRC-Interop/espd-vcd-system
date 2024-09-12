@@ -17,7 +17,7 @@ The ESPD/VCD Project consists of two main sub components and several auxiliary t
 2. The **ESPD/VCD System**, which consists of the ESPD/VCD **Designer web application** which also uses the ESPD/VCD Framework. 
 
 The project uses **gradle** for dependency management, build, testing and running **except for the designer-frontend** module which uses **npm** and the **angular-CLI**.
-The initial setup of the gradle environment can be created by executing the the `wrapper` task:
+The initial setup of the gradle environment can be created by executing the `wrapper` task:
 
 `$ gradlew wrapper`
 
