@@ -270,12 +270,11 @@ task copyWebAppResources {
 }
 
 final edmVersion="2.1.0"
-final buildNumber="b9"
 
 task generateVersionFile {
     doLast {
         file("$projectDir/src/main/resources/application.version").text = """
-eu.esens.espdvcd.build.app-version="$version-$buildNumber"
+eu.esens.espdvcd.build.app-version="$version"
 eu.esens.espdvcd.build.edm-version="$edmVersion"
 eu.esens.espdvcd.build.revision=${grgit.open(dir: "${rootProject.projectDir}").head().id}
 eu.esens.espdvcd.build.time="${new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())}"
