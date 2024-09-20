@@ -69,6 +69,13 @@
     border-radius: 2px;
 }
 
+.singleQuestion {
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 10px;
+}
+
 .espd-details .chapter-headline{
     font-size: 14px;
     vertical-align: unset;

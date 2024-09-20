@@ -228,7 +228,7 @@
     <#elseif modelType == "ESPD_REQUEST">
         <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
         <#assign no = pr.getESPDProperty("espd.gui.no", props)>
-        <i class="fa fa-circle-o" aria-hidden="true"></i>${yes} / <i class="fa fa-circle-o" aria-hidden="true"></i>${no}
+        ${yes} / ${no}
     </#if>
 </#macro>
 
