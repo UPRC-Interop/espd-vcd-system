@@ -110,9 +110,16 @@
         <#list requirementGroups as requirementGroup>
             <#assign condition = requirementGroup.getCondition()/>
             <#assign id = requirementGroup.getID()/>
-            <#if id == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">
-                <#continue>
-            <#elseif condition == "ONTRUE" && indicatorValue == false>
+<#-- This solution was used for "EO registered in a PQS" criterion when question subgroup = 59e6f3ef-15cd-4e21-82ac-ea497ccd44e2 was renderred multiple times throughout the pdf. -->
+<#--            <#if id == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">-->
+<#--                <#continue>-->
+<#--            <#elseif condition == "ONTRUE" && indicatorValue == false>-->
+<#--                <#continue>-->
+<#--            <#elseif condition == "ONFALSE" && indicatorValue == true>-->
+<#--                <#continue>-->
+<#--            </#if>-->
+<#-- Uncomment this piece of code if you wish question subgroup = 59e6f3ef-15cd-4e21-82ac-ea497ccd44e2 to be skipped -->
+            <#if condition == "ONTRUE" && indicatorValue == false>
                 <#continue>
             <#elseif condition == "ONFALSE" && indicatorValue == true>
                 <#continue>
@@ -221,7 +228,7 @@
     <#elseif modelType == "ESPD_REQUEST">
         <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
         <#assign no = pr.getESPDProperty("espd.gui.no", props)>
-        ${yes} / ${no}
+        <i class="fa fa-circle-o" aria-hidden="true"></i>${yes} / <i class="fa fa-circle-o" aria-hidden="true"></i>${no}
     </#if>
 </#macro>
 
