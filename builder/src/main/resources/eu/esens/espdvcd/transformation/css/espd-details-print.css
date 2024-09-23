@@ -156,6 +156,15 @@ p {
     vertical-align: middle;
 }
 
+.fa-circle-o {
+    margin-left: -5px;
+    margin-right: 0;
+}
+
+.yes-no {
+    margin-left: -7px;
+}
+
 .singleQuestion {
     margin-top: 20px;
     margin-bottom: 20px;
