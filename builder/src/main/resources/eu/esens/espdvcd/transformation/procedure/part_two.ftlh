@@ -124,10 +124,9 @@
             <span class="content-left">${pr.getESPDProperty("espd.part1.website", props)}</span>
         </div>
         <div class="singleQuestion">
-            <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}</label>
             <#assign yes = pr.getESPDProperty("espd.gui.yes", props)/>
             <#assign no = pr.getESPDProperty("espd.gui.no", props)/>
-            ${yes} / ${no}
+            <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}<span style="margin-left: 5px">${yes} / ${no}</span></label>
         </div>
     </#if>
 
