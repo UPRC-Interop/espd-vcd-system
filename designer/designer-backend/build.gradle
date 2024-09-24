@@ -270,7 +270,7 @@ task copyWebAppResources {
 }
 
 final edmVersion="2.1.0"
-final buildNumber="b9"
+final buildNumber="b10"
 
 task generateVersionFile {
     doLast {
