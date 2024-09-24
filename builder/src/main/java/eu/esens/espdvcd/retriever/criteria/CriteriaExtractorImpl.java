@@ -149,7 +149,10 @@ public class CriteriaExtractorImpl implements CriteriaExtractor {
     public List<SelectableCriterion> getFullList(List<SelectableCriterion> initialList, boolean addAsSelected) {
         initCriterionList();
         Set<SelectableCriterion> initialSet = new LinkedHashSet<>();
-        initialList.forEach(sc -> sc.setSelected(addAsSelected));
+        initialList.forEach(sc -> {
+            sc.setSelected(addAsSelected);
+            sc.setCompulsory(CriteriaConfig.getInstance().isCompulsory(operator, sc.getID()));
+        });
         criterionList.forEach(sc -> sc.setSelected(false));
         initialSet.addAll(initialList);
         initialSet.addAll(criterionList);

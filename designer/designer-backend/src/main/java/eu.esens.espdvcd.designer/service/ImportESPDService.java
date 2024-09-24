@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.service;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.retriever.exception.RetrieverException;
@@ -27,5 +28,5 @@ import java.io.File;
 import java.io.IOException;
 
 public interface ImportESPDService<T extends ESPDRequest> {
-    T importESPDFile(@NotNull File XML) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException;
+    T importESPDFile(@NotNull File XML, ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException;
 }
