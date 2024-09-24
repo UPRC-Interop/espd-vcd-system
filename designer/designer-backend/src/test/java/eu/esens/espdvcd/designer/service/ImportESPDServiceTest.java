@@ -17,6 +17,7 @@ package eu.esens.espdvcd.designer.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.model.ESPDRequest;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.model.SelectableCriterion;
@@ -68,7 +69,7 @@ public class ImportESPDServiceTest {
     public void testQuantityIntegerImport() throws Exception {
         ImportESPDService service = ImportESPDResponseService.getInstance();
         Assert.assertNotNull(espdResponse);
-        ESPDResponse theResponse = (ESPDResponse) service.importESPDFile(espdResponse);
+        ESPDResponse theResponse = (ESPDResponse) service.importESPDFile(espdResponse, ContractingOperatorEnum.CONTRACTING_AUTHORITY);
 
         List<Requirement> requirementList = theResponse.getFullCriterionList().stream()
                 .filter(cr -> cr.getID().equals("b16cb9fc-6cb7-4585-9302-9533b415cf48"))
@@ -101,13 +102,13 @@ public class ImportESPDServiceTest {
 
     @Test
     public void responseJSONFromResponseTest() throws Exception {
-        ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdResponseFile);
+        ESPDResponse response = (ESPDResponse) importESPDService.importESPDFile(espdResponseFile, ContractingOperatorEnum.CONTRACTING_AUTHORITY);
         Assert.assertNotNull(response);
     }
 
     @Test
     public void requestSelfContainedImport() throws Exception {
-        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("sfc-210-da-req.xml").toURI()));
+        ESPDRequest request = ImportESPDRequestService.getInstance().importESPDFile(new File(this.getClass().getClassLoader().getResource("sfc-210-da-req.xml").toURI()), ContractingOperatorEnum.CONTRACTING_AUTHORITY);
         System.out.println(writer.writeValueAsString(request));
     }
 }

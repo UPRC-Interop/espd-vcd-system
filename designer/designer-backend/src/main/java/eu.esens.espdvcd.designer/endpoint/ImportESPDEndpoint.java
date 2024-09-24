@@ -16,6 +16,7 @@
 package eu.esens.espdvcd.designer.endpoint;
 
 import eu.esens.espdvcd.builder.exception.BuilderException;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.service.ImportESPDService;
 import eu.esens.espdvcd.designer.util.AppConfig;
@@ -42,6 +43,7 @@ import java.util.Objects;
 
 public class ImportESPDEndpoint extends Endpoint {
     private final ImportESPDService service;
+    private static final String CONTRACTING_OPERATOR_PARAM = "contractingOperator";
 
     public ImportESPDEndpoint(ImportESPDService service) {
         this.service = service;
@@ -57,6 +59,14 @@ public class ImportESPDEndpoint extends Endpoint {
             }), JsonUtil.json());
 
             spark.post("", (rq, rsp) -> {
+                ContractingOperatorEnum contractingOperatorEnum;
+                try {
+                    contractingOperatorEnum = ContractingOperatorEnum.valueOf(
+                            rq.queryParams(CONTRACTING_OPERATOR_PARAM));
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    LOGGER.warning("Failed to extract the contracting operator. Falling back to default, which is CONTRACTING_ENTITY");
+                    contractingOperatorEnum = ContractingOperatorEnum.CONTRACTING_ENTITY;
+                }
                 rsp.header("Content-Type", "application/json");
                 if (Objects.nonNull(rq.contentType())) {
                     String LOGGER_DOCUMENT_ERROR = "Error occurred in ESPDEndpoint while converting an XML response to an object. ";
@@ -94,7 +104,7 @@ public class ImportESPDEndpoint extends Endpoint {
                             }
                             writeDumpedFile(tempFile);
                             try {
-                                return service.importESPDFile(tempFile);
+                                return service.importESPDFile(tempFile, contractingOperatorEnum);
                             } catch (RetrieverException | BuilderException | NullPointerException e) {
                                 LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                                 rsp.status(406);
@@ -124,7 +134,7 @@ public class ImportESPDEndpoint extends Endpoint {
 
                             writeDumpedFile(espdFile);
 
-                            return service.importESPDFile(espdFile);
+                            return service.importESPDFile(espdFile, contractingOperatorEnum);
                         } catch (RetrieverException | BuilderException | UnmarshalException e) {
                             LOGGER.severe(LOGGER_DOCUMENT_ERROR + e.getMessage());
                             rsp.status(406);

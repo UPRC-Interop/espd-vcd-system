@@ -19,10 +19,12 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.ESPDResponse;
 import eu.esens.espdvcd.schema.enums.EDMVersion;
+import jakarta.validation.constraints.Null;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -42,8 +44,19 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         return INSTANCE;
     }
 
+    /**
+     *
+     * @param XML
+     * @param contractingOperatorEnum Currently not used in Response, therefore it could be null
+     * @return
+     * @throws BuilderException
+     * @throws JAXBException
+     * @throws SAXException
+     * @throws ValidationException
+     * @throws IOException
+     */
     @Override
-    public ESPDResponse importESPDFile(File XML) throws BuilderException, JAXBException, SAXException, ValidationException, IOException {
+    public ESPDResponse importESPDFile(File XML, @Null ContractingOperatorEnum contractingOperatorEnum) throws BuilderException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(XML);
         QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
@@ -76,4 +89,5 @@ public enum ImportESPDResponseService implements ImportESPDService<ESPDResponse>
         is.close();
         return response;
     }
+
 }
