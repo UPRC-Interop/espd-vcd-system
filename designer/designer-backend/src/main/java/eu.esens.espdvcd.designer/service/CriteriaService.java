@@ -40,7 +40,7 @@ public interface CriteriaService {
     }
 
     default  List<SelectableCriterion> getUnselectedCriteria(List<SelectableCriterion> initialList) throws RetrieverException {
-        return getUnselectedCriteria(initialList, ContractingOperatorEnum.CONTRACTING_ENTITY);
+        return getUnselectedCriteria(initialList, ContractingOperatorEnum.CONTRACTING_AUTHORITY);
     }
 
     default List<SelectableCriterion> getCriteria() throws RetrieverException{
