@@ -63,7 +63,7 @@ public class GetECertisCriterionRetryingTask implements Callable<ECertisCriterio
         try {
             return mapper.readValue(rTask.call(), ECertisCriterionImpl.class);
         } catch (MismatchedInputException e) {
-            LOGGER.log(Level.SEVERE, "MismatchedInputException when reading " + uri.toString());
+            LOGGER.log(Level.SEVERE, "MismatchedInputException when reading " + uri);
             throw e;
         }
     }

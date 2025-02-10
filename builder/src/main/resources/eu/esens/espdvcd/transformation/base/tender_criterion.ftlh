@@ -81,38 +81,71 @@
         <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
         <p class="descOfCriterionParagraph">${descOfCriterion}</p>
         <#if modelType == "ESPD_REQUEST">
-            <@getTenderingCriterionGroupRequest criterion.getRequirementGroups() model modelType enProps props version/>
+            <@getTenderingCriterionGroupRequest criterion.getRequirementGroups() model modelType enProps props version "ON*" "" criterionID/>
         <#elseif modelType == "ESPD_RESPONSE">
-            <@getTenderingCriterionGroupResponse criterion.getRequirementGroups() model modelType enProps props version true/>
+            <@getTenderingCriterionGroupResponse criterion.getRequirementGroups() model modelType enProps props version true criterionID/>
         </#if>
     </div>
 </#macro>
 
-<#macro getTenderingCriterionGroupRequest requirementGroups model modelType enProps props version>
+<#macro getTenderingCriterionGroupRequest requirementGroups model modelType enProps props version defaultCondition requirementGroupId criterionId>
+    <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
+    <#assign no = pr.getESPDProperty("espd.gui.no", props)>
     <#if requirementGroups??>
         <#list requirementGroups as requirementGroup>
+            <#assign id = requirementGroup.getID()/>
+            <#assign condition = requirementGroup.getCondition()/>
+            <#assign showNo = true/>
+            <#if condition == "ONTRUE">
+                <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${yes}</span>
+            <#elseif condition == "ONFALSE">
+                <#assign showNo = false/>
+                <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${no}</span>
+            </#if>
             <div class="group">
                 <#list requirementGroup.getRequirements() as requirement>
                     <div class="requirement">
-                        <@getTenderCriterionContent requirement model modelType enProps props version/>
+                        <@getTenderCriterionContent requirement model modelType enProps props version id criterionId/>
                     </div>
                 </#list>
                 <div class="requirementGroup">
-                    <@getTenderingCriterionGroupRequest requirementGroup.getRequirementGroups() model modelType enProps props version/>
+                    <#if id == "77ae3f29-7c5f-4afa-af97-24afec48c5bf">
+                        <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${yes}</span>
+                    </#if>
+                    <#if id == "4887c3d7-05fc-4e3e-b066-f338910f0c4c">
+                        <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${yes}</span><br>
+                    </#if>
+                    <@getTenderingCriterionGroupRequest requirementGroup.getRequirementGroups() model modelType enProps props version condition id criterionId/>
                 </div>
             </div>
+            <#if showNo == true>
+                <#if id != "92e44d3b-af8e-4a29-91a8-24d27aa27fee" && id != "289f39b3-2a15-421a-8050-a29858031f35" && id != "30450436-f559-4dfa-98ba-f0842ed9d2a0" && id != "1768de86-a6c8-48e4-bd8e-de2f2f7424d0" && id != "c0cd9c1c-e90a-4ff9-bce3-ac0fe31abf16" && id != "e1886054-ada4-473c-9afc-2fde82c24cf4" && id != "e9aa7763-c167-4352-8060-1a3d7d3e2662" && id != "096686e1-82ca-4de0-8710-d74d90da0f0c" && id != "42dc8062-974d-4201-91ba-7f2ea90338fd" && id != "488ca189-bcdb-4bf4-80c7-3ad507fd89fb" && id != "96f00020-0a25-402e-b850-2378e83b5695" && id != "d7721546-9106-43a7-8d31-2fe08a862b00" && id != "96defecc-7d32-4957-82e9-aad5f3c5b736" && id != "575f7550-8a2d-4bad-b9d8-be07ab570076" && id != "cb73544d-e8bb-4cc6-819b-b8e04f1e240e">
+                    <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${no}</span>
+                </#if>
+            </#if>
+            <#assign showNo = false/>
         </#list>
+        <#if requirementGroupId == "7c637c0c-7703-4389-ba52-02997a055bd7" || requirementGroupId == "098fd3cc-466e-4233-af1a-affe09471bce" || requirementGroupId == "976b5acb-c00f-46ca-8f83-5ce6abfdfe43" || requirementGroupId == "67362ec7-cec3-4cb8-a38e-5d7a2a31e6d8" || requirementGroupId == "77ae3f29-7c5f-4afa-af97-24afec48c5bf">
+            <span class="icon-label"><i class="fa fa-circle-o" aria-hidden="true"></i> ${no}</span>
+        </#if>
     </#if>
 </#macro>
 
-<#macro getTenderingCriterionGroupResponse requirementGroups model modelType enProps props version indicatorValue>
+<#macro getTenderingCriterionGroupResponse requirementGroups model modelType enProps props version indicatorValue criterionId>
     <#if requirementGroups??>
         <#list requirementGroups as requirementGroup>
             <#assign condition = requirementGroup.getCondition()/>
             <#assign id = requirementGroup.getID()/>
-            <#if id == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2">
-                <#continue>
-            <#elseif condition == "ONTRUE" && indicatorValue == false>
+            <#-- This solution was used for "EO registered in a PQS" criterion when question subgroup = 59e6f3ef-15cd-4e21-82ac-ea497ccd44e2 was renderred multiple times throughout the pdf. -->
+            <#-- <#if id == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2"> -->
+            <#--    <#continue> -->
+            <#-- <#elseif condition == "ONTRUE" && indicatorValue == false> -->
+            <#--    <#continue> -->
+            <#-- <#elseif condition == "ONFALSE" && indicatorValue == true> -->
+            <#--    <#continue> -->
+            <#-- </#if> -->
+            <#-- Uncomment this piece of code if you wish question subgroup = 59e6f3ef-15cd-4e21-82ac-ea497ccd44e2 to be skipped -->
+            <#if condition == "ONTRUE" && indicatorValue == false>
                 <#continue>
             <#elseif condition == "ONFALSE" && indicatorValue == true>
                 <#continue>
@@ -134,13 +167,13 @@
                     </#if>
                     <#if showRequirementGroup>
                         <div class="requirement">
-                            <@getTenderCriterionContent requirement model modelType enProps props version/>
+                            <@getTenderCriterionContent requirement model modelType enProps props version id criterionId/>
                         </div>
                     </#if>
                 </#list>
                 <#if showRequirementGroup>
                     <div class="requirementGroup">
-                        <@getTenderingCriterionGroupResponse requirementGroup.getRequirementGroups() model modelType enProps props version indicator/>
+                        <@getTenderingCriterionGroupResponse requirementGroup.getRequirementGroups() model modelType enProps props version indicator criterionId/>
                     </div>
                 </#if>
             </div>
@@ -148,10 +181,10 @@
     </#if>
 </#macro>
 
-<#macro getTenderCriterionContent req model modelType enProps props version>
+<#macro getTenderCriterionContent req model modelType enProps props version requirementGroupId criterionId>
     <#if req.getResponseDataType() == "INDICATOR" || req.getResponseDataType() == "CODE_BOOLEAN">
         <@getDescription req modelType enProps props/>
-        <@yesNoIndicator req modelType enProps props/>
+        <@yesNoIndicator req modelType enProps props requirementGroupId criterionId/>
     <#elseif req.getResponseDataType() == "DATE">
         <@getDateValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "DESCRIPTION">
@@ -188,7 +221,7 @@
         <@getDescription req modelType enProps props/>
         <@getUrlValue req modelType enProps props/>
     <#elseif req.getResponseDataType() == "WEIGHT_INDICATOR">
-        <@yesNoIndicator req modelType enProps props/>
+        <@yesNoIndicator req modelType enProps props requirementGroupId criterionId/>
     <#elseif req.getResponseDataType() == "LOT_IDENTIFIER">
         <@getLotIdentifierValue req model modelType props/>
     <#elseif req.getResponseDataType() == "ECONOMIC_OPERATOR_IDENTIFIER">
@@ -213,7 +246,7 @@
 </#macro>
 <#---->
 
-<#macro yesNoIndicator req modelType enProps props>
+<#macro yesNoIndicator req modelType enProps props requirementGroupId criterionId>
     <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
         <#if req.getResponse().isIndicator()??>
             <label class="yesNoIndicatorLabel"><span class="icon-label"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>${yesNo(req.getResponse().isIndicator(), props)}</span></label>
@@ -221,7 +254,9 @@
     <#elseif modelType == "ESPD_REQUEST">
         <#assign yes = pr.getESPDProperty("espd.gui.yes", props)>
         <#assign no = pr.getESPDProperty("espd.gui.no", props)>
-        ${yes} / ${no}
+        <#if (requirementGroupId == "92e44d3b-af8e-4a29-91a8-24d27aa27fee") || (requirementGroupId == "59e6f3ef-15cd-4e21-82ac-ea497ccd44e2") || (requirementGroupId == "1768de86-a6c8-48e4-bd8e-de2f2f7424d0") || (requirementGroupId == "1768de86-a6c8-48e4-bd8e-de2f2f7424d0") || (requirementGroupId == "d7721546-9106-43a7-8d31-2fe08a862b00") || (requirementGroupId == "cb73544d-e8bb-4cc6-819b-b8e04f1e240e") || (requirementGroupId == "cb73544d-e8bb-4cc6-819b-b8e04f1e240e") || (requirementGroupId == "30450436-f559-4dfa-98ba-f0842ed9d2a0" && criterionId == "696a75b2-6107-428f-8b74-82affb67e184")>
+            <span class="yes-no">${yes} / ${no}</span>
+        </#if>
     </#if>
 </#macro>
 

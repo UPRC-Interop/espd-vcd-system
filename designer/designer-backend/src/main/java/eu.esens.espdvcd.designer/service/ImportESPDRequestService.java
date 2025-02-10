@@ -19,6 +19,7 @@ import eu.esens.espdvcd.builder.BuilderFactory;
 import eu.esens.espdvcd.builder.exception.BuilderException;
 import eu.esens.espdvcd.builder.util.ArtefactUtils;
 import eu.esens.espdvcd.codelist.enums.QualificationApplicationTypeEnum;
+import eu.esens.espdvcd.codelist.enums.internal.ContractingOperatorEnum;
 import eu.esens.espdvcd.designer.exception.ValidationException;
 import eu.esens.espdvcd.designer.util.CriteriaUtil;
 import eu.esens.espdvcd.model.ESPDRequest;
@@ -44,7 +45,7 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
     }
 
     @Override
-    public ESPDRequest importESPDFile(File XML) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException {
+    public ESPDRequest importESPDFile(File XML, ContractingOperatorEnum contractingOperatorEnum) throws RetrieverException, BuilderException, JAXBException, SAXException, ValidationException, IOException {
         EDMVersion artefactVersion = ArtefactUtils.findEDMVersion(new FileInputStream(XML));
         QualificationApplicationTypeEnum qualificationApplicationType = ArtefactUtils.findQualificationApplicationType(XML);
 
@@ -76,7 +77,7 @@ public enum ImportESPDRequestService implements ImportESPDService<ESPDRequest> {
                 break;
         }
         Objects.requireNonNull(request);
-        request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList()));
+        request.setCriterionList(criteriaService.getUnselectedCriteria(request.getFullCriterionList(), contractingOperatorEnum));
         CriteriaUtil.generateUUIDs(request.getFullCriterionList());
         is.close();
         return request;
