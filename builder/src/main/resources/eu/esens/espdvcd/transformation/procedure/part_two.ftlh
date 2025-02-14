@@ -73,6 +73,7 @@
         <#assign fax = model.getEODetails().getContactingDetails().getFaxNumber()!""/>
         <#assign id = model.getEODetails().getID()!""/>
         <#assign websiteURI = model.getEODetails().getWebSiteURI()!""/>
+        <#assign lots = model.getEODetails().getProcurementProjectLot()!""/>
 
         <@s.sectionLabelForValueOfNode name "espd.part2.name" props/>
         <@s.sectionLabelForValueOfNode address "espd.part1.street.and.num" props/>
@@ -85,6 +86,7 @@
         <@s.sectionLabelForValueOfNode fax "espd.part1.fax" props/>
         <@s.sectionLabelForValueOfNode id "espd.part2.vat" props/>
         <@s.sectionLabelForUrlValueOfNode websiteURI "espd.part1.website" props/>
+        <@s.sectionLabelForValueOfNode lots "espd.crit.lots.indication" props/>
 
         <div class="singleQuestion">
             <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}<@smeIndicator model props/></label>
@@ -122,6 +124,9 @@
         </div>
         <div class="descInput">
             <span class="content-left">${pr.getESPDProperty("espd.part1.website", props)}</span>
+        </div>
+        <div class="descInput">
+            <span class="content-left">${pr.getESPDProperty("espd.crit.lots.indication", props)}</span>
         </div>
         <div class="singleQuestion">
             <#assign yes = pr.getESPDProperty("espd.gui.yes", props)/>

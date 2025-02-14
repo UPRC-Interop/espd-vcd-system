@@ -23,7 +23,7 @@
         <h3>${pr.getESPDProperty("espd.part5.header", props)}</h3>
         <#assign fullCriterionList = model.getFullCriterionList()/>
         <#list fullCriterionList as criterion>
-            <#if criterion.getID() == "51c39ba9-0444-4967-afe9-36f753b30175" && criterion.isSelected() == true>
+            <#if (version == "V2" && criterion.getID() == "51c39ba9-0444-4967-afe9-36f753b30175" && criterion.isSelected() == true) || (version == "V1" && criterion.getID() == "9c70375e-1264-407e-8b50-b9736bc08901" && criterion.isSelected() == true)>
                 <#assign isReductionOfCandidatesCriterion = true/>
                 <#break>
             </#if>

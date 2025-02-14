@@ -35,7 +35,7 @@
         <#list selectionCriteria as criterion>
             <#assign criterionGroup = criterion.getCriterionGroup()/>
             <#assign criterionTypeCode = criterion.getTypeCode()/>
-            <#if criterion.getID() == "f4dc58dd-af45-4602-a4c8-3dca30fac082" && criterion.isSelected()>
+            <#if (version == "V2" && criterion.getID() == "f4dc58dd-af45-4602-a4c8-3dca30fac082" && criterion.isSelected() == true) || (version == "V1" && criterion.getID() == "7e7db838-eeac-46d9-ab39-42927486f22d" && criterion.isSelected() == true)>
                 <#assign isSelectionAllcriterion = true/>
                 <#break>
             </#if>
@@ -103,7 +103,7 @@
             <div class="chapter-content">
                 <#assign selectionCriteria = model.getSelectionCriteriaList()>
                 <#list selectionCriteria as criterion>
-                    <#if criterion.getID() == "f4dc58dd-af45-4602-a4c8-3dca30fac082" && criterion.isSelected()>
+                        <#if (version == "V2" && criterion.getID() == "f4dc58dd-af45-4602-a4c8-3dca30fac082" && criterion.isSelected() == true) || (version == "V1" && criterion.getID() == "7e7db838-eeac-46d9-ab39-42927486f22d" && criterion.isSelected() == true)>
                         <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.part4.crit.selection.ca.declares.that", props)}</label>
                         <@getSelectionAllCriterion criterion model modelType enProps props version/>
                         <#break>
@@ -114,44 +114,93 @@
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.suitability", props)}</div>
             <div class="chapter-content">
                 <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "58(2)" enProps props version/>
+                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.SUITABILITY" 1 enProps props version/>
             </div>
         <#elseif chapter == "espd.part4.economic.and.financial.standing">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.economic.and.financial.standing", props)}</div>
             <div class="chapter-content">
                 <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "58(3)" enProps props version/>
+                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING" 2 enProps props version/>
             </div>
         <#elseif chapter == "espd.part4.technical.professional.ability">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.technical.professional.ability", props)}</div>
             <div class="chapter-content">
                 <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "58(4)" enProps props version/>
+                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 3 enProps props version/>
             </div>
         <#elseif chapter == "espd.part4.quality.assurance">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.quality.assurance", props)}</div>
             <div class="chapter-content">
                 <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "62(2)" enProps props version/>
+                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 4 enProps props version/>
             </div>
         </#if>
     </div>
 </#macro>
 
-<#macro selectionCriteriaContent model modelType article enProps props version>
+<#macro selectionCriteriaContent model modelType criterionGroup group enProps props version>
     <#assign selectionCriteria = model.getSelectionCriteriaList()>
     <#list selectionCriteria as criterion>
         <#if criterion.isSelected() == false>
             <#continue>
         </#if>
-        <#if criterion.getLegislationReference()??>
-            <#if criterion.getLegislationReference().getArticle()?contains(article?string)>
-                <@tc.getTenderingCriterion criterion model modelType enProps props version/>
-                <#if criterion.getSubCriterionList()??>
-                    <#assign subCriterionList = criterion.getSubCriterionList()/>
-                    <#list subCriterionList as subCriterion>
-                        <@tc.getTenderingCriterion subCriterion model modelType enProps props version/>
-                    </#list>
+        <#if criterion.getCriterionGroup()??>
+            <#if criterion.getCriterionGroup() == criterionGroup>
+                <#if criterionGroup == "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY">
+                    <#assign criterionTypeCode = criterion.getTypeCode()/>
+                    <#if group == 3>
+                        <#assign validCriterionCodes = [
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.REFERENCES.WORKS_PERFORMANCE",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.REFERENCES.SUPPLIES_DELIVERY_PERFORMANCE",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.REFERENCES.SERVICES_DELIVERY_PERFORMANCE",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.TECHNICIANS_FOR_QUALITY_CONTROL",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.TECHNICIANS_FOR_CARRYING_WORKS",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.FACILITIES_FOR_QUALITY_ENSURING",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.FACILITIES_FOR_STUDY_RESEARCH",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.SUPPLY_CHAIN_MANAGEMENT",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.PROFESSIONAL_QUALIFICATIONS",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.ENVIRONMENTAL_MANAGEMENT_MEASURES",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.EQUIPMENT",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.TECHNICAL.CHECKS.ALLOWANCE_OF_CHECKS",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.MANAGERIAL_STAFF",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.AVERAGE_ANNUAL_MANPOWER",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.SUBCONTRACTING_PROPORTION",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.ARTEFACTS.NO_AUTHENTICATED_ARTEFACTS",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.MANAGEMENT.ARTEFACTS.AUTHENTICATED_ARTEFACTS",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INSTITUTES_CERTIFICATE"
+                        ]/>
+                        <#if validCriterionCodes?seq_contains(criterionTypeCode)>
+                            <@tc.getTenderingCriterion criterion model modelType enProps props version/>
+                            <#if criterion.getSubCriterionList()??>
+                                <#assign subCriterionList = criterion.getSubCriterionList()/>
+                                <#list subCriterionList as subCriterion>
+                                    <@tc.getTenderingCriterion subCriterion model modelType enProps props version/>
+                                </#list>
+                            </#if>
+                        </#if>
+                    <#elseif group == 4>
+                        <#assign validCriterionCodes = [
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.QUALITY_ASSURANCE.QA_INDEPENDENT_CERTIFICATE",
+                        "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.ENVIRONMENTAL_MANAGEMENT.ENV_INDEPENDENT_CERTIFICATE"
+                        ]/>
+                        <#if validCriterionCodes?seq_contains(criterionTypeCode)>
+                            <@tc.getTenderingCriterion criterion model modelType enProps props version/>
+                            <#if criterion.getSubCriterionList()??>
+                                <#assign subCriterionList = criterion.getSubCriterionList()/>
+                                <#list subCriterionList as subCriterion>
+                                    <@tc.getTenderingCriterion subCriterion model modelType enProps props version/>
+                                </#list>
+                            </#if>
+                        </#if>
+                    </#if>
+                <#else>
+                    <@tc.getTenderingCriterion criterion model modelType enProps props version/>
+                    <#if criterion.getSubCriterionList()??>
+                        <#assign subCriterionList = criterion.getSubCriterionList()/>
+                        <#list subCriterionList as subCriterion>
+                            <@tc.getTenderingCriterion subCriterion model modelType enProps props version/>
+                        </#list>
+                    </#if>
                 </#if>
             </#if>
         </#if>
