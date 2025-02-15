@@ -26,6 +26,7 @@
     <#assign conflictsTopTitle = pr.getESPDProperty("espd.part3.crit.insolvency.conflicts.top.title", props)/>
     <#assign breachingObligations = pr.getESPDProperty("espd.part3.crit.eu.main.breaching.obligations", props)/>
     <#assign nationalTopTile = pr.getESPDProperty("espd.part3.crit.purely.national.top.title", props)/>
+    <#assign nationalMainTile = pr.getESPDProperty("espd.crit.eu.title.purely.national", props)/>
 
     <div class="section">
         <h3>${pr.getESPDProperty("espd.part3.header",props)}</h3
@@ -70,37 +71,37 @@
             <#assign emptyD = true/>
         </#if>
         <#if (emptyA == false) && (emptyB == false) && (emptyC == false) && (emptyD == false)>
-            <@exclusionChapter criminalTopTitle criminalMainTitle model modelType "57(1)" enProps props version/>
-            <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType "57(2)" enProps props version/>
-            <@exclusionChapter conflictsTopTitle breachingObligations model modelType "57(4)" enProps props version/>
-            <@exclusionChapter nationalTopTile '' model modelType '' enProps props version/>
+            <@exclusionChapter criminalTopTitle criminalMainTitle model modelType 1 enProps props version/>
+            <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType 2 enProps props version/>
+            <@exclusionChapter conflictsTopTitle breachingObligations model modelType 3 enProps props version/>
+            <@exclusionChapter nationalTopTile nationalMainTile model modelType 4 enProps props version/>
         <#else>
             <#if emptyA == false>
-                <@exclusionChapter criminalTopTitle criminalMainTitle model modelType "57(1)" enProps props version/>
+                <@exclusionChapter criminalTopTitle criminalMainTitle model modelType 1 enProps props version/>
             </#if>
             <#if emptyB == false>
-                <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType "57(2)" enProps props version/>
+                <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType 2 enProps props version/>
             </#if>
             <#if emptyC == false>
-                <@exclusionChapter conflictsTopTitle breachingObligations model modelType "57(4)" enProps props version/>
+                <@exclusionChapter conflictsTopTitle breachingObligations model modelType 3 enProps props version/>
              </#if>
             <#if emptyD == false>
-                <@exclusionChapter nationalTopTile "" model modelType "" enProps props version/>
+                <@exclusionChapter nationalTopTile nationalMainTile model modelType 4 enProps props version/>
             </#if>
         </#if>
     </div>
 </#macro>
 
-<#macro exclusionChapter chapter_headline chapter_content model modelType article enProps props version>
+<#macro exclusionChapter chapter_headline chapter_content model modelType group enProps props version>
     <div class="chapter">
         <#if chapter_content??>
             <div class="chapter-headline">${chapter_headline}</div>
             <div class="chapter-content">
                 <label class="chapter-content-title">${chapter_content}</label>
-                <#if article == "">
+                <#if group == 4>
                     <@purelyNationalExclusionGrounds model modelType enProps props version/>
                 <#else>
-                    <@tenderingCriteria model modelType article enProps props version/>
+                    <@tenderingCriteria model modelType group enProps props version/>
                 </#if>
             </div>
         </#if>
@@ -113,8 +114,8 @@
         <#if criterion.isSelected() == false>
             <#continue>
         </#if>
-        <#if criterion.getLegislationReference()?? && criterion.getTypeCode()??>
-            <#if criterion.getLegislationReference().getArticle() == "Article 57(3)" && criterion.getTypeCode() == "CRITERION.EXCLUSION.NATIONAL.OTHER">
+        <#if criterion.getCriterionGroup()?? && criterion.getTypeCode()??>
+            <#if criterion.getCriterionGroup() == "CRITERION.EXCLUSION.NATIONAL" && criterion.getTypeCode() == "CRITERION.EXCLUSION.NATIONAL.OTHER">
                 <@tc.getTenderingCriterion criterion model modelType enProps props version/>
                 <#if criterion.getSubCriterionList()??>
                     <#assign subCriterionList = criterion.getSubCriterionList()/>
@@ -127,14 +128,28 @@
     </#list>
 </#macro>
 
-<#macro tenderingCriteria model modelType article enProps props version>
+<#macro tenderingCriteria model modelType group enProps props version>
     <#assign exclusionCriteria = model.getExclusionCriteriaList()>
     <#list exclusionCriteria as criterion>
         <#if criterion.isSelected() == false>
             <#continue>
         </#if>
-        <#if criterion.getLegislationReference()?? && criterion.getTypeCode()??>
-            <#if criterion.getLegislationReference().getArticle()?contains(article?string) && criterion.getTypeCode() != "CRITERION.EXCLUSION.NATIONAL.OTHER">
+        <#if criterion.getTypeCode()?? && criterion.getCriterionGroup()??>
+            <#if group == 1>
+                <#assign validCriterionGroups = ["CRITERION.EXCLUSION.CONVICTIONS"]/>
+            <#elseif group == 2>
+                <#assign validCriterionGroups = ["CRITERION.EXCLUSION.CONTRIBUTIONS"]/>
+            <#elseif group == 3>
+                <#assign validCriterionGroups = [
+                "CRITERION.EXCLUSION.SOCIAL",
+                "CRITERION.EXCLUSION.BUSINESS",
+                "CRITERION.EXCLUSION.MISCONDUCT",
+                "CRITERION.EXCLUSION.CONFLICT_OF_INTEREST"
+                ]/>
+            <#elseif group == 4>
+                <#assign validCriterionGroups = ["CRITERION.EXCLUSION.NATIONAL"]/>
+            </#if>
+            <#if validCriterionGroups?seq_contains(criterion.getCriterionGroup()) && criterion.getTypeCode() != "CRITERION.EXCLUSION.NATIONAL.OTHER">
                 <@tc.getTenderingCriterion criterion model modelType enProps props version/>
                 <#if criterion.getSubCriterionList()??>
                     <#assign subCriterionList = criterion.getSubCriterionList()/>

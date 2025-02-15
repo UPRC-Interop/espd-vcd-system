@@ -290,7 +290,7 @@
     <entry key="espd.crit.selection.technical.work.contracts.technicians.description">In the case of public works contracts, the economic operator will be able to call on the following technicians or technical bodies to carry out the work:</entry>
     <entry key="espd.crit.selection.technical.work.contracts.technicians.main">For works contracts: technicians or technical bodies to carry out the work</entry>
     <entry key="espd.crit.start.date">Start date</entry>
-    <entry key="espd.crit.taken.self.cleaning.measures">Have you taken measures to demonstrate your reliability (Chr(34)Self-CleaningChr(34))</entry>
+    <entry key="espd.crit.taken.self.cleaning.measures">Have you taken measures to demonstrate your reliability (Self-Cleaning)</entry>
     <entry key="espd.crit.taxes.eo.fulfilled.obligations">Has the economic operator fulfilled its obligations by paying or entering into a binding arrangement with a view to paying the taxes or social security contributions due, including, where applicable, any interest accrued or fines?</entry>
     <entry key="espd.crit.taxes.length.period.of.exclusion">In case of a conviction, insofar as established directly therein, the length of the period of exclusion</entry>
     <entry key="espd.crit.taxes.means.description">Please describe which means were used</entry>
@@ -443,7 +443,7 @@
     <entry key="espd.crit.ref.for.cert">Please state the references on which the registration or certification is based, and, where applicable, the classification obtained in the official list</entry>
     <entry key="espd.crit.all.selection.covered">Does the registration or certification cover all of the required selection criteria?</entry>
     <entry key="espd.crit.eo.has.cert.soc">Will the economic operator be able to provide a certificate with regard to the payment of social security contributions and taxes or provide information enabling the contracting authority or contracting entity to obtaining it directly by accessing a national database in any Member State that is available free of charge?</entry>
-    <entry key="espd.crit.lots.indication">Where applicable, indication of the lot(s) for which the economic operator wishes to tender</entry>
+    <entry key="espd.crit.lots.indication">Where applicable, indication of the lot(s) for which the economic operator wishes to tender:</entry>
     <entry key="espd.crit.allow.checks">Do you allow checks?</entry>
     <entry key="espd.crit.describe.educational">Please describe the educational or professional qualification</entry>
     <entry key="espd.crit.esco.code">If possible please indicate the ESCO code of this qualification</entry>

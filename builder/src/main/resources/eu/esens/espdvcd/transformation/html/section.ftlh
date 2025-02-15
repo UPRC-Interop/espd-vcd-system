@@ -7,9 +7,9 @@
     <#if value??>
         <#if !propertyValue?contains(":")>
             <#assign propertyValue += ":">
-            <@sectionLabelForMail propertyValue text />
+            <@sectionLabelForMail propertyValue text/>
         <#else>
-            <@sectionLabelForMail propertyValue text />
+            <@sectionLabelForMail propertyValue text/>
         </#if>
     </#if>
 </#macro>
@@ -19,9 +19,9 @@
     <#if value??>
         <#if !propertyValue?contains(":")>
             <#assign propertyValue += ":">
-            <@sectionLabelForUrl propertyValue text />
+            <@sectionLabelForUrl propertyValue text/>
         <#else>
-            <@sectionLabelForUrl propertyValue text />
+            <@sectionLabelForUrl propertyValue text/>
         </#if>
     </#if>
 </#macro>
