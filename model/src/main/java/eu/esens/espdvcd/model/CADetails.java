@@ -353,7 +353,7 @@ public class CADetails implements Serializable {
 
     public String getProcurementPublicationNumber() {
         if (procurementPublicationNumber == null || procurementPublicationNumber.isEmpty()) {
-            procurementPublicationNumber = "0000/S 000-0000000";
+            procurementPublicationNumber = "0000/S 000-000000";
         }
         return procurementPublicationNumber;
     }

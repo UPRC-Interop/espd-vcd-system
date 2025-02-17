@@ -198,7 +198,7 @@ public interface SchemaExtractorV2 {
             // Business logic has been moved to model class {@link CADetails#getProcurementPublicationNumber}
             dr.setID(createGROWTemporaryId(caDetails.getProcurementPublicationNumber()));
 //            } else {
-//                dr.setID(createGROWTemporaryId("0000/S 000-0000000"));
+//                dr.setID(createGROWTemporaryId("0000/S 000-000000"));
 //            }
 
             dr.setDocumentTypeCode(createDocumentTypeCode("TED_CN"));
