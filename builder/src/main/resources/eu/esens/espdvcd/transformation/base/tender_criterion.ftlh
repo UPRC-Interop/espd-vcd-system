@@ -19,78 +19,15 @@
 
 <#macro getTenderingCriterion criterion model modelType enProps props version>
     <div class="criterion">
-        <#if version == "V1">
-            <#assign criterionID = criterion.getID()/>
-            <#assign level = 0>
-            <#assign criterionMap = criterion.getPropertyKeyMap()/>
-            <#assign criterionNameProperty = criterionMap["pk1"]/>
-            <#assign criterionDescriptionProperty= criterionMap["pk2"]/>
-            <#assign nameOfCriterion = pr.getESPDProperty(criterionNameProperty, props)>
-            <#assign descOfCriterion = pr.getESPDProperty(criterionDescriptionProperty, props)/>
-            <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
-            <p class="descOfCriterionParagraph">${descOfCriterion}</p>
-        <#elseif version == "V2">
-            <#assign criterionID = criterion.getID()/>
-            <#assign criterionName = criterion.getName()/>
-            <#assign criterionDescription = criterion.getDescription()/>
-            <#assign level = 0>
-            <#if criterionID == "7d85e333-bbab-49c0-be8d-c36d71a72f5e">
-                <#assign criterionName = pr.getESPDProperty("espd.crit.eu.title.payment.social.security", enProps)/>
-            <#elseif criterionID == "696a75b2-6107-428f-8b74-82affb67e184">
-                <#assign criterionName = pr.getESPDProperty("espd.crit.eu.title.guilty.misinterpretation", enProps)/>
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.eu.text.guilty.misinterpretation", enProps)/>
-            <#elseif criterionID == "8b9700b7-b13c-41e6-a220-6bbf8d5fab31">
-                <#assign criterionDescription = pr.getESPDProperty("espd.part2.lots.concerned", enProps)/>
-            <#elseif criterionID == "a80ddb62-d25b-4e4e-ae22-3968460dc0a9">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.eu.text.breaching.obligations.environmental", enProps)/>
-            <#elseif criterionID == "a261a395-ed17-4939-9c75-b9ff1109ca6e">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.eu.text.breaching.obligations.social", enProps)/>
-            <#elseif criterionID == "a34b70d6-c43d-4726-9a88-8e2b438424bf">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.eu.text.breaching.obligations.labour", enProps)/>
-            <#elseif criterionID == "6346959b-e097-4ea1-89cd-d1b4c131ea4d">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.selection.technical.number.managerial.staff.description", enProps)/>
-            <#elseif criterionID == "1f49b3f0-d50f-43f6-8b30-4bafab108b9b">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.selection.technical.average.annual.manpower.description", enProps)/>
-            <#elseif criterionID == "a7669d7d-9297-43e1-9d10-691a1660187c">
-                <#assign criterionDescription = pr.getESPDProperty("espd.crit.selection.technical.supply.contracts.certificate.quality.description", enProps)/>
-            <#elseif criterionID == "51c39ba9-0444-4967-afe9-36f753b30175">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.part5.title.eo.declares.that", enProps)/>
-            <#elseif criterionID == "daffa2a9-9f8f-4568-8be8-7b8bf306d096">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.eu.text.national.bankruptcy", enProps)/>
-            <#elseif criterionID == "8fda202a-0c37-41bb-9d7d-de3f49edbfcb">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.eu.text.liquidator", enProps)/>
-            <#elseif criterionID == "166536e2-77f7-455c-b018-70582474e4f6">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.eu.text.suspended.business", enProps)/>
-            <#elseif criterionID == "b1b5ac18-f393-4280-9659-1367943c1a2e">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.eu.text.conflict.interest", enProps)/>
-            <#elseif criterionID == "499efc97-2ac1-4af2-9e84-323c2ca67747">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.economic.general.yearly.turnover.description", enProps)/>
-            <#elseif criterionID == "d3dfb714-f558-4512-bbc5-e456fa2339de">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.economic.specific.average.turnover.description", enProps)/>
-            <#elseif criterionID == "074f6031-55f9-4e99-b9a4-c4363e8bc315">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.economic.specific.yearly.turnover.description", enProps)/>
-            <#elseif criterionID == "e4d37adc-08cd-4f4d-a8d8-32b62b0a1f46">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.economic.financial.ratio.description", enProps)/>
-            <#elseif criterionID == "ab0e7f2e-6418-40e2-8870-6713123e41ad">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.economic.other.financial.requirements.description", enProps)/>
-            <#elseif criterionID == "90a2e100-44cc-45d3-9970-69d6714f1596">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.study.research.facilities.description", enProps)/>
-            <#elseif criterionID == "07301031-2270-41af-8e7e-66fe0c777107">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.educational.professional.qualifications.description", enProps)/>
-            <#elseif criterionID == "c8809aa1-29b6-4f27-ae2f-27e612e394db">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.allowance.of.checks.description", enProps)/>
-            <#elseif criterionID == "612a1625-118d-4ea4-a6db-413184e7c0a8">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.subcontracting.proportion.description", enProps)/>
-            <#elseif criterionID == "5e506c16-26ab-4e32-bb78-b27f87dc0565">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.technical.service.contracts.performance.services.description", enProps)/>
-            <#elseif criterionID == "9eeb6d5c-0eb8-48e8-a4c5-5087a7c095a4">
-                <#assign criterionDescription =  pr.getESPDProperty("espd.crit.selection.suitability.service.contracts.auth.description", enProps)/>
-            </#if>
-            <#assign nameOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionName,enProps), props)>
-            <#assign descOfCriterion = pr.getESPDProperty(pr.getESPDPropertyTranslationKey(criterionDescription,enProps), props)/>
-            <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
-            <p class="descOfCriterionParagraph">${descOfCriterion}</p>
-        </#if>
+        <#assign criterionID = criterion.getID()/>
+        <#assign level = 0>
+        <#assign criterionMap = criterion.getPropertyKeyMap()/>
+        <#assign criterionNameProperty = criterionMap["pk1"]/>
+        <#assign criterionDescriptionProperty= criterionMap["pk2"]/>
+        <#assign nameOfCriterion = pr.getESPDProperty(criterionNameProperty, props)>
+        <#assign descOfCriterion = pr.getESPDProperty(criterionDescriptionProperty, props)/>
+        <label class="nameOfCriterionLabel">${nameOfCriterion}</label>
+        <p class="descOfCriterionParagraph">${descOfCriterion}</p>
         <#if modelType == "ESPD_REQUEST">
             <#if version == "V1">
                 <@getTenderingCriterionGroupRequestV1 criterion.getRequirementGroups() model modelType enProps props version "ON*" "" criterionID/>
