@@ -709,4 +709,5 @@
     <entry key="espd.part3.eo.crit.lots">Lots the requirements apply to:</entry>
     <entry key="espd.part3.financial.or.economic.requirement">Economic or financial requirement</entry>
     <entry key="espd.part3.rating.requirement">Rating requirement</entry>
+    <entry key="espd.no.criteria.selected">No criteria selected</entry>
 </properties>

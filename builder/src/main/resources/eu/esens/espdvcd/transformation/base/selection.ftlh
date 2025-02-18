@@ -71,32 +71,17 @@
         </#if>
 
         <#if isSelectionAllcriterion??>
-            <@selectionChapter model modelType enProps props version "espd.part4.all.selection.switch"/>
+            <@selectionChapter model modelType enProps props version "espd.part4.all.selection.switch" false/>
         <#else>
-            <#if (emptyA == false) && (emptyB == false) && (emptyC == false) && (emptyD == false)>
-                <@selectionChapter model modelType enProps props version "espd.part4.suitability"/>
-                <@selectionChapter model modelType enProps props version "espd.part4.economic.and.financial.standing"/>
-                <@selectionChapter model modelType enProps props version "espd.part4.technical.professional.ability"/>
-                <@selectionChapter model modelType enProps props version "espd.part4.quality.assurance"/>
-            <#else>
-                <#if emptyA == false>
-                    <@selectionChapter model modelType enProps props version "espd.part4.suitability"/>
-                </#if>
-                <#if emptyB == false>
-                    <@selectionChapter model modelType enProps props version "espd.part4.economic.and.financial.standing"/>
-                </#if>
-                <#if emptyC == false>
-                    <@selectionChapter model modelType enProps props version "espd.part4.technical.professional.ability"/>
-                </#if>
-                <#if emptyD == false>
-                    <@selectionChapter model modelType enProps props version "espd.part4.quality.assurance"/>
-                </#if>
-            </#if>
+            <@selectionChapter model modelType enProps props version "espd.part4.suitability" emptyA/>
+            <@selectionChapter model modelType enProps props version "espd.part4.economic.and.financial.standing" emptyB/>
+            <@selectionChapter model modelType enProps props version "espd.part4.technical.professional.ability" emptyC/>
+            <@selectionChapter model modelType enProps props version "espd.part4.quality.assurance" emptyD/>
         </#if>
     </div>
 </#macro>
 
-<#macro selectionChapter model modelType enProps props version chapter>
+<#macro selectionChapter model modelType enProps props version chapter emptyGroup>
     <div class="chapter">
         <#if chapter == "espd.part4.all.selection.switch">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.all.selection.switch", props)}</div>
@@ -112,28 +97,48 @@
             </div>
         <#elseif chapter == "espd.part4.suitability">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.suitability", props)}</div>
-            <div class="chapter-content">
-                <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.SUITABILITY" 1 enProps props version/>
-            </div>
+            <#if emptyGroup == true>
+                <#assign notSelected = pr.getESPDProperty("espd.no.criteria.selected", props)/>
+                <h4 class="no-selected-criteria-h4">${notSelected}</h4>
+            <#else>
+                <div class="chapter-content">
+                    <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
+                    <@selectionCriteriaContent model modelType "CRITERION.SELECTION.SUITABILITY" 1 enProps props version/>
+                </div>
+            </#if>
         <#elseif chapter == "espd.part4.economic.and.financial.standing">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.economic.and.financial.standing", props)}</div>
-            <div class="chapter-content">
-                <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING" 2 enProps props version/>
-            </div>
+            <#if emptyGroup == true>
+                <#assign notSelected = pr.getESPDProperty("espd.no.criteria.selected", props)/>
+                <h4 class="no-selected-criteria-h4">${notSelected}</h4>
+            <#else>
+                <div class="chapter-content">
+                    <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
+                    <@selectionCriteriaContent model modelType "CRITERION.SELECTION.ECONOMIC_FINANCIAL_STANDING" 2 enProps props version/>
+                </div>
+            </#if>
         <#elseif chapter == "espd.part4.technical.professional.ability">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.technical.professional.ability", props)}</div>
-            <div class="chapter-content">
-                <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 3 enProps props version/>
-            </div>
+            <#if emptyGroup == true>
+                <#assign notSelected = pr.getESPDProperty("espd.no.criteria.selected", props)/>
+                <h4 class="no-selected-criteria-h4">${notSelected}</h4>
+            <#else>
+                <div class="chapter-content">
+                    <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
+                    <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 3 enProps props version/>
+                </div>
+            </#if>
         <#elseif chapter == "espd.part4.quality.assurance">
             <div class="chapter-headline">${pr.getESPDProperty("espd.part4.quality.assurance", props)}</div>
-            <div class="chapter-content">
-                <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
-                <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 4 enProps props version/>
-            </div>
+            <#if emptyGroup == true>
+                <#assign notSelected = pr.getESPDProperty("espd.no.criteria.selected", props)/>
+                <h4 class="no-selected-criteria-h4">${notSelected}</h4>
+            <#else>
+                <div class="chapter-content">
+                    <label class="selectionChaptersInfo">${pr.getESPDProperty("espd.crit.selection.economic.financial.standing.article.tooltip", props)}</label>
+                    <@selectionCriteriaContent model modelType "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY" 4 enProps props version/>
+                </div>
+            </#if>
         </#if>
     </div>
 </#macro>

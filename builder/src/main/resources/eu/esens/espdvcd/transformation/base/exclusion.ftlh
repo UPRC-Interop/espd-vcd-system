@@ -70,40 +70,30 @@
         <#if CriteriaCounterD == 0>
             <#assign emptyD = true/>
         </#if>
-        <#if (emptyA == false) && (emptyB == false) && (emptyC == false) && (emptyD == false)>
-            <@exclusionChapter criminalTopTitle criminalMainTitle model modelType 1 enProps props version/>
-            <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType 2 enProps props version/>
-            <@exclusionChapter conflictsTopTitle breachingObligations model modelType 3 enProps props version/>
-            <@exclusionChapter nationalTopTile nationalMainTile model modelType 4 enProps props version/>
-        <#else>
-            <#if emptyA == false>
-                <@exclusionChapter criminalTopTitle criminalMainTitle model modelType 1 enProps props version/>
-            </#if>
-            <#if emptyB == false>
-                <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType 2 enProps props version/>
-            </#if>
-            <#if emptyC == false>
-                <@exclusionChapter conflictsTopTitle breachingObligations model modelType 3 enProps props version/>
-             </#if>
-            <#if emptyD == false>
-                <@exclusionChapter nationalTopTile nationalMainTile model modelType 4 enProps props version/>
-            </#if>
-        </#if>
+        <@exclusionChapter criminalTopTitle criminalMainTitle model modelType 1 emptyA enProps props version/>
+        <@exclusionChapter paymentTaxesTitle taxesMainTitle model modelType 2 emptyB enProps props version/>
+        <@exclusionChapter conflictsTopTitle breachingObligations model modelType 3 emptyC enProps props version/>
+        <@exclusionChapter nationalTopTile nationalMainTile model modelType 4 emptyD enProps props version/>
     </div>
 </#macro>
 
-<#macro exclusionChapter chapter_headline chapter_content model modelType group enProps props version>
+<#macro exclusionChapter chapter_headline chapter_content model modelType group emptyGroup enProps props version>
     <div class="chapter">
         <#if chapter_content??>
             <div class="chapter-headline">${chapter_headline}</div>
-            <div class="chapter-content">
-                <label class="chapter-content-title">${chapter_content}</label>
-                <#if group == 4>
-                    <@purelyNationalExclusionGrounds model modelType enProps props version/>
-                <#else>
-                    <@tenderingCriteria model modelType group enProps props version/>
-                </#if>
-            </div>
+            <#if emptyGroup == true>
+                <#assign notSelected = pr.getESPDProperty("espd.no.criteria.selected", props)/>
+                <h4 class="no-selected-criteria-h4">${notSelected}</h4>
+            <#else>
+                <div class="chapter-content">
+                    <label class="chapter-content-title">${chapter_content}</label>
+                    <#if group == 4>
+                        <@purelyNationalExclusionGrounds model modelType enProps props version/>
+                    <#else>
+                        <@tenderingCriteria model modelType group enProps props version/>
+                    </#if>
+                </div>
+            </#if>
         </#if>
     </div>
 </#macro>
