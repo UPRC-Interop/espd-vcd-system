@@ -90,6 +90,10 @@
     padding: 20px;
 }
 
+.no-selected-criteria-h4 {
+    padding-left: 20px;
+}
+
 .chapter-content-title, .selectionChaptersInfo, .finishTopLabel {
     text-align: justify;
     padding-bottom: 10px;

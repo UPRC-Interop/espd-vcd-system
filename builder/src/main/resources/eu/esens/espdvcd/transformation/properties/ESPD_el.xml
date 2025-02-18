@@ -710,4 +710,5 @@
     <entry key="espd.part3.eo.crit.lots">Παρτίδες για τις οποίες ισχύουν οι απαιτήσεις:</entry>
     <entry key="espd.part3.financial.or.economic.requirement">Οικονομική ή χρηματοοικονομική απαίτηση</entry>
     <entry key="espd.part3.rating.requirement">Βαθμολογική απαίτηση</entry>
+    <entry key="espd.no.criteria.selected">Δεν έχει επιλεγεί κανένα κριτήριο σε αυτή την ενότητα</entry>
 </properties>
