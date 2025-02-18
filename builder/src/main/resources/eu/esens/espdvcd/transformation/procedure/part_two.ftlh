@@ -27,7 +27,7 @@
 </#macro>
 
 <#macro partTwoChapter model modelType enProps props version>
-<#--  Α  -->
+    <#--  Α  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.info.eo", props)}
@@ -36,11 +36,11 @@
             <@sectionForEO model modelType enProps props version/>
         </div>
     </div>
-<#--  Β  -->
+    <#--  Β  -->
     <div class="chapter">
         <@powerOfAttorney model modelType props/>
     </div>
-<#--  Γ  -->
+    <#--  Γ  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.info.reliance", props)}
@@ -49,7 +49,7 @@
             <@tenderingCriteriaByCriterionTypeCode model modelType 'CRITERION.OTHER.EO_DATA.RELIES_ON_OTHER_CAPACITIES' enProps props version/>
         </div>
     </div>
-<#--  Δ  -->
+    <#--  Δ  -->
     <div class="chapter">
         <div class="chapter-headline">
             ${pr.getESPDProperty("espd.part2.information.subcontractors", props)}
@@ -86,7 +86,9 @@
         <@s.sectionLabelForValueOfNode fax "espd.part1.fax" props/>
         <@s.sectionLabelForValueOfNode id "espd.part2.vat" props/>
         <@s.sectionLabelForUrlValueOfNode websiteURI "espd.part1.website" props/>
-        <@s.sectionLabelForValueOfNode lots "espd.crit.lots.indication" props/>
+        <#if version == "V1">
+            <@s.sectionLabelForValueOfNode lots "espd.crit.lots.indication" props/>
+        </#if>
 
         <div class="singleQuestion">
             <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}<@smeIndicator model props/></label>
@@ -125,16 +127,17 @@
         <div class="descInput">
             <span class="content-left">${pr.getESPDProperty("espd.part1.website", props)}</span>
         </div>
-        <div class="descInput">
-            <span class="content-left">${pr.getESPDProperty("espd.crit.lots.indication", props)}</span>
-        </div>
+        <#if version == "V1">
+            <div class="descInput">
+                <span class="content-left">${pr.getESPDProperty("espd.crit.lots.indication", props)}</span>
+            </div>
+        </#if>
         <div class="singleQuestion">
             <#assign yes = pr.getESPDProperty("espd.gui.yes", props)/>
             <#assign no = pr.getESPDProperty("espd.gui.no", props)/>
             <label id="eoSizedLabel">${pr.getESPDProperty("espd.part2.is.eo.sized",props)}<span style="margin-left: 5px">${yes} / ${no}</span></label>
         </div>
     </#if>
-
     <@tenderingCriteriaByCriterionTypeCode model modelType "CRITERION.OTHER.EO_DATA.SHELTERED_WORKSHOP" enProps props version/>
     <@tenderingCriteriaByCriterionTypeCode model modelType "CRITERION.OTHER.EO_DATA.REGISTERED_IN_OFFICIAL_LIST" enProps props version/>
     <@tenderingCriteriaByCriterionTypeCode model modelType "CRITERION.OTHER.EO_DATA.TOGETHER_WITH_OTHERS" enProps props version/>
