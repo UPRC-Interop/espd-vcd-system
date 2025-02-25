@@ -327,10 +327,6 @@ public class CADetails implements Serializable {
         this.procurementProcedureDesc = procurementProcedureDesc;
     }
 
-    public String getProcurementProcedureFileReferenceNo() {
-        return procurementProcedureFileReferenceNo;
-    }
-
     public void setProcurementProcedureFileReferenceNo(String procurementProcedureFileReferenceNo) {
         this.procurementProcedureFileReferenceNo = procurementProcedureFileReferenceNo;
     }
@@ -356,6 +352,13 @@ public class CADetails implements Serializable {
             procurementPublicationNumber = "0000/S 000-000000";
         }
         return procurementPublicationNumber;
+    }
+
+    public String getProcurementProcedureFileReferenceNo() {
+        if (procurementProcedureFileReferenceNo == null || procurementProcedureFileReferenceNo.isEmpty()) {
+            procurementProcedureFileReferenceNo = "-";
+        }
+        return procurementProcedureFileReferenceNo;
     }
 
     public void setProcurementPublicationNumber(String procurementPublicationNumber) {
