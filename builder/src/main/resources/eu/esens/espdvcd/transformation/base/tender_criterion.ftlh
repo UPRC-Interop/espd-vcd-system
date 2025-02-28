@@ -352,14 +352,20 @@
 </#macro>
 
 <#macro getDescriptionValue req modelType enProps props>
-    <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
-        <#if req.getResponse().getDescription()??>
-            <#if req.getPropertyKeyOrNull()??>
-                <#assign propertyKey = req.getPropertyKeyOrNull()/>
-                <#assign description = pr.getESPDProperty(propertyKey, props)/>
-                <label class="descriptionLabel">${description}</label>
+    <#if modelType == "ESPD_RESPONSE">
+        <#if req.getPropertyKeyOrNull()??>
+            <#assign propertyKey = req.getPropertyKeyOrNull()/>
+            <#assign description = pr.getESPDProperty(propertyKey, props)/>
+            <label class="descriptionLabel">${description}</label>
+        </#if>
+        <#if req.getResponse()??>
+            <#if req.getResponse().getDescription()??>
                 <p class="descriptionParagraph">${req.getResponse().getDescription()}</p>
+            <#else>
+                <p class="descriptionParagraph">&ndash;</p>
             </#if>
+        <#else>
+            <p class="descriptionParagraph">&ndash;</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
         <#if req.getPropertyKeyOrNull()??>
@@ -459,9 +465,15 @@
 </#macro>
 
 <#macro getCodeValue req modelType enProps props>
-    <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
-        <#if req.getResponse().getEvidenceURLCode()??>
-            <p class="codeParagraph">${req.getResponse().getEvidenceURLCode()}</p>
+    <#if modelType == "ESPD_RESPONSE">
+        <#if req.getResponse()??>
+            <#if req.getResponse().getEvidenceURLCode()??>
+                <p class="codeParagraph">${req.getResponse().getEvidenceURLCode()}</p>
+            <#else>
+                <p class="codeParagraph">&ndash;</p>
+            </#if>
+        <#else>
+            <p class="codeParagraph">&ndash;</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
         <p class="codeParagraph">&ndash;</p>
@@ -523,19 +535,40 @@
         <label class="eoIdentifierTypeLabel">${pr.getESPDProperty("espd.crit.type.id", props)}</label>
         <p class="eoIdentifierTypeParagraph">&ndash;</p>
     <#elseif modelType == "ESPD_RESPONSE">
+        <label class="eoIdentifierEntityLabel">${pr.getESPDProperty("espd.crit.entity.id", props)}</label>
         <#if req.getResponse()??>
-            <label class="eoIdentifierEntityLabel">${pr.getESPDProperty("espd.crit.entity.id", props)}</label>
-            <p class="eoIdentifierEntityParagraph">${req.getResponse().getIdentifier()}</p>
-            <label class="eoIdentifierTypeLabel">${pr.getESPDProperty("espd.crit.type.id", props)}</label>
-            <p class="eoIdentifierTypeParagraph">${req.getResponse().getEOIDType()}</p>
+            <#if req.getResponse().getIdentifier()??>
+                <p class="eoIdentifierEntityParagraph">${req.getResponse().getIdentifier()}</p>
+            <#else>
+                <p class="eoIdentifierEntityParagraph">&ndash;</p>
+            </#if>
+        <#else>
+            <p class="eoIdentifierEntityParagraph">&ndash;</p>
+        </#if>
+        <label class="eoIdentifierTypeLabel">${pr.getESPDProperty("espd.crit.type.id", props)}</label>
+        <#if req.getResponse()??>
+            <#if req.getResponse().getEOIDType()??>
+                <p class="eoIdentifierTypeParagraph">${req.getResponse().getEOIDType()}</p>
+            <#else>
+                <p class="eoIdentifierTypeParagraph">&ndash;</p>
+            </#if>
+        <#else>
+            <p class="eoIdentifierTypeParagraph">&ndash;</p>
         </#if>
     </#if>
 </#macro>
 
 <#macro getIdentifierValue req model modelType props>
-    <#if modelType == "ESPD_RESPONSE" && req.getResponse()??>
-        <#if req.getResponse().getIdentifier()??>
-            <p class="identifierParagraph">${req.getResponse().getIdentifier()}</p>
+    <#if modelType == "ESPD_RESPONSE">
+        <label class="identifierLabel">${pr.getESPDProperty("espd.crit.qualification.number", props)}</label>
+        <#if  req.getResponse()??>
+            <#if req.getResponse().getIdentifier()??>
+                <p class="identifierParagraph">${req.getResponse().getIdentifier()}</p>
+            <#else>
+                <p class="identifierParagraph">&ndash;</p>
+            </#if>
+        <#else>
+            <p class="identifierParagraph">&ndash;</p>
         </#if>
     <#elseif modelType == "ESPD_REQUEST">
         <label class="identifierLabel">${pr.getESPDProperty("espd.crit.qualification.number", props)}</label>
