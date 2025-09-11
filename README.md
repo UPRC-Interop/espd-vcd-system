@@ -6,6 +6,8 @@ This README would normally document whatever steps are necessary to get your app
 
 #### Prerequisites ####
 - **Java 11 JDK**
+- **Node 14**
+- **Gradle 8**
 
 ##### For the designer-frontend submodule #####
 - **NPM** - Node package manager, can be installed by installing [NodeJS LTS](http://nodejs.org)
@@ -64,3 +66,6 @@ A quick deployment for testing can be achieved though the angular-CLI. From the 
 The designer-frontend angular UI should now be accessible at <http://localhost:4200>
 
 For more information about the *designer-frontend* submodule, please read its README.MD file.
+
+## Deployment process ##
+This development environment is dedicated to the ESPD v2 backend component, and it is deployed through the GitHub actions that can be found in the `promitheus-espd-backend-serverless` repository. More details on the deployment process can be found there.
