@@ -76,10 +76,17 @@
     <#assign city = model.getCADetails().getPostalAddress().getCity()!""/>
     <#assign address = model.getCADetails().getPostalAddress().getAddressLine1()!""/>
     <#assign postcode = model.getCADetails().getPostalAddress().getPostCode()!""/>
-    <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()!""/>
-    <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!""/>
-    <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!""/>
-    <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!""/>
+    <#if (model.getCADetails().getContactingDetails())??>
+        <#assign contactPointName = model.getCADetails().getContactingDetails().getContactPointName()!""/>
+        <#assign tel = model.getCADetails().getContactingDetails().getTelephoneNumber()!""/>
+        <#assign fax = model.getCADetails().getContactingDetails().getFaxNumber()!""/>
+        <#assign email = model.getCADetails().getContactingDetails().getEmailAddress()!""/>
+    <#else>
+        <#assign contactPointName = ""/>
+        <#assign tel = ""/>
+        <#assign fax = ""/>
+        <#assign email = ""/>
+    </#if>
     <#assign countryCode = model.getCADetails().getPostalAddress().getCountryCode()!""/>
 
     <@s.sectionLabelForValueOfNode officialName "espd.part1.name" props/>
